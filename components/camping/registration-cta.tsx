@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button, Checkbox } from '@heroui/react'
 import { ArrowRight, Check } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 export function RegistrationCTA() {
   const [termsAccepted, setTermsAccepted] = useState({
@@ -12,6 +13,14 @@ export function RegistrationCTA() {
   })
 
   const canProceed = termsAccepted.info && termsAccepted.terms
+
+  const router = useRouter()
+
+  const handleNextStep = () => {
+    if (canProceed) {
+      router.push('/registration')
+    }
+  }
 
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-secondary/30 to-background relative overflow-hidden">
@@ -119,6 +128,7 @@ export function RegistrationCTA() {
                 : 'bg-muted text-muted-foreground cursor-not-allowed'
             }`}
             isDisabled={!canProceed}
+            onPress={handleNextStep}
           >
             <span>Próximo Passo</span>
             <ArrowRight className="w-5 h-5 ml-2" />
