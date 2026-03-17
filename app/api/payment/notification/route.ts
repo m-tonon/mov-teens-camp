@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     const updatedRegistration = await RegistrationModel.findOneAndUpdate(
       { "payment.referenceId": referenceId },
       { $set: { "payment.paymentConfirmed": true } },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!updatedRegistration) {

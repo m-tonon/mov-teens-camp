@@ -82,7 +82,7 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Error in /api/registrations/export:", error);
+    console.error("Error in /api/registration/export:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

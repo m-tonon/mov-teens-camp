@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { RegistrationFormData } from "@/shared/registration.interface";
+import {
+  PaymentInfo,
+  RegistrationFormData,
+} from "@/shared/registration.interface";
 import { saveRegistration } from "@/services/registration";
 
 interface Props {
@@ -84,12 +87,17 @@ export function RegistrationForm({ onSubmit }: Props) {
   const handleBlur = (name: string) =>
     setTouched((prev) => ({ ...prev, [name]: true }));
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const generateReferenceId = () => {
+    const randomPart = Math.random().toString(36).slice(2, 8).toUpperCase();
+    return `REF-${randomPart}`;
+  };
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    // Mark all fields as touched on submit
+    // Mark all required fields as touched
     const allFields = [
       "name",
       "birthDate",
@@ -103,14 +111,63 @@ export function RegistrationForm({ onSubmit }: Props) {
     ];
     setTouched(Object.fromEntries(allFields.map((f) => [f, true])));
 
+    // Guard: block if age is invalid
+    if (ageError) {
+      setLoading(false);
+      return;
+    }
+
     try {
-      const saved = await saveRegistration(formData);
-      onSubmit({
-        ...formData,
-        payment: { ...formData.payment, referenceId: saved.referenceId },
+      const referenceId = generateReferenceId();
+
+      const checkoutRes = await fetch("/api/payment/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          referenceId,
+          amount: formData.payment.amount,
+          email: formData.responsibleInfo.email,
+          name: formData.responsibleInfo.name,
+          cpf: formData.responsibleInfo.document.replace(/\D/g, ""),
+          phone: formData.responsibleInfo.phone,
+        }),
       });
-    } catch {
-      setError("Erro ao salvar inscrição. Tente novamente.");
+
+      if (!checkoutRes.ok) throw new Error("Falha ao gerar link de pagamento.");
+
+      const { paymentLink } = await checkoutRes.json();
+
+      const paymentData: PaymentInfo = {
+        referenceId,
+        paymentConfirmed: false,
+        paymentLink: paymentLink,
+        amount: formData.payment.amount,
+        name: formData.responsibleInfo.name,
+        cpf: formData.responsibleInfo.document.replace(/\D/g, ""),
+        email: formData.responsibleInfo.email,
+        phone: formData.responsibleInfo.phone,
+      };
+
+      const updatedFormData: RegistrationFormData = {
+        ...formData,
+        payment: paymentData,
+      };
+
+      const saved = await saveRegistration(updatedFormData);
+
+      onSubmit({
+        ...updatedFormData,
+        payment: {
+          ...updatedFormData.payment,
+          referenceId: saved.referenceId,
+        },
+      });
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Erro ao salvar inscrição. Tente novamente.",
+      );
     } finally {
       setLoading(false);
     }

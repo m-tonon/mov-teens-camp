@@ -20,6 +20,8 @@ const CAMP_INFO = {
   ],
 };
 
+const installmentsAvailable = true;
+
 export function PaymentSection({ data, onBack }: Props) {
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -86,15 +88,19 @@ export function PaymentSection({ data, onBack }: Props) {
               <span className="font-medium text-foreground">PagSeguro</span>
             </span>
           </div>
-          <div className="flex items-start gap-2 text-sm opacity-50">
+          <div className="flex items-start gap-2 text-sm">
             <span className="flex-shrink-0 mt-0.5">🔄</span>
-            <span className="line-through text-muted-foreground">
+            <span
+              className={`${!installmentsAvailable ? "line-through" : "text-foreground/80"} `}
+            >
               Parcelamento em até {CAMP_INFO.paymentOptions.maxInstallments}x no
               cartão
             </span>
-            <span className="text-xs bg-muted text-muted-foreground px-1.5 py-0.5 rounded-md no-underline not-line-through ml-1 self-start">
-              indisponível
-            </span>
+            {!installmentsAvailable && (
+              <span className="text-xs bg-muted text-muted-foreground px-1.5 py-0.5 rounded-md no-underline not-line-through ml-1 self-start">
+                indisponível
+              </span>
+            )}
           </div>
         </div>
       </div>

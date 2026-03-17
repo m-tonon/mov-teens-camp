@@ -11,6 +11,8 @@ const DOMAIN_URL = process.env.DOMAIN_URL!;
 export async function POST(req: NextRequest) {
   try {
     const payment = await req.json();
+    console.log("Incoming payment:", payment);
+
     if (!payment?.name || !payment?.cpf || !payment?.referenceId) {
       return NextResponse.json(
         { error: "Missing payment info" },
@@ -57,7 +59,17 @@ export async function POST(req: NextRequest) {
       },
     );
 
-    return NextResponse.json(response.data);
+    const pagbankData = response.data;
+
+    const paymentLink =
+      pagbankData.links?.find((l: { rel: string }) => l.rel === "PAY")?.href ??
+      null;
+
+    return NextResponse.json({
+      paymentLink,
+      referenceId: pagbankData.reference_id,
+      checkoutId: pagbankData.id,
+    });
   } catch (error: any) {
     console.error(
       "Error in /api/payments/checkout:",

@@ -1,7 +1,6 @@
 import { PaymentInfo } from "@/shared/registration.interface";
 
-// Simulated payment API endpoint
-const PAYMENT_API_URL = "/api/payment";
+const PAYMENT_API_URL = "/api/payment/checkout";
 
 interface CreatePaymentResponse {
   paymentLink: string;
