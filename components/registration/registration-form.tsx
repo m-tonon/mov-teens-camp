@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { RegistrationFormData } from "@/shared/registration.interface";
+import {
+  PaymentInfo,
+  RegistrationFormData,
+} from "@/shared/registration.interface";
 import { saveRegistration } from "@/services/registration";
 
 interface Props {
@@ -51,6 +54,23 @@ export function RegistrationForm({ onSubmit }: Props) {
     return age;
   };
 
+  const formatCPF = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 11);
+    return digits
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  };
+
+  const formatPhone = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 2) return digits.replace(/(\d{1,2})/, "($1");
+    if (digits.length <= 7) return digits.replace(/(\d{2})(\d+)/, "($1) $2");
+    if (digits.length <= 11)
+      return digits.replace(/(\d{2})(\d{5})(\d+)/, "($1) $2-$3");
+    return digits;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -59,6 +79,25 @@ export function RegistrationForm({ onSubmit }: Props) {
     const { name, value, type } = e.target;
     const checked =
       type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
+
+    if (name === "responsibleInfo.document") {
+      setFormData((prev) => ({
+        ...prev,
+        responsibleInfo: {
+          ...prev.responsibleInfo,
+          document: formatCPF(value),
+        },
+      }));
+      return;
+    }
+
+    if (name === "responsibleInfo.phone") {
+      setFormData((prev) => ({
+        ...prev,
+        responsibleInfo: { ...prev.responsibleInfo, phone: formatPhone(value) },
+      }));
+      return;
+    }
 
     if (name.startsWith("responsibleInfo.")) {
       const key = name.split(".")[1];
@@ -84,12 +123,17 @@ export function RegistrationForm({ onSubmit }: Props) {
   const handleBlur = (name: string) =>
     setTouched((prev) => ({ ...prev, [name]: true }));
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const generateReferenceId = () => {
+    const randomPart = Math.random().toString(36).slice(2, 8).toUpperCase();
+    return `REF-${randomPart}`;
+  };
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    // Mark all fields as touched on submit
+    // Mark all required fields as touched
     const allFields = [
       "name",
       "birthDate",
@@ -103,14 +147,63 @@ export function RegistrationForm({ onSubmit }: Props) {
     ];
     setTouched(Object.fromEntries(allFields.map((f) => [f, true])));
 
+    // Guard: block if age is invalid
+    if (ageError) {
+      setLoading(false);
+      return;
+    }
+
     try {
-      const saved = await saveRegistration(formData);
-      onSubmit({
-        ...formData,
-        payment: { ...formData.payment, referenceId: saved.referenceId },
+      const referenceId = generateReferenceId();
+
+      const checkoutRes = await fetch("/api/payment/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          referenceId,
+          amount: formData.payment.amount,
+          email: formData.responsibleInfo.email,
+          name: formData.responsibleInfo.name,
+          cpf: formData.responsibleInfo.document.replace(/\D/g, ""),
+          phone: formData.responsibleInfo.phone,
+        }),
       });
-    } catch {
-      setError("Erro ao salvar inscrição. Tente novamente.");
+
+      if (!checkoutRes.ok) throw new Error("Falha ao gerar link de pagamento.");
+
+      const { paymentLink } = await checkoutRes.json();
+
+      const paymentData: PaymentInfo = {
+        referenceId,
+        paymentConfirmed: false,
+        paymentLink: paymentLink,
+        amount: formData.payment.amount,
+        name: formData.responsibleInfo.name,
+        cpf: formData.responsibleInfo.document.replace(/\D/g, ""),
+        email: formData.responsibleInfo.email,
+        phone: formData.responsibleInfo.phone,
+      };
+
+      const updatedFormData: RegistrationFormData = {
+        ...formData,
+        payment: paymentData,
+      };
+
+      const saved = await saveRegistration(updatedFormData);
+
+      onSubmit({
+        ...updatedFormData,
+        payment: {
+          ...updatedFormData.payment,
+          referenceId: saved.referenceId,
+        },
+      });
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Erro ao salvar inscrição. Tente novamente.",
+      );
     } finally {
       setLoading(false);
     }
@@ -165,6 +258,18 @@ export function RegistrationForm({ onSubmit }: Props) {
       <div className="flex-1 h-px bg-border ml-2" />
     </div>
   );
+
+  const isFormValid =
+    !!formData.name &&
+    !!formData.birthDate &&
+    !!formData.gender &&
+    !!formData.identityDocument &&
+    !!formData.responsibleInfo.name &&
+    !!formData.responsibleInfo.document &&
+    !!formData.responsibleInfo.phone &&
+    !!formData.responsibleInfo.email &&
+    formData.parentalAuthorization &&
+    !ageError;
 
   return (
     <div className="w-full">
@@ -471,6 +576,7 @@ export function RegistrationForm({ onSubmit }: Props) {
                 value={formData.responsibleInfo.phone}
                 onChange={handleChange}
                 onBlur={() => handleBlur("responsibleInfo.phone")}
+                maxLength={15}
                 required
               />
               {touched["responsibleInfo.phone"] &&
@@ -564,7 +670,7 @@ export function RegistrationForm({ onSubmit }: Props) {
 
           <button
             type="submit"
-            disabled={loading || !!ageError}
+            disabled={loading || !isFormValid}
             className="w-full py-4 text-sm font-semibold rounded-xl bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             {loading ? (

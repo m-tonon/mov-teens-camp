@@ -1,7 +1,6 @@
 import { RegistrationFormData, SaveRegistrationResponse } from "@/shared/registration.interface";
 
-// Simulated API endpoint
-const API_URL = "/api/registrations";
+const API_URL = "/api/registration";
 
 export async function saveRegistration(
   data: RegistrationFormData

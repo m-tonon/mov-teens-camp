@@ -29,14 +29,14 @@ export async function POST(req: NextRequest) {
     let updatedRegistration = await RegistrationModel.findOneAndUpdate(
       { "payment.referenceId": formData.payment?.referenceId },
       { $set: formData },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!updatedRegistration) {
       updatedRegistration = await RegistrationModel.findOneAndUpdate(
         { identityDocument: formData.identityDocument },
         { $set: formData },
-        { new: true },
+        { returnDocument: "after" },
       );
     }
 
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
       referenceId: registration.payment.referenceId,
     });
   } catch (error) {
-    console.error("Error in /api/registrations:", error);
+    console.error("Error in /api/registration:", error);
     return NextResponse.json(
       { error: "Failed to save data to MongoDB" },
       { status: 500 },

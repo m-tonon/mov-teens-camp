@@ -1,0 +1,41 @@
+const CONTACTS = [
+  { name: "Secretaria IPVO", phone: "(44) 3226-4473" },
+  { name: "Anjinho", phone: "(44) 9 9846-0089" },
+];
+
+export function PaymentCompletedScreen() {
+  return (
+    <main className="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
+      <div className="max-w-sm w-full text-center space-y-5">
+        <span className="text-6xl block">✅</span>
+
+        <div className="space-y-1">
+          <h2 className="text-2xl font-bold tracking-tight">
+            Inscrição realizada com sucesso!
+          </h2>
+          <p className="text-muted-foreground text-sm">
+            Seu pagamento ainda está em processo de confirmação.
+          </p>
+        </div>
+
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Enviaremos um email para confirmar a sua inscrição assim que o
+          pagamento for validado.{" "}
+          <strong className="text-foreground">
+            Verifique também a sua caixa de spam.
+          </strong>
+        </p>
+
+        <div className="bg-card border border-border rounded-2xl px-5 py-4 space-y-2 text-sm text-left">
+          <p className="font-medium text-foreground">Em caso de dúvidas:</p>
+          {CONTACTS.map((c) => (
+            <p key={c.phone} className="text-muted-foreground">
+              📞 <strong className="text-foreground">{c.name}:</strong>{" "}
+              {c.phone}
+            </p>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}

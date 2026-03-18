@@ -11,6 +11,8 @@ const DOMAIN_URL = process.env.DOMAIN_URL!;
 export async function POST(req: NextRequest) {
   try {
     const payment = await req.json();
+    console.log("Incoming payment:", payment);
+
     if (!payment?.name || !payment?.cpf || !payment?.referenceId) {
       return NextResponse.json(
         { error: "Missing payment info" },
@@ -26,38 +28,68 @@ export async function POST(req: NextRequest) {
       .toISOString()
       .replace("Z", "-03:00");
 
-    const amount = payment.amount ? payment.amount * 100 : 28000;
+    const amount = payment.amount ?? 28000;
 
-    const response = await axios.post(
-      `${PAGBANK_API_URL}/checkouts`,
-      {
-        reference_id: payment.referenceId,
-        expiration_date: expirationDate,
-        customer: {
-          name: payment.name,
-          email: payment.email,
-          tax_id: payment.cpf,
-          phone: { country: "+55", area, number },
-        },
-        customer_modifiable: true,
-        items: [{ name: "2º Acampa Teens", quantity: 1, unit_amount: amount }],
-        payment_methods: [
-          { type: "CREDIT_CARD" },
-          { type: "DEBIT_CARD" },
-          { type: "PIX" },
-        ],
-        redirect_url: `https://${DOMAIN_URL}/?paymentCompleted=true`,
-        return_url: `https://${DOMAIN_URL}/`,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${PAGBANK_TOKEN}`,
-          "Content-type": "application/json",
+    const payload = {
+      reference_id: payment.referenceId,
+      expiration_date: expirationDate,
+      customer: {
+        name: payment.name,
+        email: payment.email,
+        tax_id: payment.cpf,
+        phone: {
+          country: "+55",
+          area,
+          number,
         },
       },
-    );
+      customer_modifiable: true,
+      items: [
+        {
+          name: "3º Acampa Teens",
+          quantity: 1,
+          unit_amount: amount,
+        },
+      ],
+      payment_methods: [
+        { type: "CREDIT_CARD" },
+        { type: "DEBIT_CARD" },
+        { type: "PIX" },
+      ],
+      payment_methods_configs: [
+        {
+          type: "credit_card",
+          config_options: [{ option: "installments_limit", value: "10" }],
+        },
+      ],
+      redirect_url: `https://${DOMAIN_URL}/?paymentCompleted=true`,
+      return_url: `https://${DOMAIN_URL}/`,
+      notification_urls: [`https://${DOMAIN_URL}/api/payment/notification`],
+    };
 
-    return NextResponse.json(response.data);
+    console.log("Request options to PagBank:", payload);
+
+    const pagbank = axios.create({
+      baseURL: PAGBANK_API_URL,
+      headers: {
+        Authorization: `Bearer ${PAGBANK_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const response = await pagbank.post("/checkouts", payload);
+
+    const pagbankData = response.data;
+
+    const paymentLink =
+      pagbankData.links?.find((l: { rel: string }) => l.rel === "PAY")?.href ??
+      null;
+
+    return NextResponse.json({
+      paymentLink,
+      referenceId: pagbankData.reference_id,
+      checkoutId: pagbankData.id,
+    });
   } catch (error: any) {
     console.error(
       "Error in /api/payments/checkout:",
