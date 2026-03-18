@@ -54,6 +54,23 @@ export function RegistrationForm({ onSubmit }: Props) {
     return age;
   };
 
+  const formatCPF = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 11);
+    return digits
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  };
+
+  const formatPhone = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 2) return digits.replace(/(\d{1,2})/, "($1");
+    if (digits.length <= 7) return digits.replace(/(\d{2})(\d+)/, "($1) $2");
+    if (digits.length <= 11)
+      return digits.replace(/(\d{2})(\d{5})(\d+)/, "($1) $2-$3");
+    return digits;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -62,6 +79,25 @@ export function RegistrationForm({ onSubmit }: Props) {
     const { name, value, type } = e.target;
     const checked =
       type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
+
+    if (name === "responsibleInfo.document") {
+      setFormData((prev) => ({
+        ...prev,
+        responsibleInfo: {
+          ...prev.responsibleInfo,
+          document: formatCPF(value),
+        },
+      }));
+      return;
+    }
+
+    if (name === "responsibleInfo.phone") {
+      setFormData((prev) => ({
+        ...prev,
+        responsibleInfo: { ...prev.responsibleInfo, phone: formatPhone(value) },
+      }));
+      return;
+    }
 
     if (name.startsWith("responsibleInfo.")) {
       const key = name.split(".")[1];
@@ -222,6 +258,18 @@ export function RegistrationForm({ onSubmit }: Props) {
       <div className="flex-1 h-px bg-border ml-2" />
     </div>
   );
+
+  const isFormValid =
+    !!formData.name &&
+    !!formData.birthDate &&
+    !!formData.gender &&
+    !!formData.identityDocument &&
+    !!formData.responsibleInfo.name &&
+    !!formData.responsibleInfo.document &&
+    !!formData.responsibleInfo.phone &&
+    !!formData.responsibleInfo.email &&
+    formData.parentalAuthorization &&
+    !ageError;
 
   return (
     <div className="w-full">
@@ -528,6 +576,7 @@ export function RegistrationForm({ onSubmit }: Props) {
                 value={formData.responsibleInfo.phone}
                 onChange={handleChange}
                 onBlur={() => handleBlur("responsibleInfo.phone")}
+                maxLength={15}
                 required
               />
               {touched["responsibleInfo.phone"] &&
@@ -621,7 +670,7 @@ export function RegistrationForm({ onSubmit }: Props) {
 
           <button
             type="submit"
-            disabled={loading || !!ageError}
+            disabled={loading || !isFormValid}
             className="w-full py-4 text-sm font-semibold rounded-xl bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             {loading ? (
