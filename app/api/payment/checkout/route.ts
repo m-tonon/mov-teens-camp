@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
       ],
       redirect_url: `https://${DOMAIN_URL}/?paymentCompleted=true`,
       return_url: `https://${DOMAIN_URL}/`,
-      notification_urls: [`https://${DOMAIN_URL}/api/payments/notifications`],
+      notification_urls: [`https://${DOMAIN_URL}/api/payment/notification`],
     };
 
     console.log("Request options to PagBank:", payload);

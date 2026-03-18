@@ -746,7 +746,7 @@ export const confirmationTemplate = `
                                                                         ">sua
                                                                         inscrição
                                                                         no
-                                                                        2º Acampa Teens foi
+                                                                        3º Acampa Teens foi
                                                                         concluída
                                                                         com
                                                                         sucesso!&nbsp;</span></span></strong>🎉
@@ -973,7 +973,7 @@ export const confirmationTemplate = `
                                                                                         255,
                                                                                         255
                                                                                       );
-                                                                                    "> 31&nbsp;de&nbsp;outubro a&nbsp;02&nbsp;de&nbsp;novembro</span></span></span>
+                                                                                    "> 05&nbsp;a&nbsp;07&nbsp;de&nbsp;Junho</span></span></span>
                                                                             </p>
                                                                           </li>
                                                                           <li style="
@@ -1114,7 +1114,7 @@ export const confirmationTemplate = `
                                                                                         255,
                                                                                         255
                                                                                       );
-                                                                                    ">&nbsp;R$&nbsp;250</span></span></span>
+                                                                                    ">&nbsp;R$&nbsp;280</span></span></span>
                                                                             </p>
                                                                           </li>
                                                                           <li style="
@@ -1415,7 +1415,7 @@ export const confirmationTemplate = `
                                                               <img style="
                                                                   max-width: 100%;
                                                                   height: 50px;
-                                                                " width="60" height="30" class="site-img-logo" src="https://github.com/m-tonon/movteens-inscricoes/blob/master/src/assets/movteens-logo.png" alt="Movteens">
+                                                                " width="60" height="30" class="site-img-logo" src="https://mcusercontent.com/7431ecec0175e179b64e6e523/images/c793a017-c09a-0671-1163-0842011abd7d.png" alt="Movteens">
                                                             </a><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="
                                                           background-color: transparent;
                                                           width: 100%;
@@ -1621,7 +1621,6 @@ export const confirmationTemplate = `
       </style>
     </center>
     <script type="text/javascript" src="/vDO1/yb0-/wII/pAC/hR6g/tOtap28DhQcD/BCxDFUhs/Yw0/WVSRrcxw"></script>
-  
 
 </body></html>
 `
