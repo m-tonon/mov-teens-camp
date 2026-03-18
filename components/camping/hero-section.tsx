@@ -1,33 +1,42 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Button } from '@heroui/react'
-import { CalendarDays, MapPin, ChevronDown } from 'lucide-react'
+import { motion } from "framer-motion";
+import { Button } from "@heroui/react";
+import { CalendarDays, MapPin, ChevronDown } from "lucide-react";
 
 export function HeroSection() {
   const scrollToContent = () => {
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
-  }
+    window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+  };
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-secondary/20" />
-      
+
+      {/* Background image */}
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/hero-background.jpg')" }}
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 0.3, scale: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      />
+
       <motion.div
         className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl"
-        animate={{ 
+        animate={{
           scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3]
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 8, repeat: Infinity }}
       />
-      
+
       <motion.div
         className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-accent/10 blur-3xl"
-        animate={{ 
+        animate={{
           scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.4, 0.2]
+          opacity: [0.2, 0.4, 0.2],
         }}
         transition={{ duration: 10, repeat: Infinity }}
       />
@@ -57,12 +66,23 @@ export function HeroSection() {
         </motion.h1>
 
         <motion.p
-          className="text-xl sm:text-2xl md:text-3xl font-light text-muted-foreground mb-2 tracking-wide"
+          className="text-xl sm:text-2xl md:text-3xl font-black tracking-[0.3em] mb-2"
+          style={{ fontFamily: "'Courier New', Courier, monospace" }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Deepfake
+          <span
+            className="bg-black text-white px-8 py-2 inline-block"
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
+            }}
+          >
+            DEEP FAKE
+          </span>
         </motion.p>
 
         <motion.p
@@ -71,7 +91,8 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          Um tempo para crescer na fé, criar amizades verdadeiras e viver momentos que você nunca vai esquecer.
+          Um tempo para crescer na fé, criar amizades verdadeiras e viver
+          momentos que você nunca vai esquecer.
         </motion.p>
 
         <motion.div
@@ -117,5 +138,5 @@ export function HeroSection() {
         <ChevronDown className="w-5 h-5" />
       </motion.button>
     </section>
-  )
+  );
 }
