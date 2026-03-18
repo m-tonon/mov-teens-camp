@@ -545,7 +545,7 @@ export const confirmationTemplate = `
                                                       <div>
                                                         <!--[if !mso]><!-->
                                                       </div>
-                                                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="85%" style="
+                                                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="10%" style="
                                                           border-collapse: separate;
                                                           margin: 0;
                                                           vertical-align: top;
@@ -560,7 +560,7 @@ export const confirmationTemplate = `
                                                                 border-radius: 0;
                                                                 margin: 0;
                                                               " valign="top">
-                                                              <img alt="" src="https://mcusercontent.com/1e3ede6565010c0201471308b/images/a661f130-ffe6-4bd3-56e3-4fcf93204dba.png" width="561" height="auto" style="
+                                                              <img alt="" src="https://mcusercontent.com/7431ecec0175e179b64e6e523/images/797cedd3-8c5a-2766-51ee-07b79f1c76be.png" width="561" height="auto" style="
                                                                   display: block;
                                                                   max-width: 100%;
                                                                   height: auto;
@@ -574,29 +574,6 @@ export const confirmationTemplate = `
                                                         <!--<![endif]-->
                                                       </div>
                                                       <div>
-                                                        <!--[if mso]>
-                                                          <span
-                                                            class="mceImageBorder"
-                                                            style="
-                                                              border: 0;
-                                                              vertical-align: top;
-                                                              margin: 0;
-                                                            "
-                                                            ><img
-                                                              role="presentation"
-                                                              class="imageDropZone mceImage"
-                                                              src="https://mcusercontent.com/1e3ede6565010c0201471308b/images/c729b8f3-53f0-8386-3b7a-4ccee2601469.jpeg"
-                                                              alt=""
-                                                              width="561"
-                                                              height="auto"
-                                                              style="
-                                                                display: block;
-                                                                max-width: 561px;
-                                                                width: 561px;
-                                                                height: auto;
-                                                              "
-                                                          /></span>
-                                                        <![endif]-->
                                                       </div>
                                                     </td>
                                                   </tr>
