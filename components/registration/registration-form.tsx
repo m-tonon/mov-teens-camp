@@ -649,7 +649,7 @@ export function RegistrationForm({ onSubmit }: Props) {
               Autorizo o menor acima a participar do evento{" "}
               <strong className="text-foreground">3º ACAMPA TEENS</strong> no
               Maanaim — Estr. Arns, 1516, Mandaguaçu - PR, no período de{" "}
-              <strong className="text-foreground">05 a 07 de junho</strong>.
+              <strong className="text-foreground">05 a 07 de Junho de 2026</strong>.
               Esta autorização está de acordo com o ECA (lei 8.069/90).
             </span>
           </label>

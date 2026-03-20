@@ -10,7 +10,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: #0a0a0a;
+      background-color: transparent;
       font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #e5e5e5;
       -webkit-text-size-adjust: 100%;
@@ -22,13 +22,16 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
     a { color: inherit; text-decoration: none; }
 
     .email-wrapper {
-      background-color: #0a0a0a;
+      background-color: transparent;
       padding: 40px 16px;
     }
 
     .email-container {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
+      background-color: #0a0a0a;
+      border-radius: 16px;
+      overflow: hidden;
     }
 
     /* Header */
@@ -312,7 +315,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
       <!-- HEADER -->
       <div class="header">
         <div class="header-glow"></div>
-        <div class="badge">⛺ 3ª Edição · 2025</div>
+        <div class="badge">⛺ 3ª Edição · 2026</div>
         <div class="title-acampa">ACAMPA</div>
         <div class="title-teens">TEENS</div>
         <div class="deepfake-tag">DEEP FAKE</div>
@@ -347,7 +350,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="info-label">📅 Data</td>
-                  <td class="info-value">05 a 07 de Junho de 2025</td>
+                  <td class="info-value">05 a 07 de Junho de 2026</td>
                 </tr>
               </table>
             </td>
@@ -402,7 +405,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
 
         <p class="message-text">
           Nos vemos lá!<br>
-          <strong>Equipe MovTeens</strong>
+          <strong>Equipe Acampa Teens</strong>
         </p>
 
         <hr class="divider">
@@ -418,13 +421,8 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
 
       <!-- FOOTER -->
       <div class="footer">
-        <img
-          src="https://mcusercontent.com/7431ecec0175e179b64e6e523/images/9484b549-1188-d680-bbe9-eaccbd967b58.png"
-          alt="MovTeens"
-          class="footer-logo"
-        />
         <p class="footer-text">
-          © 2025 MovTeens · IPVO<br>
+          © 2026 MovTeens · IPVO<br>
           Este e-mail foi enviado automaticamente. Por favor, não responda.
         </p>
       </div>
