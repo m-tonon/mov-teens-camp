@@ -1,7 +1,8 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Mic2, Quote } from 'lucide-react'
+import { motion } from "framer-motion";
+import { Mic2, Quote } from "lucide-react";
+import Image from "next/image";
 
 export function SpeakerSection() {
   return (
@@ -21,8 +22,12 @@ export function SpeakerSection() {
             <Mic2 className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-widest text-primary font-medium">Preletor</p>
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight">Quem Vai Ministrar</h2>
+            <p className="text-xs uppercase tracking-widest text-primary font-medium">
+              Preletor
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+              Quem Vai Estar Com Você
+            </h2>
           </div>
         </motion.div>
 
@@ -37,16 +42,23 @@ export function SpeakerSection() {
             {/* Image */}
             <div className="relative md:w-2/5 aspect-square md:aspect-auto bg-gradient-to-br from-primary/30 via-accent/20 to-secondary flex items-center justify-center h-70">
               <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent md:bg-gradient-to-r" />
-              
-              <motion.div
-                className="relative z-10 w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-5xl md:text-6xl font-black text-primary-foreground"
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+
+              <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                PL
-              </motion.div>
+                <motion.div className="relative z-10 p-1 rounded-full bg-gradient-to-br from-primary to-accent">
+                  <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden">
+                    <Image
+                      src="https://mcusercontent.com/7431ecec0175e179b64e6e523/images/3723a54f-b3a2-a179-5a04-a42cecf59b9c.jpeg"
+                      alt="Preletor"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+              </a>
             </div>
 
             {/* Content */}
@@ -60,7 +72,7 @@ export function SpeakerSection() {
                 <h3 className="text-3xl sm:text-4xl font-black tracking-tight mb-2 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent text-center">
                   Pastor Lucas
                 </h3>
-                
+
                 <p className="text-primary font-medium mb-6 text-center">
                   Pastor de Novas Gerações <br /> 1ª Igreja Batista de Tupã
                 </p>
@@ -68,7 +80,9 @@ export function SpeakerSection() {
                 <div className="relative">
                   <Quote className="absolute -top-2 -left-2 w-8 h-8 text-primary/20" />
                   <p className="text-muted-foreground leading-relaxed pl-6">
-                    Lucas atua no ministério há mais de 10 anos. Apaixonado por gente, trabalha principalmente com adolescentes e jovens e casado com Nathália.
+                    Há mais de 10 anos no ministério, é casado com Nathália e
+                    dedica sua vida a ajudar adolescentes e jovens a descobrirem
+                    uma fé verdadeira em meio a um mundo de aparências.
                   </p>
                 </div>
               </motion.div>
@@ -77,5 +91,5 @@ export function SpeakerSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

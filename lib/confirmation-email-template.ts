@@ -1,1603 +1,435 @@
+export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscrição Confirmada — 3º Acampa Teens</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 
-export const confirmationTemplate = `
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
-    <!--[if gte mso 15]>
-      <xml>
-        <o:OfficeDocumentSettings>
-          <o:AllowPNG />
-          <o:PixelsPerInch>96</o:PixelsPerInch>
-        </o:OfficeDocumentSettings>
-      </xml>
-    <![endif]-->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IPVO Acampa Teens 2025</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <style>
-      img {
-        -ms-interpolation-mode: bicubic;
-      }
-      table,
-      td {
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
-      }
-      .mceStandardButton,
-      .mceStandardButton td,
-      .mceStandardButton td a {
-        mso-hide: all !important;
-      }
-      p,
-      a,
-      li,
-      td,
-      blockquote {
-        mso-line-height-rule: exactly;
-      }
-      p,
-      a,
-      li,
-      td,
-      body,
-      table,
-      blockquote {
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-      }
-      @media only screen and (max-width: 480px) {
-        body,
-        table,
-        td,
-        p,
-        a,
-        li,
-        blockquote {
-          -webkit-text-size-adjust: none !important;
-        }
-      }
-      .mcnPreviewText {
-        display: none !important;
-      }
-      .bodyCell {
-        margin: 0 auto;
-        padding: 0;
-        width: 100%;
-      }
-      .ExternalClass,
-      .ExternalClass p,
-      .ExternalClass td,
-      .ExternalClass div,
-      .ExternalClass span,
-      .ExternalClass font {
-        line-height: 100%;
-      }
-      .ReadMsgBody {
-        width: 100%;
-      }
-      .ExternalClass {
-        width: 100%;
-      }
-      a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-        font-size: inherit !important;
-        font-family: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-      }
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        background: #ffffff;
-      }
-      p {
-        margin: 0;
-        padding: 0;
-      }
-      table {
-        border-collapse: collapse;
-      }
-      td,
-      p,
-      a {
-        word-break: break-word;
-      }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        display: block;
-        margin: 0;
-        padding: 0;
-      }
-      img,
-      a img {
-        border: 0;
-        height: auto;
-        outline: none;
-        text-decoration: none;
-      }
-      a[href^='tel'],
-      a[href^='sms'] {
-        color: inherit;
-        cursor: default;
-        text-decoration: none;
-      }
-      li p {
-        margin: 0 !important;
-      }
-      .ProseMirror a {
-        pointer-events: none;
-      }
-      .mceColumn .mceButtonLink,
-      .mceColumn-1 .mceButtonLink,
-      .mceColumn-2 .mceButtonLink,
-      .mceColumn-3 .mceButtonLink,
-      .mceColumn-4 .mceButtonLink {
-        min-width: 30px;
-      }
-      @media only screen and (max-width: 640px) {
-        .mceClusterLayout td {
-          padding: 4px !important;
-        }
-      }
-      @media only screen and (max-width: 480px) {
-        body {
-          width: 100% !important;
-          min-width: 100% !important;
-        }
-        body.mobile-native {
-          -webkit-user-select: none;
-          user-select: none;
-          transition: transform 0.2s ease-in;
-          transform-origin: top center;
-        }
-        body.mobile-native.selection-allowed a,
-        body.mobile-native.selection-allowed .ProseMirror {
-          user-select: auto;
-          -webkit-user-select: auto;
-        }
-        colgroup {
-          display: none;
-        }
-        img {
-          height: auto !important;
-        }
-        .mceWidthContainer {
-          max-width: 660px !important;
-        }
-        .mceColumn {
-          display: block !important;
-          width: 100% !important;
-        }
-        .mceColumn-forceSpan {
-          display: table-cell !important;
-          width: auto !important;
-        }
-        .mceColumn-forceSpan .mceButton a {
-          min-width: 0 !important;
-        }
-        .mceReverseStack {
-          display: table;
-          width: 100%;
-        }
-        .mceColumn-1 {
-          display: table-footer-group;
-          width: 100% !important;
-        }
-        .mceColumn-2 {
-          display: block !important;
-          width: 100% !important;
-        }
-        .mceColumn-3 {
-          display: table-header-group;
-          width: 100% !important;
-        }
-        .mceColumn-4 {
-          display: table-caption;
-          width: 100% !important;
-        }
-        .mceKeepColumns .mceButtonLink {
-          min-width: 0px;
-        }
-        .mceBlockContainer {
-          padding-right: 16px !important;
-          padding-left: 16px !important;
-        }
-        .mceTextBlockContainer {
-          padding-right: 16px !important;
-          padding-left: 16px !important;
-        }
-        .mceBlockContainerE2E {
-          padding-right: 0px;
-          padding-left: 0px;
-        }
-        .mceSpacing-24 {
-          padding-right: 16px !important;
-          padding-left: 16px !important;
-        }
-        .mceImage,
-        .mceLogo {
-          width: 100% !important;
-          height: auto !important;
-        }
-        .mceFooterSection .mceText,
-        .mceFooterSection .mceText p {
-          font-size: 16px !important;
-          line-height: 140% !important;
-        }
-      }
-      div[contenteditable='true'] {
-        outline: 0;
-      }
-      .ProseMirror h1.empty-node:only-child::before,
-      .ProseMirror h2.empty-node:only-child::before,
-      .ProseMirror h3.empty-node:only-child::before,
-      .ProseMirror h4.empty-node:only-child::before {
-        content: 'Heading';
-      }
-      .ProseMirror p.empty-node:only-child::before,
-      .ProseMirror:empty::before {
-        content: 'Start typing...';
-      }
-      .mceImageBorder {
-        display: inline-block;
-      }
-      .mceImageBorder img {
-        border: 0 !important;
-      }
-      body,
-      #bodyTable {
-        background-color: rgb(244, 244, 244);
-      }
-      .mceText,
-      .mcnTextContent,
-      .mceLabel {
-        font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
-      }
-      .mceText,
-      .mcnTextContent,
-      .mceLabel {
-        color: rgb(0, 0, 0);
-      }
-      .mceText h1 {
-        margin-bottom: 0px;
-      }
-      .mceText p {
-        margin-bottom: 0px;
-      }
-      .mceText ul {
-        margin-bottom: 0px;
-      }
-      .mceText label {
-        margin-bottom: 0px;
-      }
-      .mceText input {
-        margin-bottom: 0px;
-      }
-      .mceSpacing-12 .mceInput + .mceErrorMessage {
-        margin-top: -6px;
-      }
-      .mceText h1 {
-        margin-bottom: 0px;
-      }
-      .mceText p {
-        margin-bottom: 0px;
-      }
-      .mceText ul {
-        margin-bottom: 0px;
-      }
-      .mceText label {
-        margin-bottom: 0px;
-      }
-      .mceText input {
-        margin-bottom: 0px;
-      }
-      .mceSpacing-24 .mceInput + .mceErrorMessage {
-        margin-top: -12px;
-      }
-      .mceInput {
-        background-color: transparent;
-        border: 2px solid rgb(208, 208, 208);
-        width: 60%;
-        color: rgb(77, 77, 77);
-        display: block;
-      }
-      .mceInput[type='radio'],
-      .mceInput[type='checkbox'] {
-        float: left;
-        margin-right: 12px;
-        display: inline;
-        width: auto !important;
-      }
-      .mceLabel > .mceInput {
-        margin-bottom: 0px;
-        margin-top: 2px;
-      }
-      .mceLabel {
-        display: block;
-      }
-      .mceText p,
-      .mcnTextContent p {
-        color: rgb(0, 0, 0);
-        font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 1.5;
-        mso-line-height-alt: 150%;
-        text-align: center;
-        letter-spacing: 0px;
-        direction: ltr;
-        margin: 0px;
-      }
-      .mceText h1,
-      .mcnTextContent h1 {
-        color: rgb(0, 0, 0);
-        font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
-        font-size: 31px;
-        font-weight: bold;
-        line-height: 1.5;
-        mso-line-height-alt: 150%;
-        text-align: center;
-        letter-spacing: 0px;
-        direction: ltr;
-      }
-      .mceSectionBody .mceText p,
-      .mceSectionBody .mcnTextContent p {
-      }
-      .mceSectionFooter .mceText p,
-      .mceSectionFooter .mcnTextContent p {
-      }
-      @media only screen and (max-width: 480px) {
-        .mceText p {
-          margin: 0px;
-          font-size: 16px !important;
-          line-height: 1.5 !important;
-          mso-line-height-alt: 150%;
-        }
-      }
-      @media only screen and (max-width: 480px) {
-        .mceText h1 {
-          font-size: 31px !important;
-          line-height: 1.5 !important;
-          mso-line-height-alt: 150%;
-        }
-      }
-      @media only screen and (max-width: 480px) {
-        .bodyCell {
-          padding-left: 16px !important;
-          padding-right: 16px !important;
-        }
-      }
-      @media only screen and (max-width: 480px) {
-        .mceDividerBlock {
-          border-top-width: 2px !important;
-        }
-      }
-      @media only screen and (max-width: 480px) {
-        .mceDividerContainer {
-          width: 100% !important;
-        }
-      }
-      #dataBlockId-13 p,
-      #dataBlockId-13 h1,
-      #dataBlockId-13 h2,
-      #dataBlockId-13 h3,
-      #dataBlockId-13 h4,
-      #dataBlockId-13 ul {
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <!---->
-    <div style="display: none; max-height: 0px; overflow: hidden">
-      ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌ &nbsp;   ͏ ‌
-      &nbsp;   ͏ ‌ &nbsp;  ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
-      ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
-      ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
-      ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
-      ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
-      ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
-      ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
-      ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
-    </div>
-    <!--MCE_TRACKING_PIXEL-->
-    <center>
-      <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="background-color: rgb(244, 244, 244)">
-        <tbody>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #0a0a0a;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #e5e5e5;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { border: 0; height: auto; outline: none; text-decoration: none; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .email-wrapper {
+      background-color: #0a0a0a;
+      padding: 40px 16px;
+    }
+
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #0a0a0a 0%, #12082a 50%, #0a0a0a 100%);
+      border: 1px solid #2a1a4a;
+      border-radius: 16px 16px 0 0;
+      padding: 48px 40px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-glow {
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(109, 40, 217, 0.25) 0%, transparent 70%);
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(109, 40, 217, 0.2);
+      border: 1px solid rgba(109, 40, 217, 0.4);
+      color: #a78bfa;
+      font-family: 'Oswald', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    .title-acampa {
+      font-family: 'Oswald', 'Arial Black', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .title-teens {
+      font-family: 'Oswald', 'Arial Black', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #7c3aed, #a78bfa, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .deepfake-tag {
+      display: inline-block;
+      background: #000;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      padding: 6px 24px;
+      margin-top: 12px;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    }
+
+    /* Success banner */
+    .success-banner {
+      background: linear-gradient(135deg, #052e16, #14532d);
+      border-left: 3px solid #22c55e;
+      padding: 20px 32px;
+      text-align: center;
+    }
+
+    .success-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .success-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #4ade80;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .success-subtitle {
+      font-size: 13px;
+      color: #86efac;
+      margin-top: 4px;
+    }
+
+    /* Body */
+    .body-section {
+      background-color: #111111;
+      border-left: 1px solid #1f1f1f;
+      border-right: 1px solid #1f1f1f;
+      padding: 40px;
+    }
+
+    .greeting {
+      font-size: 16px;
+      color: #d1d5db;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .greeting strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Info card */
+    .info-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 28px 0;
+    }
+
+    .info-card-header {
+      background: linear-gradient(135deg, #1e0a3c, #12082a);
+      border-bottom: 1px solid #2a1a4a;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-card-header-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #a78bfa;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .info-row {
+      padding: 50px 54px;
+      border-bottom: 1px solid #222;
+      display: table;
+      width: 100%;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      display: table-cell;
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      width: 40%;
+      padding: 12px;
+    }
+
+    .info-value {
+      display: table-cell;
+      font-size: 14px;
+      color: #e5e5e5;
+      font-weight: 500;
+      vertical-align: middle;
+      padding: 12px;
+    }
+
+    .info-emoji {
+      margin-right: 6px;
+    }
+
+    .confirmed-badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #4ade80;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* Message */
+    .message-text {
+      font-size: 15px;
+      color: #9ca3af;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .message-text strong {
+      color: #e5e5e5;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid #1f1f1f;
+      margin: 32px 0;
+    }
+
+    /* Contact section */
+    .contact-section {
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 24px;
+    }
+
+    .contact-title {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .contact-item {
+      font-size: 14px;
+      color: #d1d5db;
+      padding: 4px 0;
+    }
+
+    .contact-item strong {
+      color: #ffffff;
+    }
+
+    /* Footer */
+    .footer {
+      background: #0a0a0a;
+      border: 1px solid #1f1f1f;
+      border-top: none;
+      border-radius: 0 0 16px 16px;
+      padding: 28px 40px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      width: 80px;
+      height: auto;
+      margin: 0 auto 16px;
+      opacity: 0.8;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .footer-text a {
+      color: #7c3aed;
+    }
+
+    /* Responsive */
+    @media only screen and (max-width: 480px) {
+      .header, .body-section, .footer { padding: 28px 20px !important; }
+      .title-acampa, .title-teens { font-size: 38px !important; }
+      .info-label { font-size: 11px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-container">
+
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-glow"></div>
+        <div class="badge">⛺ 3ª Edição · 2025</div>
+        <div class="title-acampa">ACAMPA</div>
+        <div class="title-teens">TEENS</div>
+        <div class="deepfake-tag">DEEP FAKE</div>
+      </div>
+
+      <!-- SUCCESS BANNER -->
+      <div class="success-banner">
+        <div class="success-icon">✅</div>
+        <div class="success-title">Inscrição Confirmada!</div>
+        <div class="success-subtitle">Seu pagamento foi processado com sucesso</div>
+      </div>
+
+      <!-- BODY -->
+      <div class="body-section">
+
+        <p class="greeting">
+          Olá, <strong>{{nomeParticipante}}</strong>!<br><br>
+          Temos uma ótima notícia: <strong><br/>sua inscrição no 3º Acampa Teens foi concluída com sucesso!</strong> 🎉<br><br>
+          Prepare-se para dias que vão ficar na memória — cheios de alegria, comunhão e crescimento espiritual. 🙏🔥
+        </p>
+
+        <!-- Info card -->
+        <table class="info-card" width="100%" cellpadding="0" cellspacing="0">
           <tr>
-            <td class="bodyCell" align="center" valign="top">
-              <table id="root" border="0" cellpadding="0" cellspacing="0" width="100%">
-                <tbody data-block-id="4" class="mceWrapper">
-                  <tr>
-                    <td style="background-color: transparent" valign="top" align="center" class="mceSectionHeader">
-                      <!--[if (gte mso 9)|(IE)]><table align="center" border="0" cellspacing="0" cellpadding="0" width="660" style="width:660px;"><tr><td><![endif]-->
-                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 660px" role="presentation">
-                        <tbody>
-                          <tr>
-                            <td style="background-color: #ffffff" valign="top" class="mceWrapperInner">
-                              <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="3">
-                                <tbody>
-                                  <tr class="mceRow">
-                                    <td style="
-                                        background-position: center;
-                                        background-repeat: no-repeat;
-                                        background-size: cover;
-                                      " valign="top">
-                                      <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                        <tbody>
-                                          <tr>
-                                            <td valign="top" class="mceColumn" data-block-id="-4" colspan="12" width="100%">
-                                              <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                <tbody>
-                                                  <tr>
-                                                    <td valign="top" id="blockContainerId-21"></td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody data-block-id="11" class="mceWrapper">
-                  <tr>
-                    <td style="background-color: transparent" valign="top" align="center" class="mceSectionBody">
-                      <!--[if (gte mso 9)|(IE)]><table align="center" border="0" cellspacing="0" cellpadding="0" width="660" style="width:660px;"><tr><td><![endif]-->
-                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 660px" role="presentation">
-                        <tbody>
-                          <tr>
-                            <td style="background-color: #ffffff" valign="top" class="mceWrapperInner">
-                              <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="10">
-                                <tbody>
-                                  <tr class="mceRow">
-                                    <td style="
-                                        background-position: center;
-                                        background-repeat: no-repeat;
-                                        background-size: cover;
-                                      " valign="top">
-                                      <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                        <tbody>
-                                          <tr>
-                                            <td style="
-                                                padding-top: 0;
-                                                padding-bottom: 0;
-                                              " valign="top" class="mceColumn" data-block-id="-5" colspan="12" width="100%">
-                                              <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                <tbody>
-                                                  <tr>
-                                                    <td style="
-                                                        padding-top: 12px;
-                                                        padding-bottom: 12px;
-                                                        padding-right: 0;
-                                                        padding-left: 0;
-                                                      " valign="top" class="mceImageBlockContainer" align="center" id="blockContainerId-20">
-                                                      <div>
-                                                        <!--[if !mso]><!-->
-                                                      </div>
-                                                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="10%" style="
-                                                          border-collapse: separate;
-                                                          margin: 0;
-                                                          vertical-align: top;
-                                                          max-width: 85%;
-                                                          width: 85%;
-                                                          height: auto;
-                                                        " role="presentation" data-testid="image-20">
-                                                        <tbody>
-                                                          <tr>
-                                                            <td style="
-                                                                border: 0;
-                                                                border-radius: 0;
-                                                                margin: 0;
-                                                              " valign="top">
-                                                              <img alt="" src="https://mcusercontent.com/7431ecec0175e179b64e6e523/images/797cedd3-8c5a-2766-51ee-07b79f1c76be.png" width="561" height="auto" style="
-                                                                  display: block;
-                                                                  max-width: 100%;
-                                                                  height: auto;
-                                                                  border-radius: 0;
-                                                                " class="imageDropZone mceImage" data-block-id="20">
-                                                            </td>
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                      <div>
-                                                        <!--<![endif]-->
-                                                      </div>
-                                                      <div>
-                                                      </div>
-                                                    </td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="
-                                                        padding-top: 0;
-                                                        padding-bottom: 0;
-                                                        padding-right: 0;
-                                                        padding-left: 0;
-                                                      " valign="top" id="blockContainerId-19">
-                                                      <table width="100%" style="
-                                                          border: 0;
-                                                          border-radius: 0;
-                                                          border-collapse: separate;
-                                                        ">
-                                                        <tbody>
-                                                          <tr>
-                                                            <td style="
-                                                                padding-left: 24px;
-                                                                padding-right: 24px;
-                                                                padding-top: 12px;
-                                                              " class="mceTextBlockContainer">
-                                                              <div data-block-id="19" class="mceText" id="dataBlockId-19" style="
-                                                                  width: 100%;
-                                                                ">
-                                                                <p class="" style="
-                                                                    margin: 0px;
-                                                                    padding: 0px;
-                                                                    line-height: 1.45;
-                                                                    font-variant-ligatures: normal;
-                                                                    font-variant-caps: normal;
-                                                                    font-weight: 400;
-                                                                    letter-spacing: normal;
-                                                                    orphans: 2;
-                                                                    text-align: left;
-                                                                    text-indent: 0px;
-                                                                    text-transform: none;
-                                                                    widows: 2;
-                                                                    word-spacing: 0px;
-                                                                    -webkit-text-stroke-width: 0px;
-                                                                    white-space: normal;
-                                                                    background-color: rgb(
-                                                                      255,
-                                                                      255,
-                                                                      255
-                                                                    );
-                                                                    text-decoration-thickness: initial;
-                                                                    text-decoration-style: initial;
-                                                                    text-decoration-color: initial;
-                                                                    mso-line-height-alt: 145%;
-                                                                  ">
-                                                                  <span style="
-                                                                      color: rgb(
-                                                                        26,
-                                                                        26,
-                                                                        26
-                                                                      );
-                                                                    "><span style="
-                                                                        font-family: 'Helvetica Neue',
-                                                                          Helvetica,
-                                                                          Arial,
-                                                                          Verdana,
-                                                                          sans-serif;
-                                                                      "><span style="
-                                                                          background-color: rgb(
-                                                                            255,
-                                                                            255,
-                                                                            255
-                                                                          );
-                                                                        ">Olá,&nbsp;</span></span></span><strong><span style="
-                                                                        color: rgb(
-                                                                          26,
-                                                                          26,
-                                                                          26
-                                                                        );
-                                                                      "><span style="
-                                                                          font-family: 'Helvetica Neue',
-                                                                            Helvetica,
-                                                                            Arial,
-                                                                            Verdana,
-                                                                            sans-serif;
-                                                                        "><span style="
-                                                                            background-color: rgb(
-                                                                              255,
-                                                                              255,
-                                                                              255
-                                                                            );
-                                                                          ">{{nomeParticipante}}</span></span></span></strong>
-                                                                </p>
-                                                                <p style="
-                                                                    text-align: left;
-                                                                  ">
-                                                                  <br>
-                                                                </p>
-                                                                <p style="
-                                                                    margin: 0px;
-                                                                    padding: 0px;
-                                                                    line-height: 1.45;
-                                                                    font-variant-ligatures: normal;
-                                                                    font-variant-caps: normal;
-                                                                    font-weight: 400;
-                                                                    letter-spacing: normal;
-                                                                    orphans: 2;
-                                                                    text-align: left;
-                                                                    text-indent: 0px;
-                                                                    text-transform: none;
-                                                                    widows: 2;
-                                                                    word-spacing: 0px;
-                                                                    -webkit-text-stroke-width: 0px;
-                                                                    white-space: normal;
-                                                                    background-color: rgb(
-                                                                      255,
-                                                                      255,
-                                                                      255
-                                                                    );
-                                                                    text-decoration-thickness: initial;
-                                                                    text-decoration-style: initial;
-                                                                    text-decoration-color: initial;
-                                                                    mso-line-height-alt: 145%;
-                                                                  ">
-                                                                  <span style="
-                                                                      font-family: 'Helvetica Neue',
-                                                                        Helvetica,
-                                                                        Arial,
-                                                                        Verdana,
-                                                                        sans-serif;
-                                                                    "><span style="
-                                                                        background-color: rgb(
-                                                                          255,
-                                                                          255,
-                                                                          255
-                                                                        );
-                                                                      ">Temos uma
-                                                                      ótima
-                                                                      notícia:&nbsp;</span></span><strong><span style="
-                                                                        font-family: 'Helvetica Neue',
-                                                                          Helvetica,
-                                                                          Arial,
-                                                                          Verdana,
-                                                                          sans-serif;
-                                                                      "><span style="
-                                                                          background-color: rgb(
-                                                                            255,
-                                                                            255,
-                                                                            255
-                                                                          );
-                                                                        ">sua
-                                                                        inscrição
-                                                                        no
-                                                                        3º Acampa Teens foi
-                                                                        concluída
-                                                                        com
-                                                                        sucesso!&nbsp;</span></span></strong>🎉
-                                                                </p>
-                                                                <p style="
-                                                                    text-align: left;
-                                                                  ">
-                                                                  <br>
-                                                                </p>
-                                                                <h1 style="
-                                                                    margin: 0px
-                                                                      0px 16px;
-                                                                    font-variant-ligatures: normal;
-                                                                    font-variant-caps: normal;
-                                                                    letter-spacing: normal;
-                                                                    orphans: 2;
-                                                                    text-align: left;
-                                                                    text-indent: 0px;
-                                                                    text-transform: none;
-                                                                    widows: 2;
-                                                                    word-spacing: 0px;
-                                                                    -webkit-text-stroke-width: 0px;
-                                                                    white-space: normal;
-                                                                    background-color: rgb(
-                                                                      255,
-                                                                      255,
-                                                                      255
-                                                                    );
-                                                                    text-decoration-thickness: initial;
-                                                                    text-decoration-style: initial;
-                                                                    text-decoration-color: initial;
-                                                                  ">
-                                                                  <span style="
-                                                                      font-size: 24px;
-                                                                    ">📍</span><strong><span style="
-                                                                        color: rgb(
-                                                                          26,
-                                                                          26,
-                                                                          26
-                                                                        );
-                                                                      "><span style="
-                                                                          font-size: 24px;
-                                                                        "><span style="
-                                                                            font-family: 'Helvetica Neue',
-                                                                              Helvetica,
-                                                                              Arial,
-                                                                              Verdana,
-                                                                              sans-serif;
-                                                                          "><span style="
-                                                                              background-color: rgb(
-                                                                                255,
-                                                                                255,
-                                                                                255
-                                                                              );
-                                                                            ">Informações
-                                                                            do
-                                                                            acampamento:</span></span></span></span></strong>
-                                                                </h1>
-                                                                <ul style="
-                                                                    padding-left: 0px;
-                                                                    margin: 8px
-                                                                      0px;
-                                                                    color: rgb(
-                                                                      26,
-                                                                      26,
-                                                                      26
-                                                                    );
-                                                                    font-family: -apple-system,
-                                                                      BlinkMacSystemFont,
-                                                                      'Segoe UI',
-                                                                      Roboto,
-                                                                      Helvetica,
-                                                                      Arial,
-                                                                      sans-serif;
-                                                                    font-size: small;
-                                                                    font-style: normal;
-                                                                    font-variant-ligatures: normal;
-                                                                    font-variant-caps: normal;
-                                                                    font-weight: 400;
-                                                                    letter-spacing: normal;
-                                                                    orphans: 2;
-                                                                    text-align: start;
-                                                                    text-indent: 0px;
-                                                                    text-transform: none;
-                                                                    widows: 2;
-                                                                    word-spacing: 0px;
-                                                                    -webkit-text-stroke-width: 0px;
-                                                                    white-space: normal;
-                                                                    background-color: rgb(
-                                                                      255,
-                                                                      255,
-                                                                      255
-                                                                    );
-                                                                    text-decoration-thickness: initial;
-                                                                    text-decoration-style: initial;
-                                                                    text-decoration-color: initial;
-                                                                    list-style: none;
-                                                                  " class="last-child">
-                                                                  <li style="
-                                                                      text-align: left;
-                                                                    ">
-                                                                    <ul style="
-                                                                        padding-left: 0px;
-                                                                        margin: 8px
-                                                                          0px;
-                                                                        color: rgb(
-                                                                          26,
-                                                                          26,
-                                                                          26
-                                                                        );
-                                                                        font-family: -apple-system,
-                                                                          BlinkMacSystemFont,
-                                                                          'Segoe UI',
-                                                                          Roboto,
-                                                                          Helvetica,
-                                                                          Arial,
-                                                                          sans-serif;
-                                                                        font-size: small;
-                                                                        font-style: normal;
-                                                                        font-variant-ligatures: normal;
-                                                                        font-variant-caps: normal;
-                                                                        font-weight: 400;
-                                                                        letter-spacing: normal;
-                                                                        orphans: 2;
-                                                                        text-align: start;
-                                                                        text-indent: 0px;
-                                                                        text-transform: none;
-                                                                        widows: 2;
-                                                                        word-spacing: 0px;
-                                                                        -webkit-text-stroke-width: 0px;
-                                                                        white-space: normal;
-                                                                        background-color: rgb(
-                                                                          255,
-                                                                          255,
-                                                                          255
-                                                                        );
-                                                                        text-decoration-thickness: initial;
-                                                                        text-decoration-style: initial;
-                                                                        text-decoration-color: initial;
-                                                                        list-style: none;
-                                                                      ">
-                                                                      <li style="
-                                                                          text-align: left;
-                                                                        ">
-                                                                        <ul style="
-                                                                            padding-left: 0px;
-                                                                            margin: 8px
-                                                                              0px;
-                                                                            color: rgb(
-                                                                              26,
-                                                                              26,
-                                                                              26
-                                                                            );
-                                                                            font-family: -apple-system,
-                                                                              BlinkMacSystemFont,
-                                                                              'Segoe UI',
-                                                                              Roboto,
-                                                                              Helvetica,
-                                                                              Arial,
-                                                                              sans-serif;
-                                                                            font-size: small;
-                                                                            font-style: normal;
-                                                                            font-variant-ligatures: normal;
-                                                                            font-variant-caps: normal;
-                                                                            font-weight: 400;
-                                                                            letter-spacing: normal;
-                                                                            orphans: 2;
-                                                                            text-align: start;
-                                                                            text-indent: 0px;
-                                                                            text-transform: none;
-                                                                            widows: 2;
-                                                                            word-spacing: 0px;
-                                                                            -webkit-text-stroke-width: 0px;
-                                                                            white-space: normal;
-                                                                            background-color: rgb(
-                                                                              255,
-                                                                              255,
-                                                                              255
-                                                                            );
-                                                                            text-decoration-thickness: initial;
-                                                                            text-decoration-style: initial;
-                                                                            text-decoration-color: initial;
-                                                                            list-style: none;
-                                                                          ">
-                                                                          <li style="
-                                                                              text-align: left;
-                                                                            ">
-                                                                            <p style="
-                                                                                text-align: left;
-                                                                              ">
-                                                                              📅&nbsp;<strong><span style="
-                                                                                    color: rgb(
-                                                                                      26,
-                                                                                      26,
-                                                                                      26
-                                                                                    );
-                                                                                  "><span style="
-                                                                                      font-family: 'Helvetica Neue',
-                                                                                        Helvetica,
-                                                                                        Arial,
-                                                                                        Verdana,
-                                                                                        sans-serif;
-                                                                                    "><span style="
-                                                                                        background-color: rgb(
-                                                                                          255,
-                                                                                          255,
-                                                                                          255
-                                                                                        );
-                                                                                      ">Data:</span></span></span></strong><span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-family: 'Helvetica Neue',
-                                                                                      Helvetica,
-                                                                                      Arial,
-                                                                                      Verdana,
-                                                                                      sans-serif;
-                                                                                  "><span style="
-                                                                                      background-color: rgb(
-                                                                                        255,
-                                                                                        255,
-                                                                                        255
-                                                                                      );
-                                                                                    "> 05&nbsp;a&nbsp;07&nbsp;de&nbsp;Junho</span></span></span>
-                                                                            </p>
-                                                                          </li>
-                                                                          <li style="
-                                                                              text-align: left;
-                                                                            ">
-                                                                            <p style="
-                                                                                text-align: left;
-                                                                              ">
-                                                                              📍&nbsp;<strong><span style="
-                                                                                    color: rgb(
-                                                                                      26,
-                                                                                      26,
-                                                                                      26
-                                                                                    );
-                                                                                  "><span style="
-                                                                                      font-family: 'Helvetica Neue',
-                                                                                        Helvetica,
-                                                                                        Arial,
-                                                                                        Verdana,
-                                                                                        sans-serif;
-                                                                                    "><span style="
-                                                                                        background-color: rgb(
-                                                                                          255,
-                                                                                          255,
-                                                                                          255
-                                                                                        );
-                                                                                      ">Local:</span></span></span></strong><span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-family: 'Helvetica Neue',
-                                                                                      Helvetica,
-                                                                                      Arial,
-                                                                                      Verdana,
-                                                                                      sans-serif;
-                                                                                  "><span style="
-                                                                                      background-color: rgb(
-                                                                                        255,
-                                                                                        255,
-                                                                                        255
-                                                                                      );
-                                                                                    ">&nbsp;Acampamento
-                                                                                    Evangélico
-                                                                                    Maanaim</span></span></span>
-                                                                            </p>
-                                                                          </li>
-                                                                          <li style="
-                                                                              text-align: left;
-                                                                            ">
-                                                                            <p style="
-                                                                                text-align: left;
-                                                                              ">
-                                                                              <strong><span style="
-                                                                                    color: rgb(
-                                                                                      26,
-                                                                                      26,
-                                                                                      26
-                                                                                    );
-                                                                                  "><span style="
-                                                                                      font-family: 'Helvetica Neue',
-                                                                                        Helvetica,
-                                                                                        Arial,
-                                                                                        Verdana,
-                                                                                        sans-serif;
-                                                                                    "><span style="
-                                                                                        background-color: rgb(
-                                                                                          255,
-                                                                                          255,
-                                                                                          255
-                                                                                        );
-                                                                                      ">🧒
-                                                                                      Faixa
-                                                                                      etária:</span></span></span></strong><span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-family: 'Helvetica Neue',
-                                                                                      Helvetica,
-                                                                                      Arial,
-                                                                                      Verdana,
-                                                                                      sans-serif;
-                                                                                  "><span style="
-                                                                                      background-color: rgb(
-                                                                                        255,
-                                                                                        255,
-                                                                                        255
-                                                                                      );
-                                                                                    ">&nbsp;12&nbsp;a&nbsp;16&nbsp;anos</span></span></span>
-                                                                            </p>
-                                                                          </li>
-                                                                          <li style="
-                                                                              text-align: left;
-                                                                            ">
-                                                                            <p style="
-                                                                                text-align: left;
-                                                                              ">
-                                                                              <strong><span style="
-                                                                                    color: rgb(
-                                                                                      26,
-                                                                                      26,
-                                                                                      26
-                                                                                    );
-                                                                                  "><span style="
-                                                                                      font-family: 'Helvetica Neue',
-                                                                                        Helvetica,
-                                                                                        Arial,
-                                                                                        Verdana,
-                                                                                        sans-serif;
-                                                                                    "><span style="
-                                                                                        background-color: rgb(
-                                                                                          255,
-                                                                                          255,
-                                                                                          255
-                                                                                        );
-                                                                                      ">💵
-                                                                                      Valor
-                                                                                      pago:</span></span></span></strong><span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-family: 'Helvetica Neue',
-                                                                                      Helvetica,
-                                                                                      Arial,
-                                                                                      Verdana,
-                                                                                      sans-serif;
-                                                                                  "><span style="
-                                                                                      background-color: rgb(
-                                                                                        255,
-                                                                                        255,
-                                                                                        255
-                                                                                      );
-                                                                                    ">&nbsp;R$&nbsp;280</span></span></span>
-                                                                            </p>
-                                                                          </li>
-                                                                          <li style="
-                                                                              text-align: left;
-                                                                            ">
-                                                                            <p style="
-                                                                                text-align: left;
-                                                                              ">
-                                                                              ✅&nbsp;<strong><span style="
-                                                                                    color: rgb(
-                                                                                      26,
-                                                                                      26,
-                                                                                      26
-                                                                                    );
-                                                                                  "><span style="
-                                                                                      font-family: 'Helvetica Neue',
-                                                                                        Helvetica,
-                                                                                        Arial,
-                                                                                        Verdana,
-                                                                                        sans-serif;
-                                                                                    "><span style="
-                                                                                        background-color: rgb(
-                                                                                          255,
-                                                                                          255,
-                                                                                          255
-                                                                                        );
-                                                                                      ">Inscrição
-                                                                                      confirmada:</span></span></span></strong><span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-family: 'Helvetica Neue',
-                                                                                      Helvetica,
-                                                                                      Arial,
-                                                                                      Verdana,
-                                                                                      sans-serif;
-                                                                                  "><span style="
-                                                                                      background-color: rgb(
-                                                                                        255,
-                                                                                        255,
-                                                                                        255
-                                                                                      );
-                                                                                    ">&nbsp;Sim!
-                                                                                    Seu
-                                                                                    nome
-                                                                                    já
-                                                                                    está
-                                                                                    na
-                                                                                    nossa
-                                                                                    lista.</span></span></span>
-                                                                            </p>
-                                                                          </li>
-                                                                          <li style="
-                                                                              text-align: left;
-                                                                            ">
-                                                                            <p style="
-                                                                                text-align: left;
-                                                                              ">
-                                                                              <br>
-                                                                            </p>
-                                                                          </li>
-                                                                          <li style="
-                                                                              text-align: left;
-                                                                            ">
-                                                                            <p style="
-                                                                                margin: 0px;
-                                                                                padding: 0px;
-                                                                                line-height: 1.45;
-                                                                                font-variant-ligatures: normal;
-                                                                                font-variant-caps: normal;
-                                                                                font-weight: 400;
-                                                                                letter-spacing: normal;
-                                                                                orphans: 2;
-                                                                                text-align: left;
-                                                                                text-indent: 0px;
-                                                                                text-transform: none;
-                                                                                widows: 2;
-                                                                                word-spacing: 0px;
-                                                                                -webkit-text-stroke-width: 0px;
-                                                                                white-space: normal;
-                                                                                background-color: rgb(
-                                                                                  255,
-                                                                                  255,
-                                                                                  255
-                                                                                );
-                                                                                text-decoration-thickness: initial;
-                                                                                text-decoration-style: initial;
-                                                                                text-decoration-color: initial;
-                                                                                mso-line-height-alt: 145%;
-                                                                              ">
-                                                                              <span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-family: 'Helvetica Neue',
-                                                                                      Helvetica,
-                                                                                      Arial,
-                                                                                      Verdana,
-                                                                                      sans-serif;
-                                                                                  "><span style="
-                                                                                      background-color: rgb(
-                                                                                        255,
-                                                                                        255,
-                                                                                        255
-                                                                                      );
-                                                                                    ">Estamos
-                                                                                    muito
-                                                                                    felizes
-                                                                                    por
-                                                                                    ter
-                                                                                    você
-                                                                                    com
-                                                                                    a
-                                                                                    gente!<br>Será
-                                                                                    um
-                                                                                    tempo
-                                                                                    inesquecível
-                                                                                    de
-                                                                                    comunhão,
-                                                                                    diversão,
-                                                                                    aprendizado
-                                                                                    da
-                                                                                    Palavra
-                                                                                    e
-                                                                                    crescimento
-                                                                                    espiritual.&nbsp;</span></span></span>🙏🔥
-                                                                            </p>
-                                                                            <p style="
-                                                                                text-align: left;
-                                                                              ">
-                                                                              <span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-family: 'Helvetica Neue',
-                                                                                      Helvetica,
-                                                                                      Arial,
-                                                                                      Verdana,
-                                                                                      sans-serif;
-                                                                                  "><span style="
-                                                                                      background-color: rgb(
-                                                                                        255,
-                                                                                        255,
-                                                                                        255
-                                                                                      );
-                                                                                    "><br></span></span></span><span style="
-                                                                                  font-family: 'Helvetica Neue',
-                                                                                    Helvetica,
-                                                                                    Arial,
-                                                                                    Verdana,
-                                                                                    sans-serif;
-                                                                                "><span style="
-                                                                                    background-color: rgb(
-                                                                                      255,
-                                                                                      255,
-                                                                                      255
-                                                                                    );
-                                                                                  ">Se
-                                                                                  você
-                                                                                  tiver
-                                                                                  qualquer
-                                                                                  dúvida
-                                                                                  ou
-                                                                                  precisar
-                                                                                  de
-                                                                                  mais
-                                                                                  informações,
-                                                                                  é
-                                                                                  só
-                                                                                  entrar
-                                                                                  em
-                                                                                  contato
-                                                                                  com
-                                                                                  a
-                                                                                  equipe
-                                                                                  do
-                                                                                  acampamento.</span></span>
-                                                                            </p>
-                                                                            <p style="
-                                                                                margin: 0px;
-                                                                                padding: 0px;
-                                                                                line-height: 1.45;
-                                                                                font-variant-ligatures: normal;
-                                                                                font-variant-caps: normal;
-                                                                                font-weight: 400;
-                                                                                letter-spacing: normal;
-                                                                                orphans: 2;
-                                                                                text-align: left;
-                                                                                text-indent: 0px;
-                                                                                text-transform: none;
-                                                                                widows: 2;
-                                                                                word-spacing: 0px;
-                                                                                -webkit-text-stroke-width: 0px;
-                                                                                white-space: normal;
-                                                                                background-color: rgb(
-                                                                                  255,
-                                                                                  255,
-                                                                                  255
-                                                                                );
-                                                                                text-decoration-thickness: initial;
-                                                                                text-decoration-style: initial;
-                                                                                text-decoration-color: initial;
-                                                                                mso-line-height-alt: 145%;
-                                                                              ">
-                                                                              <span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-family: 'Helvetica Neue',
-                                                                                      Helvetica,
-                                                                                      Arial,
-                                                                                      Verdana,
-                                                                                      sans-serif;
-                                                                                  "><span style="
-                                                                                      background-color: rgb(
-                                                                                        255,
-                                                                                        255,
-                                                                                        255
-                                                                                      );
-                                                                                    ">Nos
-                                                                                    vemos
-                                                                                    lá!<br><br></span></span></span><strong><span style="
-                                                                                    color: rgb(
-                                                                                      26,
-                                                                                      26,
-                                                                                      26
-                                                                                    );
-                                                                                  "><span style="
-                                                                                      font-family: 'Helvetica Neue',
-                                                                                        Helvetica,
-                                                                                        Arial,
-                                                                                        Verdana,
-                                                                                        sans-serif;
-                                                                                    "><span style="
-                                                                                        background-color: rgb(
-                                                                                          255,
-                                                                                          255,
-                                                                                          255
-                                                                                        );
-                                                                                      ">Equipe
-                                                                                      MovTeens</span></span></span></strong><span style="
-                                                                                  color: rgb(
-                                                                                    26,
-                                                                                    26,
-                                                                                    26
-                                                                                  );
-                                                                                "><span style="
-                                                                                    font-size: small;
-                                                                                  "><span style="
-                                                                                      font-family: -apple-system,
-                                                                                        BlinkMacSystemFont,
-                                                                                        'Segoe UI',
-                                                                                        Roboto,
-                                                                                        Helvetica,
-                                                                                        Arial,
-                                                                                        sans-serif;
-                                                                                    "><span style="
-                                                                                        background-color: rgb(
-                                                                                          255,
-                                                                                          255,
-                                                                                          255
-                                                                                        );
-                                                                                      "><br></span></span></span></span>
-                                                                            </p>
-                                                                          </li>
-                                                                        </ul>
-                                                                      </li>
-                                                                    </ul>
-                                                                  </li>
-                                                                </ul>
-                                                              </div>
-                                                            </td>
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                    </td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="
-                                                        background-color: transparent;
-                                                        padding-bottom: 20px;
-                                                        padding-right: 24px;
-                                                        padding-left: 24px;
-                                                      " valign="top" class="mceDividerBlockContainer" id="blockContainerId-8">
-                                                      <a href="#" target="_blank" rel="noopener noreferrer">
-                                                              <img style="
-                                                                  max-width: 100%;
-                                                                  height: 50px;
-                                                                " width="60" height="30" class="site-img-logo" src="https://mcusercontent.com/7431ecec0175e179b64e6e523/images/c793a017-c09a-0671-1163-0842011abd7d.png" alt="Movteens">
-                                                            </a><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="
-                                                          background-color: transparent;
-                                                          width: 100%;
-                                                        " role="presentation" class="mceDividerContainer" data-block-id="8">
-                                                        <tbody>
-                                                          <tr>
-                                                            
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                    </td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody data-block-id="17" class="mceWrapper">
-                  <tr>
-                    <td style="background-color: transparent" valign="top" align="center" class="mceSectionFooter">
-                      <!--[if (gte mso 9)|(IE)]><table align="center" border="0" cellspacing="0" cellpadding="0" width="660" style="width:660px;"><tr><td><![endif]-->
-                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 660px" role="presentation">
-                        <tbody>
-                          <tr>
-                            <td style="background-color: #ffffff" valign="top" class="mceWrapperInner">
-                              <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="16">
-                                <tbody>
-                                  <tr class="mceRow">
-                                    <td style="
-                                        background-position: center;
-                                        background-repeat: no-repeat;
-                                        background-size: cover;
-                                      " valign="top">
-                                      <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                        <tbody>
-                                          <tr>
-                                            <td style="
-                                                padding-top: 0;
-                                                padding-bottom: 0;
-                                              " valign="top" class="mceColumn" data-block-id="-6" colspan="12" width="100%">
-                                              <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                <tbody>
-                                                  <tr>
-                                                    <td style="
-                                                        padding-top: 8px;
-                                                        padding-bottom: 8px;
-                                                        padding-right: 8px;
-                                                        padding-left: 8px;
-                                                      " valign="top" id="blockContainerId-15">
-                                                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="15" id="section_804da8337b76aa4db1ee9c9d8b288054" class="mceFooterSection">
-                                                        <tbody>
-                                                          <tr class="mceRow">
-                                                            <td style="
-                                                                background-position: center;
-                                                                background-repeat: no-repeat;
-                                                                background-size: cover;
-                                                              " valign="top">
-                                                              <table border="0" cellpadding="0" cellspacing="12" width="100%" role="presentation">
-                                                                <tbody>
-                                                                  <tr>
-                                                                    <td style="
-                                                                        padding-top: 0;
-                                                                        padding-bottom: 0;
-                                                                      " valign="top" class="mceColumn" data-block-id="-3" colspan="12" width="100%">
-                                                                      <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                                        <tbody>
-                                                                          <tr>
-                                                                            <td style="
-                                                                                padding-top: 0;
-                                                                                padding-bottom: 0;
-                                                                                padding-right: 0;
-                                                                                padding-left: 0;
-                                                                              " valign="top" align="center" id="blockContainerId-13">
-                                                                              <table width="100%" style="
-                                                                                  border: 0;
-                                                                                  border-radius: 0;
-                                                                                  border-collapse: separate;
-                                                                                ">
-                                                                                <tbody>
-                                                                                  <tr>
-                                                                                    <td style="
-                                                                                        padding-left: 16px;
-                                                                                        padding-right: 16px;
-                                                                                        padding-top: 12px;
-                                                                                        padding-bottom: 12px;
-                                                                                      " class="mceTextBlockContainer">
-                                                                                      <div data-block-id="13" class="mceText" id="dataBlockId-13" style="
-                                                                                          display: inline-block;
-                                                                                          width: 100%;
-                                                                                        ">
-                                                                                        <p class="last-child">
-                                                                                          <br>
-                                                                                        </p>
-                                                                                      </div>
-                                                                                    </td>
-                                                                                  </tr>
-                                                                                </tbody>
-                                                                              </table>
-                                                                            </td>
-                                                                          </tr>
-                                                                          <tr>
-                                                                            <td valign="top" class="mceLayoutContainer" align="center" id="blockContainerId--2">
-                                                                              <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" data-block-id="-2">
-                                                                                <tbody>
-                                                                                  <tr class="mceRow">
-                                                                                    <td style="
-                                                                                        background-position: center;
-                                                                                        background-repeat: no-repeat;
-                                                                                        background-size: cover;
-                                                                                      " valign="top">
-                                                                                      <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                                                        <tbody>
-                                                                                          <tr>
-                                                                                            <td valign="top" class="mceColumn" data-block-id="-7" colspan="12" width="100%">
-                                                                                              <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                                                                <tbody>
-                                                                                                  <tr>
-                                                                                                    <td valign="top" align="center" id="blockContainerId-14">
-                                                                                                      <div>
-                                                                                                        <div data-block-id="14"></div>
-                                                                                                      </div>
-                                                                                                    </td>
-                                                                                                  </tr>
-                                                                                                </tbody>
-                                                                                              </table>
-                                                                                            </td>
-                                                                                          </tr>
-                                                                                        </tbody>
-                                                                                      </table>
-                                                                                    </td>
-                                                                                  </tr>
-                                                                                </tbody>
-                                                                              </table>
-                                                                            </td>
-                                                                          </tr>
-                                                                        </tbody>
-                                                                      </table>
-                                                                    </td>
-                                                                  </tr>
-                                                                </tbody>
-                                                              </table>
-                                                            </td>
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                    </td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
-                    </td>
-                  </tr>
-                </tbody>
+            <td class="info-card-header">
+              <span style="font-size:16px;">📍</span>
+              <span class="info-card-header-title">Informações do Acampamento</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="info-row">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="info-label">📅 Data</td>
+                  <td class="info-value">05 a 07 de Junho de 2025</td>
+                </tr>
               </table>
             </td>
           </tr>
-        </tbody>
-      </table>
-    </center>
-    <center>
-      <br>
-      <br><br><br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <table border="0" cellpadding="0" cellspacing="0" width="100%" id="canspamBarWrapper" style="background-color: #ffffff; border-top: 1px solid #e5e5e5"></table>
-      <style type="text/css">
-        @media only screen and (max-width: 480px) {
-          table#canspamBar td {
-            font-size: 14px !important;
-          }
-          table#canspamBar td a {
-            display: block !important;
-            margin-top: 10px !important;
-          }
-        }
-      </style>
-    </center>
-    <script type="text/javascript" src="/vDO1/yb0-/wII/pAC/hR6g/tOtap28DhQcD/BCxDFUhs/Yw0/WVSRrcxw"></script>
+          <tr>
+            <td class="info-row">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="info-label">📍 Local</td>
+                  <td class="info-value">Acampamento Evangélico Maanaim<br>
+                    <span style="font-size:12px; color:#6b7280;">Estr. Arns, 1516 — Mandaguaçu, PR</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="info-row">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="info-label">🧒 Faixa etária</td>
+                  <td class="info-value">12 a 16 anos</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="info-row">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="info-label">💵 Valor pago</td>
+                  <td class="info-value">R$ 280,00</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="info-row">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="info-label">✅ Status</td>
+                  <td class="info-value"><span class="confirmed-badge">Confirmado</span></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
 
-</body></html>
-`
+        <p class="message-text">
+          Se você tiver qualquer dúvida ou precisar de mais informações, é só entrar em contato com a equipe do acampamento.
+        </p>
+
+        <p class="message-text">
+          Nos vemos lá!<br>
+          <strong>Equipe MovTeens</strong>
+        </p>
+
+        <hr class="divider">
+
+        <!-- Contact -->
+        <div class="contact-section">
+          <div class="contact-title">📞 Dúvidas? Fale conosco</div>
+          <div class="contact-item"><strong>Secretaria IPVO:</strong> (44) 3226-4473</div>
+          <div class="contact-item"><strong>Anjinho:</strong> (44) 9 9846-0089</div>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <img
+          src="https://mcusercontent.com/7431ecec0175e179b64e6e523/images/9484b549-1188-d680-bbe9-eaccbd967b58.png"
+          alt="MovTeens"
+          class="footer-logo"
+        />
+        <p class="footer-text">
+          © 2025 MovTeens · IPVO<br>
+          Este e-mail foi enviado automaticamente. Por favor, não responda.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>`;

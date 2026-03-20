@@ -19,26 +19,8 @@ export function HeroSection() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/hero-background.jpg')" }}
         initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 0.3, scale: 1 }}
+        animate={{ opacity: 0.6, scale: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
-      />
-
-      <motion.div
-        className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-
-      <motion.div
-        className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-accent/10 blur-3xl"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{ duration: 10, repeat: Infinity }}
       />
 
       {/* Content */}
@@ -91,8 +73,8 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          Um tempo para crescer na fé, criar amizades verdadeiras e viver
-          momentos que você nunca vai esquecer.
+          Num mundo de falsas versões,
+          <br /> descubra quem você realmente é em Cristo.
         </motion.p>
 
         <motion.div
