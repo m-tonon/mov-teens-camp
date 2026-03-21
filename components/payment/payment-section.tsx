@@ -16,7 +16,7 @@ const CAMP_INFO = {
   },
   contacts: [
     { name: "Secretaria IPVO", phone: "(44) 3226-4473" },
-    { name: "Anjinho", phone: "(44) 9 9846-0089" },
+    { name: "Ana Carla", phone: "(44) 9 9115-8078" },
   ],
 };
 
@@ -55,7 +55,7 @@ export function PaymentSection({ data, onBack }: Props) {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto space-y-4">
+    <div className="w-full max-w-2xl mx-auto space-y-4">
       {/* Amount card */}
       <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
         <div className="h-1.5 w-full bg-gradient-to-r from-primary via-primary/70 to-primary/30" />

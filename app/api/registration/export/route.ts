@@ -7,16 +7,14 @@ export async function GET(req: NextRequest) {
   await connectToDatabase();
 
   try {
-    let registrations = await RegistrationModel.find({}).lean();
+    const { searchParams } = req.nextUrl;
+    const paymentOnly = searchParams.get("paid") === "true";
+    const csvMode = searchParams.get("csv") === "1";
 
-    const paymentOnly = req.nextUrl.searchParams.get("payment");
-    if (paymentOnly === "true") {
-      registrations = registrations.filter(
-        (r) => r.payment?.paymentConfirmed === true,
-      );
-    }
+    const query = paymentOnly ? { "payment.paymentConfirmed": true } : {};
+    const registrations = await RegistrationModel.find(query).lean();
 
-    const flatRegistrations = registrations.map((r: any) => ({
+    const flat = registrations.map((r: any) => ({
       name: r.name,
       birthDate: r.birthDate,
       age: r.age,
@@ -37,50 +35,52 @@ export async function GET(req: NextRequest) {
       parentalAuthorization: r.parentalAuthorization,
       paymentReferenceId: r.payment?.referenceId,
       paymentConfirmed: r.payment?.paymentConfirmed,
+      // keep nested for JSON consumers
+      responsibleInfo: r.responsibleInfo,
+      payment: r.payment,
       createdAt: r.createdAt,
       updatedAt: r.updatedAt,
+      _id: r._id,
     }));
 
-    if (req.nextUrl.searchParams.get("json") === "1") {
-      return NextResponse.json(flatRegistrations);
+    if (csvMode) {
+      const fields = [
+        { label: "Nome do Acampante", value: "name" },
+        { label: "Data de Nascimento", value: "birthDate" },
+        { label: "Idade", value: "age" },
+        { label: "Gênero", value: "gender" },
+        { label: "Documento do Acampante", value: "identityDocument" },
+        { label: "Endereço", value: "address" },
+        { label: "Membro de Igreja", value: "churchMembership" },
+        { label: "Nome da Igreja", value: "churchName" },
+        { label: "Plano de Saúde", value: "healthInsurance" },
+        { label: "Medicamentos", value: "medications" },
+        { label: "Alergias", value: "allergies" },
+        { label: "Necessidades Especiais", value: "specialNeeds" },
+        { label: "Nome do Responsável", value: "responsibleName" },
+        { label: "Telefone do Responsável", value: "responsiblePhone" },
+        { label: "Relação com o Acampante", value: "responsibleRelation" },
+        { label: "Documento do Responsável", value: "responsibleDocument" },
+        { label: "Email do Responsável", value: "responsibleEmail" },
+        { label: "Autorização dos Pais", value: "parentalAuthorization" },
+        { label: "ID do Pagamento", value: "paymentReferenceId" },
+        { label: "Pagamento Confirmado", value: "paymentConfirmed" },
+        { label: "Criado em", value: "createdAt" },
+        { label: "Atualizado em", value: "updatedAt" },
+      ];
+
+      const csv = new Parser({ fields }).parse(flat);
+      return new NextResponse(csv, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/csv",
+          "Content-Disposition":
+            'attachment; filename="movteens-inscricoes2025.csv"',
+        },
+      });
     }
 
-    const fields = [
-      { label: "Nome do Adolescente", value: "name" },
-      { label: "Data de Nascimento", value: "birthDate" },
-      { label: "Idade", value: "age" },
-      { label: "Gênero", value: "gender" },
-      { label: "Documento do Adolescente", value: "identityDocument" },
-      { label: "Endereço", value: "address" },
-      { label: "Membro de Igreja", value: "churchMembership" },
-      { label: "Nome da Igreja", value: "churchName" },
-      { label: "Plano de Saúde", value: "healthInsurance" },
-      { label: "Medicamentos", value: "medications" },
-      { label: "Alergias", value: "allergies" },
-      { label: "Necessidades Especiais", value: "specialNeeds" },
-      { label: "Nome do Responsável", value: "responsibleName" },
-      { label: "Telefone do Responsável", value: "responsiblePhone" },
-      { label: "Relação com o Adolescente", value: "responsibleRelation" },
-      { label: "Documento do Responsável", value: "responsibleDocument" },
-      { label: "Email do Responsável", value: "responsibleEmail" },
-      { label: "Autorização dos Pais", value: "parentalAuthorization" },
-      { label: "ID do Pagamento", value: "paymentReferenceId" },
-      { label: "Pagamento Confirmado", value: "paymentConfirmed" },
-      { label: "Criado em", value: "createdAt" },
-      { label: "Atualizado em", value: "updatedAt" },
-    ];
-
-    const parser = new Parser({ fields });
-    const csv = parser.parse(flatRegistrations);
-
-    return new NextResponse(csv, {
-      status: 200,
-      headers: {
-        "Content-Type": "text/csv",
-        "Content-Disposition":
-          'attachment; filename="movteens-inscricoes2025.csv"',
-      },
-    });
+    return NextResponse.json(flat);
   } catch (error) {
     console.error("Error in /api/registration/export:", error);
     return NextResponse.json(

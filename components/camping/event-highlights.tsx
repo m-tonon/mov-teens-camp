@@ -1,38 +1,39 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Calendar, MapPin, Users, Sparkles } from 'lucide-react'
+import { motion } from "framer-motion";
+import { Calendar, MapPin, Users, Sparkles } from "lucide-react";
 
 const highlights = [
   {
     icon: Calendar,
-    label: 'Data',
-    value: '05 - 07 Junho',
-    description: '3 dias de imersão',
-    color: 'bg-primary/20 text-primary',
+    label: "Data",
+    value: "05 a 07 de Junho",
+    description: "3 dias de imersão",
+    color: "bg-primary/20 text-primary",
   },
   {
     icon: MapPin,
-    label: 'Local',
-    value: 'Acampamento Maanaim',
-    description: 'Acampamento Evangélico',
-    color: 'bg-accent/20 text-accent',
+    label: "Local",
+    value: "Acampamento Maanaim",
+    description: "Acampamento Evangélico",
+    color: "bg-accent/20 text-accent",
   },
   {
     icon: Users,
-    label: 'Idade',
-    value: '12 a 16 anos',
-    description: 'Adolescentes',
-    color: 'bg-chart-3/20 text-chart-3',
+    label: "Idade",
+    value: "A partir de 12 anos",
+    description: "Faixa etária do acampamento",
+    color: "bg-chart-3/20 text-chart-3",
   },
   {
     icon: Sparkles,
-    label: 'Tema',
-    value: 'Deepfake',
-    description: 'Entre aparência e realidade: a Palavra de Deus revela quem realmente somos.',
-    color: 'bg-chart-4/20 text-chart-4',
-  }
-]
+    label: "Tema",
+    value: "Deepfake",
+    description:
+      "Num mundo de falsas versões, descubra quem você realmente é em Cristo.",
+    color: "bg-chart-4/20 text-chart-4",
+  },
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -42,12 +43,12 @@ const containerVariants = {
       staggerChildren: 0.15,
     },
   },
-}
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
-}
+};
 
 export function EventHighlights() {
   return (
@@ -84,19 +85,19 @@ export function EventHighlights() {
               <div className={`inline-flex p-3 rounded-xl ${item.color} mb-4`}>
                 <item.icon className="w-6 h-6" />
               </div>
-              
+
               <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
                 {item.label}
               </p>
-              
+
               <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1">
                 {item.value}
               </h3>
-              
+
               <p className="text-sm text-muted-foreground">
                 {item.description}
               </p>
-              
+
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </motion.div>
           ))}
@@ -117,12 +118,13 @@ export function EventHighlights() {
             <div>
               <h4 className="font-bold text-foreground mb-1">Importante</h4>
               <p className="text-sm text-muted-foreground">
-                Sua vaga so esta garantida mediante pagamento.<br /> Garanta ja a sua e lembre-se de convidar algum amigo!
+                Sua vaga so esta garantida mediante pagamento.
+                <br /> Garanta ja a sua e lembre-se de convidar algum amigo!
               </p>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

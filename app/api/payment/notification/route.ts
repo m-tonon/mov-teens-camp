@@ -4,6 +4,7 @@ import { connectToDatabase } from "@/lib/mongoose-connection";
 import { RegistrationModel } from "@/shared/models/registration.model";
 import nodemailer from "nodemailer";
 import { confirmationTemplate } from "@/lib/confirmation-email-template";
+import juice from "juice";
 
 dotenv.config();
 
@@ -73,10 +74,11 @@ async function sendConfirmationEmail(participant: {
   name: string;
   email: string;
 }) {
-  const html = confirmationTemplate.replace(
+  const withName = confirmationTemplate.replace(
     "{{nomeParticipante}}",
     participant.name,
   );
+  const html = juice(withName);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -90,7 +92,7 @@ async function sendConfirmationEmail(participant: {
     await transporter.sendMail({
       from: `"IPVO MovTeens" <${GMAIL_USER}>`,
       to: participant.email,
-      subject: "✅ Inscrição confirmada no 2º Acampa Teens!",
+      subject: "✅ Inscrição confirmada no 3º Acampa Teens!",
       html,
     });
     console.log(`Confirmation email sent to ${participant.email}`);

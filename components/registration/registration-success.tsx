@@ -153,10 +153,11 @@ export function RegistrationSuccess({ data }: Props) {
         </div>
 
         {/* Contacts */}
-        <div className="bg-card border border-border rounded-xl px-4 py-3 text-xs text-muted-foreground space-y-1">
+        <div className="bg-card border border-border rounded-xl px-4 py-3 text-xs text-muted-foreground space-y-1 pb-2">
           <p className="font-medium text-foreground mb-1.5">Dúvidas?</p>
           <p>📞 Secretaria IPVO · (44) 3226-4473</p>
-          <p>📱 Anjinho · (44) 9 9846-0089</p>
+          <p>📱 Ana Carla · (44) 9 9115-8078</p>
+          <p className="text-xs text-muted-foreground pt-2">Ou entre em contato com a secretaria da sua igreja.</p>
         </div>
       </div>
     </main>

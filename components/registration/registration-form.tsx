@@ -139,11 +139,11 @@ export function RegistrationForm({ onSubmit }: Props) {
       "birthDate",
       "gender",
       "identityDocument",
-      "parentalAuthorization",
       "responsibleInfo.name",
       "responsibleInfo.document",
       "responsibleInfo.phone",
       "responsibleInfo.email",
+      ...(isMinor ? ["parentalAuthorization"] : []),
     ];
     setTouched(Object.fromEntries(allFields.map((f) => [f, true])));
 
@@ -211,8 +211,8 @@ export function RegistrationForm({ onSubmit }: Props) {
 
   const age = formData.birthDate ? calculateAge(formData.birthDate) : null;
   const ageError =
-    age !== null && (age < 12 || age > 16)
-      ? "O adolescente deve ter entre 12 e 16 anos."
+    age !== null && (age < 12)
+      ? "O acampante deve ter pelo menos 12 anos."
       : null;
 
   const inputBase =
@@ -259,6 +259,8 @@ export function RegistrationForm({ onSubmit }: Props) {
     </div>
   );
 
+  const isMinor = age !== null && age < 18;
+
   const isFormValid =
     !!formData.name &&
     !!formData.birthDate &&
@@ -268,7 +270,7 @@ export function RegistrationForm({ onSubmit }: Props) {
     !!formData.responsibleInfo.document &&
     !!formData.responsibleInfo.phone &&
     !!formData.responsibleInfo.email &&
-    formData.parentalAuthorization &&
+    (!isMinor || formData.parentalAuthorization) &&
     !ageError;
 
   return (
@@ -291,11 +293,11 @@ export function RegistrationForm({ onSubmit }: Props) {
         onSubmit={handleSubmit}
         className="bg-card border border-border rounded-2xl shadow-sm divide-y divide-border"
       >
-        {/* ── Adolescente ── */}
+        {/* ── Acampante ── */}
         <section className="p-6 space-y-4">
           <SectionDivider
             icon="🧑"
-            title="Dados do Adolescente"
+            title="Dados do Acampante"
             subtitle="Campos com * são obrigatórios"
           />
 
@@ -458,7 +460,7 @@ export function RegistrationForm({ onSubmit }: Props) {
             />
             <p className="text-xs text-muted-foreground mt-1.5 bg-muted/50 rounded-lg px-3 py-2">
               <strong>Obs:</strong> Sem plano de saúde e sem contato com o
-              responsável, o adolescente será levado ao posto de saúde mais
+              responsável, o acampante será levado ao posto de saúde mais
               próximo.
             </p>
           </div>
@@ -497,7 +499,7 @@ export function RegistrationForm({ onSubmit }: Props) {
             </label>
             <textarea
               name="specialNeeds"
-              placeholder="Descreva qualquer necessidade especial que o adolescente tenha..."
+              placeholder="Descreva qualquer necessidade especial que o acampante tenha..."
               className={`${inputNormal} resize-none`}
               rows={2}
               value={formData.specialNeeds}
@@ -587,7 +589,7 @@ export function RegistrationForm({ onSubmit }: Props) {
 
             <div>
               <label className="block text-xs font-medium text-muted-foreground mb-1">
-                Relação com o adolescente
+                Relação com o acampante
               </label>
               <input
                 name="responsibleInfo.relation"
@@ -627,37 +629,41 @@ export function RegistrationForm({ onSubmit }: Props) {
         </section>
 
         {/* ── Autorização ── */}
-        <section className="p-6 space-y-4">
-          <label
-            className={`flex gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${
-              formData.parentalAuthorization
-                ? "border-primary/40 bg-primary/5"
-                : touched["parentalAuthorization"]
-                  ? "border-destructive/40 bg-destructive/5"
-                  : "border-border hover:bg-muted/50"
-            }`}
-          >
-            <input
-              type="checkbox"
-              name="parentalAuthorization"
-              checked={formData.parentalAuthorization}
-              onChange={handleChange}
-              onBlur={() => handleBlur("parentalAuthorization")}
-              className="mt-0.5 w-5 h-5 accent-primary flex-shrink-0"
-            />
-            <span className="text-sm leading-relaxed text-foreground/80">
-              Autorizo o menor acima a participar do evento{" "}
-              <strong className="text-foreground">3º ACAMPA TEENS</strong> no
-              Maanaim — Estr. Arns, 1516, Mandaguaçu - PR, no período de{" "}
-              <strong className="text-foreground">05 a 07 de junho</strong>.
-              Esta autorização está de acordo com o ECA (lei 8.069/90).
-            </span>
-          </label>
-          {touched["parentalAuthorization"] &&
-            !formData.parentalAuthorization && (
-              <FieldError message="A autorização dos pais/responsáveis é obrigatória." />
-            )}
-        </section>
+        {isMinor && (
+          <section className="p-6 space-y-4">
+            <label
+              className={`flex gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${
+                formData.parentalAuthorization
+                  ? "border-primary/40 bg-primary/5"
+                  : touched["parentalAuthorization"]
+                    ? "border-destructive/40 bg-destructive/5"
+                    : "border-border hover:bg-muted/50"
+              }`}
+            >
+              <input
+                type="checkbox"
+                name="parentalAuthorization"
+                checked={formData.parentalAuthorization}
+                onChange={handleChange}
+                onBlur={() => handleBlur("parentalAuthorization")}
+                className="mt-0.5 w-5 h-5 accent-primary flex-shrink-0"
+              />
+              <span className="text-sm leading-relaxed text-foreground/80">
+                Autorizo o menor acima a participar do evento{" "}
+                <strong className="text-foreground">3º ACAMPA TEENS</strong> no
+                Maanaim — Estr. Arns, 1516, Mandaguaçu - PR, no período de{" "}
+                <strong className="text-foreground">
+                  05 a 07 de Junho de 2026
+                </strong>
+                . Esta autorização está de acordo com o ECA (lei 8.069/90).
+              </span>
+            </label>
+            {touched["parentalAuthorization"] &&
+              !formData.parentalAuthorization && (
+                <FieldError message="A autorização dos pais/responsáveis é obrigatória." />
+              )}
+          </section>
+        )}
 
         {/* ── Submit ── */}
         <div className="p-6">

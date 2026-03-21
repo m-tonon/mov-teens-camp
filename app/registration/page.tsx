@@ -47,7 +47,7 @@ export default function RegistrationPage() {
         transition={{ duration: 10, repeat: Infinity }}
       />
 
-      <div className="relative max-w-lg mx-auto px-4 py-10 md:py-16">
+      <div className="relative max-w-2xl mx-auto px-4 py-10 md:py-16">
         {/* Step indicator */}
         <div className="flex items-center justify-center gap-2 mb-8">
           {STEPS.map((s, i) => {

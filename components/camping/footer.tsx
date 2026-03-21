@@ -14,7 +14,7 @@ export function Footer() {
           transition={{ duration: 0.6 }}
         >
           {/* Logo */}
-          <div className="mb-6">
+          {/* <div className="mb-6">
             <h3 className="text-2xl font-black tracking-tight">
               <span className="text-foreground">MOV</span>
               <span className="text-primary">TEENS</span>
@@ -22,10 +22,10 @@ export function Footer() {
             <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
               Ministério de Adolescentes IPVO
             </p>
-          </div>
+          </div> */}
 
           {/* Bottom */}
-          <div className="pt-8 border-t border-border w-full">
+          <div className="pt-8 border-border w-full">
             <p className="text-sm text-muted-foreground">
               © 2026 IPVO • Design by Matheus Tonon
             </p>
