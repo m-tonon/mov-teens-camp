@@ -7,7 +7,7 @@ const highlights = [
   {
     icon: Calendar,
     label: "Data",
-    value: "05 - 07 Junho",
+    value: "05 a 07 de Junho",
     description: "3 dias de imersão",
     color: "bg-primary/20 text-primary",
   },
@@ -21,8 +21,8 @@ const highlights = [
   {
     icon: Users,
     label: "Idade",
-    value: "12 a 16 anos",
-    description: "Adolescentes",
+    value: "A partir de 12 anos",
+    description: "Faixa etária do acampamento",
     color: "bg-chart-3/20 text-chart-3",
   },
   {

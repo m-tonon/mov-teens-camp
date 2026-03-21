@@ -46,11 +46,11 @@ export async function GET(req: NextRequest) {
     }
 
     const fields = [
-      { label: "Nome do Adolescente", value: "name" },
+      { label: "Nome do Acampante", value: "name" },
       { label: "Data de Nascimento", value: "birthDate" },
       { label: "Idade", value: "age" },
       { label: "Gênero", value: "gender" },
-      { label: "Documento do Adolescente", value: "identityDocument" },
+      { label: "Documento do Acampante", value: "identityDocument" },
       { label: "Endereço", value: "address" },
       { label: "Membro de Igreja", value: "churchMembership" },
       { label: "Nome da Igreja", value: "churchName" },
@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
       { label: "Necessidades Especiais", value: "specialNeeds" },
       { label: "Nome do Responsável", value: "responsibleName" },
       { label: "Telefone do Responsável", value: "responsiblePhone" },
-      { label: "Relação com o Adolescente", value: "responsibleRelation" },
+      { label: "Relação com o Acampante", value: "responsibleRelation" },
       { label: "Documento do Responsável", value: "responsibleDocument" },
       { label: "Email do Responsável", value: "responsibleEmail" },
       { label: "Autorização dos Pais", value: "parentalAuthorization" },

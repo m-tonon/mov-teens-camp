@@ -85,7 +85,7 @@ export function HeroSection() {
         >
           <div className="flex items-center gap-2 text-foreground/80">
             <CalendarDays className="w-5 h-5 text-primary" />
-            <span className="font-medium">05 - 07 Junho</span>
+            <span className="font-medium">05 a 07 de Junho</span>
           </div>
           <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-primary" />
           <div className="flex items-center gap-2 text-foreground/80">

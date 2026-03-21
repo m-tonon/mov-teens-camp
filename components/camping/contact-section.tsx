@@ -8,14 +8,16 @@ const contacts = [
     icon: Building2,
     name: 'Secretaria IPVO',
     phone: '(44) 3226-4473',
+    href: 'tel:443226473',
     description: 'Informacoes gerais',
     color: 'from-primary/20 to-primary/5',
     iconColor: 'text-primary',
   },
   {
     icon: MessageCircle,
-    name: 'Anjinho',
-    phone: '(44) 9 9846-0089',
+    name: 'Ana Carla',
+    phone: '(44) 9 9115-8078',
+    href: 'https://wa.me/5544991158078',
     description: 'WhatsApp',
     color: 'from-accent/20 to-accent/5',
     iconColor: 'text-accent',
@@ -40,7 +42,8 @@ export function ContactSection() {
             Contatos
           </h2>
           <p className="text-muted-foreground text-lg">
-            Ficou com duvidas? Entre em contato conosco
+            Ficou com dúvidas? Entre em contato conosco
+            ou com a secretaria da sua igreja.
           </p>
         </motion.div>
 
@@ -48,7 +51,7 @@ export function ContactSection() {
           {contacts.map((contact, index) => (
             <motion.a
               key={contact.name}
-              href={`tel:${contact.phone.replace(/\D/g, '')}`}
+              href={contact.href}
               className="group block"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

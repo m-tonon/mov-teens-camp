@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: '3º Acampa Teens - Deepfake',
-  description: 'Acampamento para jovens de 12 a 16 anos. Fortaleça a fé e desenvolva autonomia e comunhão.',
+  description: 'Acampamento para jovens a partir de 12 anos. Fortaleça a fé e desenvolva autonomia e comunhão.',
   icons: {
     icon: [
       {

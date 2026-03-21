@@ -372,7 +372,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="info-label">🧒 Faixa etária</td>
-                  <td class="info-value">12 a 16 anos</td>
+                  <td class="info-value">A partir de 12 anos</td>
                 </tr>
               </table>
             </td>
@@ -414,7 +414,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
         <div class="contact-section">
           <div class="contact-title">📞 Dúvidas? Fale conosco</div>
           <div class="contact-item"><strong>Secretaria IPVO:</strong> (44) 3226-4473</div>
-          <div class="contact-item"><strong>Anjinho:</strong> (44) 9 9846-0089</div>
+          <div class="contact-item"><strong>Ana Carla:</strong> (44) 9 9115-8078</div>
         </div>
 
       </div>

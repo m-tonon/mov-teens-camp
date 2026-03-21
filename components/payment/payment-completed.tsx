@@ -1,6 +1,6 @@
 const CONTACTS = [
   { name: "Secretaria IPVO", phone: "(44) 3226-4473" },
-  { name: "Anjinho", phone: "(44) 9 9846-0089" },
+  { name: "Ana Carla", phone: "(44) 9 9115-8078" },
 ];
 
 export function PaymentCompletedScreen() {
@@ -34,6 +34,7 @@ export function PaymentCompletedScreen() {
               {c.phone}
             </p>
           ))}
+          <p className="text-xs text-muted-foreground pt-2">Ou entre em contato com a secretaria da sua igreja.</p>
         </div>
       </div>
     </main>

@@ -16,7 +16,7 @@ const CAMP_INFO = {
   },
   contacts: [
     { name: "Secretaria IPVO", phone: "(44) 3226-4473" },
-    { name: "Anjinho", phone: "(44) 9 9846-0089" },
+    { name: "Ana Carla", phone: "(44) 9 9115-8078" },
   ],
 };
 
