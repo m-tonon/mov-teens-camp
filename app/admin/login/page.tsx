@@ -10,7 +10,17 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (password === process.env.ADMIN_PASS) {
+
+    const res = await fetch("/api/admin-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password }),
+    });
+
+    const data = await res.json();
+    console.log("Admin login response:", data);
+
+    if (data.success) {
       sessionStorage.setItem("admin-auth", "true");
       router.push("/admin");
     } else {
