@@ -179,7 +179,7 @@ export default function AdminPage() {
             Inscrições
           </h1>
           <p className="text-xs text-muted-foreground mt-0.5">
-            3º Acampa Teens · 05–07 Junho 2025
+            3º Acampa Teens · 05–07 Junho 2026
           </p>
         </div>
         <div className="flex items-center gap-2">

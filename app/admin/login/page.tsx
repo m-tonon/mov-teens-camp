@@ -8,7 +8,7 @@ export default function AdminLogin() {
   const [error, setError] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
       sessionStorage.setItem("admin-auth", "true");
