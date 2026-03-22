@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       .toISOString()
       .replace("Z", "-03:00");
 
-    const amount = payment.amount ?? 100;
+    const amount = payment.amount ?? 28000;
 
     const payload = {
       reference_id: payment.referenceId,
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         {
           name: "3º Acampa Teens",
           quantity: 1,
-          unit_amount: 100,
+          unit_amount: amount,
         },
       ],
       payment_methods: [

@@ -101,9 +101,15 @@ export function RegistrationForm({ onSubmit }: Props) {
 
     if (name.startsWith("responsibleInfo.")) {
       const key = name.split(".")[1];
+
+      const formattedValue =
+        key === "relation"
+          ? value.charAt(0).toUpperCase() + value.slice(1)
+          : value;
+
       setFormData((prev) => ({
         ...prev,
-        responsibleInfo: { ...prev.responsibleInfo, [key]: value },
+        responsibleInfo: { ...prev.responsibleInfo, [key]: formattedValue },
       }));
       return;
     }
@@ -211,7 +217,7 @@ export function RegistrationForm({ onSubmit }: Props) {
 
   const age = formData.birthDate ? calculateAge(formData.birthDate) : null;
   const ageError =
-    age !== null && (age < 12)
+    age !== null && age < 12
       ? "O acampante deve ter pelo menos 12 anos."
       : null;
 

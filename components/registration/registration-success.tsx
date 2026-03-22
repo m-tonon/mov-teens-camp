@@ -95,9 +95,9 @@ export function RegistrationSuccess({ data }: Props) {
                   href={paymentLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 active:scale-[0.98] shadow-sm"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-green-600 text-white text-sm font-semibold transition-all hover:bg-green-700 active:scale-[0.98] shadow-sm"
                 >
-                  Ir para o pagamento
+                  Pagar agora
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -157,7 +157,9 @@ export function RegistrationSuccess({ data }: Props) {
           <p className="font-medium text-foreground mb-1.5">Dúvidas?</p>
           <p>📞 Secretaria IPVO · (44) 3226-4473</p>
           <p>📱 Ana Carla · (44) 9 9115-8078</p>
-          <p className="text-xs text-muted-foreground pt-2">Ou entre em contato com a secretaria da sua igreja.</p>
+          <p className="text-xs text-muted-foreground pt-2">
+            Ou entre em contato com a secretaria da sua igreja.
+          </p>
         </div>
       </div>
     </main>
