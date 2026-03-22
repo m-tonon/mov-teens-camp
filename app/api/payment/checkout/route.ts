@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       .toISOString()
       .replace("Z", "-03:00");
 
-    const amount = payment.amount ?? 28000;
+    const amount = payment.amount ?? 100;
 
     const payload = {
       reference_id: payment.referenceId,
