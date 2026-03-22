@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         {
           name: "3º Acampa Teens",
           quantity: 1,
-          unit_amount: amount,
+          unit_amount: 100,
         },
       ],
       payment_methods: [
