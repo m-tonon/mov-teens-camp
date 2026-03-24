@@ -102,10 +102,11 @@ export function RegistrationForm({ onSubmit }: Props) {
     if (name.startsWith("responsibleInfo.")) {
       const key = name.split(".")[1];
 
+      const capitalizeWords = (text: string) =>
+        text.replace(/\b\w/g, (char) => char.toUpperCase());
+
       const formattedValue =
-        key === "relation"
-          ? value.charAt(0).toUpperCase() + value.slice(1)
-          : value;
+        key === "relation" ? capitalizeWords(value) : value;
 
       setFormData((prev) => ({
         ...prev,
