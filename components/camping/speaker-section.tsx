@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Mic2, Quote } from "lucide-react";
-import Image from "next/image";
+import { motion } from 'framer-motion';
+import { Mic2, Quote } from 'lucide-react';
+import Image from 'next/image';
 
 export function SpeakerSection() {
   return (
@@ -44,7 +44,7 @@ export function SpeakerSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent md:bg-gradient-to-r" />
 
               <a
-                href="https://instagram.com/"
+                href="https://instagram.com/tonon.lucass"
                 target="_blank"
                 rel="noopener noreferrer"
               >
