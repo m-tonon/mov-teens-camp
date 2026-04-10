@@ -138,29 +138,29 @@ export function PerfilForm({ onSubmit }: PerfilFormProps) {
   const totalAnswered = Object.keys(answers).length;
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-6">
       {/* Header */}
-      <div className="text-center space-y-1">
-        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium mb-2">
+      <div className="text-center space-y-2">
+        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-2">
           <span>⛪</span>
           <span>Teste Vocacional</span>
         </div>
-        <h1 className="text-xl font-black tracking-tight">
+        <h1 className="text-2xl font-black tracking-tight">
           Descubra Seu Perfil de Serviço
         </h1>
-        <p className="text-muted-foreground text-xs max-w-md mx-auto">
+        <p className="text-muted-foreground text-sm max-w-md mx-auto">
           Responda as perguntas abaixo para descobrir onde você pode servir
           melhor no ministério.
         </p>
       </div>
 
       {/* Progress */}
-      <div className="bg-card border border-border rounded-xl p-3">
-        <div className="flex justify-between items-center text-xs text-muted-foreground mb-1.5">
+      <div className="bg-card border border-border rounded-xl p-4">
+        <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
           <span>Progresso</span>
-          <span>{totalAnswered} / 21</span>
+          <span className="font-semibold">{totalAnswered} / 21</span>
         </div>
-        <div className="h-1.5 bg-border rounded-full overflow-hidden">
+        <div className="h-2 bg-border rounded-full overflow-hidden">
           <div
             className="h-full bg-primary transition-all duration-300 rounded-full"
             style={{ width: `${(totalAnswered / 21) * 100}%` }}
@@ -168,18 +168,18 @@ export function PerfilForm({ onSubmit }: PerfilFormProps) {
         </div>
       </div>
 
-      {/* Areas - sem o badge de perfil agora */}
+      {/* Areas */}
       {Object.entries(areaQuestions).map(([areaKey, area]) => (
         <div
           key={areaKey}
           className="bg-card border border-border rounded-xl overflow-hidden"
         >
-          {/* Area header - sem o perfil */}
+          {/* Area header */}
           <div className="px-4 py-3 border-b border-border bg-muted/20">
-            <p className="text-xs font-semibold text-foreground">
+            <p className="text-sm font-semibold text-foreground">
               {area.title}
             </p>
-            <p className="text-xs text-muted-foreground">{area.subtitle}</p>
+            <p className="text-sm text-muted-foreground">{area.subtitle}</p>
           </div>
 
           {/* Questions */}
@@ -189,10 +189,10 @@ export function PerfilForm({ onSubmit }: PerfilFormProps) {
               const hasError = touched[questionKey] && !answers[questionKey];
 
               return (
-                <div key={qIdx} className="px-4 py-3 space-y-1.5">
+                <div key={qIdx} className="px-4 py-4 space-y-2">
                   <label
                     htmlFor={questionKey}
-                    className="block text-xs leading-relaxed text-foreground"
+                    className="block text-sm leading-relaxed text-foreground font-medium"
                   >
                     {qIdx + 1}. {question}
                   </label>
@@ -207,7 +207,7 @@ export function PerfilForm({ onSubmit }: PerfilFormProps) {
                       setTouched((prev) => ({ ...prev, [questionKey]: true }))
                     }
                     className={`
-                      w-full rounded-lg px-3 py-2 text-xs bg-background border
+                      w-full rounded-lg px-3 py-2.5 text-sm bg-background border
                       transition-all duration-200 focus:outline-none focus:ring-2
                       cursor-pointer
                       ${
@@ -230,8 +230,8 @@ export function PerfilForm({ onSubmit }: PerfilFormProps) {
                   </select>
 
                   {hasError && (
-                    <p className="text-xs text-destructive flex items-center gap-1">
-                      <span className="inline-flex w-3 h-3 rounded-full bg-destructive/20 items-center justify-center text-[10px] font-bold">
+                    <p className="text-sm text-destructive flex items-center gap-1">
+                      <span className="inline-flex w-4 h-4 rounded-full bg-destructive/20 items-center justify-center text-xs font-bold">
                         !
                       </span>
                       Por favor, selecione uma resposta.
@@ -249,11 +249,11 @@ export function PerfilForm({ onSubmit }: PerfilFormProps) {
         <button
           type="button"
           onClick={handleSubmit}
-          className="w-full py-3 text-sm font-semibold rounded-xl bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.98] shadow-sm"
+          className="w-full py-4 text-base font-semibold rounded-xl bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.98] shadow-sm"
         >
           Ver Meu Perfil →
         </button>
-        <p className="text-center text-xs text-muted-foreground mt-2">
+        <p className="text-center text-sm text-muted-foreground mt-3">
           Todas as áreas precisam ser completamente respondidas para gerar seu
           resultado.
         </p>
