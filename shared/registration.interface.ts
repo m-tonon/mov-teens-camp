@@ -1,13 +1,13 @@
 export interface PaymentInfo {
-    referenceId: string
-    paymentConfirmed?: boolean
-    paymentLink?: string
-    amount?: number
-    name?: string
-    cpf?: string
-    email?: string
-    phone?: string
-  }
+  referenceId: string;
+  paymentConfirmed?: boolean;
+  paymentLink?: string;
+  amount?: number;
+  name?: string;
+  cpf?: string;
+  email?: string;
+  phone?: string;
+}
 
 export interface ResponsibleInfo {
   name: string;
@@ -33,6 +33,8 @@ export interface RegistrationFormData {
   responsibleInfo: ResponsibleInfo;
   parentalAuthorization: boolean;
   payment: PaymentInfo;
+  isSuiteRegistration?: boolean;
+  suitePartner?: RegistrationFormData;
 }
 
 export interface SaveRegistrationResponse {

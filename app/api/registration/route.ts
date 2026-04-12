@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
       identityDocument: formData.identityDocument,
       hasPayment: !!formData.payment,
       paymentReferenceId: formData.payment?.referenceId,
+      isSuite: formData.isSuiteRegistration,
     });
 
     if (
@@ -27,62 +28,48 @@ export async function POST(req: NextRequest) {
       !formData.responsibleInfo.document ||
       !formData.responsibleInfo.phone
     ) {
-      console.log('Missing required fields:', {
-        name: !!formData.name,
-        responsibleName: !!formData.responsibleInfo?.name,
-        responsibleDocument: !!formData.responsibleInfo?.document,
-        responsiblePhone: !!formData.responsibleInfo?.phone,
-      });
       return NextResponse.json(
-        { error: 'Missing required fields or payment not confirmed' },
+        { error: 'Missing required fields' },
         { status: 400 },
       );
     }
 
-    console.log(
-      'Checking for existing registration by payment referenceId:',
-      formData.payment?.referenceId,
-    );
-    let updatedRegistration = await RegistrationModel.findOneAndUpdate(
+    let mainRegistration = await RegistrationModel.findOneAndUpdate(
       { 'payment.referenceId': formData.payment?.referenceId },
       { $set: formData },
-      { returnDocument: 'after' },
+      { returnDocument: 'after', upsert: true },
     );
 
-    if (!updatedRegistration) {
-      console.log(
-        'No registration found by payment referenceId, trying identityDocument:',
-        formData.identityDocument,
-      );
-      updatedRegistration = await RegistrationModel.findOneAndUpdate(
-        { identityDocument: formData.identityDocument },
-        { $set: formData },
-        { returnDocument: 'after' },
-      );
-    }
+    if (formData.isSuiteRegistration && formData.suitePartner) {
+      const partnerData = {
+        ...formData.suitePartner,
+        payment: {
+          ...formData.suitePartner.payment,
+          referenceId:
+            formData.suitePartner.payment?.referenceId ||
+            formData.payment.referenceId + '-P2',
+        },
+        isSuiteRegistration: true,
+        suitePartnerId: mainRegistration._id,
+      };
 
-    if (updatedRegistration) {
-      console.log(
-        'Registration updated successfully, referenceId:',
-        updatedRegistration.payment.referenceId,
+      let partnerRegistration = await RegistrationModel.findOneAndUpdate(
+        { 'payment.referenceId': partnerData.payment.referenceId },
+        { $set: partnerData },
+        { returnDocument: 'after', upsert: true },
       );
-      return NextResponse.json({
-        message: 'Registration updated successfully',
-        referenceId: updatedRegistration.payment.referenceId,
+
+      await RegistrationModel.findByIdAndUpdate(mainRegistration._id, {
+        suitePartnerId: partnerRegistration._id,
+        suitePartnerName: partnerData.name,
       });
-    }
 
-    console.log('Creating new registration document');
-    const registration = new RegistrationModel(formData);
-    await registration.save();
-    console.log(
-      'New registration saved successfully, referenceId:',
-      registration.payment.referenceId,
-    );
+      console.log('Suite partner registration saved');
+    }
 
     return NextResponse.json({
-      message: 'Data successfully saved to MongoDB',
-      referenceId: registration.payment.referenceId,
+      message: 'Registration saved successfully',
+      referenceId: mainRegistration.payment.referenceId,
     });
   } catch (error) {
     console.error('Error in /api/registration:', error);
