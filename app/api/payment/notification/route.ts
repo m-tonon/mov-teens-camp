@@ -114,7 +114,7 @@ async function sendConfirmationEmail(
     await transporter.sendMail({
       from: `"IPVO MovTeens" <${GMAIL_USER}>`,
       to: participant.email,
-      subject: '✅ Inscrição confirmada no 3º Acampa Teens!',
+      subject: '✅ Inscrição confirmada no Acampa Deep Fake!',
       html,
     });
     console.log(`Confirmation email sent to ${participant.email}`);

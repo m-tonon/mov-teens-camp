@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import axios from "axios";
-import dotenv from "dotenv";
+import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -11,22 +11,22 @@ const DOMAIN_URL = process.env.DOMAIN_URL!;
 export async function POST(req: NextRequest) {
   try {
     const payment = await req.json();
-    console.log("Incoming payment:", payment);
+    console.log('Incoming payment:', payment);
 
     if (!payment?.name || !payment?.cpf || !payment?.referenceId) {
       return NextResponse.json(
-        { error: "Missing payment info" },
+        { error: 'Missing payment info' },
         { status: 400 },
       );
     }
 
-    const rawPhone = payment.phone?.replace(/\D/g, "");
+    const rawPhone = payment.phone?.replace(/\D/g, '');
     const area = rawPhone?.slice(0, 2) ?? null;
     const number = rawPhone?.slice(2) ?? null;
 
     const expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
       .toISOString()
-      .replace("Z", "-03:00");
+      .replace('Z', '-03:00');
 
     const amount = payment.amount ?? 28000;
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
         email: payment.email,
         tax_id: payment.cpf,
         phone: {
-          country: "+55",
+          country: '+55',
           area,
           number,
         },
@@ -46,20 +46,20 @@ export async function POST(req: NextRequest) {
       customer_modifiable: true,
       items: [
         {
-          name: "3º Acampa Teens",
+          name: 'Acampa Deep Fake',
           quantity: 1,
           unit_amount: amount,
         },
       ],
       payment_methods: [
-        { type: "CREDIT_CARD" },
-        { type: "DEBIT_CARD" },
-        { type: "PIX" },
+        { type: 'CREDIT_CARD' },
+        { type: 'DEBIT_CARD' },
+        { type: 'PIX' },
       ],
       payment_methods_configs: [
         {
-          type: "credit_card",
-          config_options: [{ option: "installments_limit", value: "10" }],
+          type: 'credit_card',
+          config_options: [{ option: 'installments_limit', value: '10' }],
         },
       ],
       redirect_url: `https://${DOMAIN_URL}/?paymentCompleted=true`,
@@ -67,22 +67,22 @@ export async function POST(req: NextRequest) {
       notification_urls: [`https://${DOMAIN_URL}/api/payment/notification`],
     };
 
-    console.log("Request options to PagBank:", payload);
+    console.log('Request options to PagBank:', payload);
 
     const pagbank = axios.create({
       baseURL: PAGBANK_API_URL,
       headers: {
         Authorization: `Bearer ${PAGBANK_TOKEN}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
-    const response = await pagbank.post("/checkouts", payload);
+    const response = await pagbank.post('/checkouts', payload);
 
     const pagbankData = response.data;
 
     const paymentLink =
-      pagbankData.links?.find((l: { rel: string }) => l.rel === "PAY")?.href ??
+      pagbankData.links?.find((l: { rel: string }) => l.rel === 'PAY')?.href ??
       null;
 
     return NextResponse.json({
@@ -92,11 +92,11 @@ export async function POST(req: NextRequest) {
     });
   } catch (error: any) {
     console.error(
-      "Error in /api/payments/checkout:",
+      'Error in /api/payments/checkout:',
       error.response?.data || error.message,
     );
     return NextResponse.json(
-      { error: error.message || "Payment error" },
+      { error: error.message || 'Payment error' },
       { status: 500 },
     );
   }
