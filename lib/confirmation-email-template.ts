@@ -3,7 +3,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inscrição Confirmada — 3º Acampa Teens</title>
+  <title>Inscrição Confirmada — Acampa Deep Fake</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 
@@ -315,9 +315,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
       <!-- HEADER -->
       <div class="header">
         <div class="header-glow"></div>
-        <div class="badge">⛺ 3ª Edição · 2026</div>
         <div class="title-acampa">ACAMPA</div>
-        <div class="title-teens">TEENS</div>
         <div class="deepfake-tag">DEEP FAKE</div>
       </div>
 
@@ -333,7 +331,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
 
         <p class="greeting">
           Olá, <strong>{{nomeParticipante}}</strong>!<br><br>
-          Temos uma ótima notícia: <strong><br/>sua inscrição no 3º Acampa Teens foi concluída com sucesso!</strong> 🎉<br><br>
+          Temos uma ótima notícia: <strong><br/>sua inscrição no Acampa Deep Fake foi concluída com sucesso!</strong> 🎉<br><br>
           Prepare-se para dias que vão ficar na memória — cheios de alegria, comunhão e crescimento espiritual. 🙏🔥
         </p>
 
@@ -405,7 +403,7 @@ export const confirmationTemplate = `<html lang="pt-BR" xmlns="http://www.w3.org
 
         <p class="message-text">
           Nos vemos lá!<br>
-          <strong>Equipe Acampa Teens</strong>
+          <strong>Equipe Acampa Deep Fake</strong>
         </p>
 
         <hr class="divider">

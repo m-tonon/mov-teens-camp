@@ -1,14 +1,16 @@
-import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import { Providers } from './providers'
-import './globals.css'
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import { Providers } from './providers';
+// @ts-ignore
+import './globals.css';
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: '3º Acampa Teens - Deepfake',
-  description: 'Acampamento para jovens a partir de 12 anos. Fortaleça a fé e desenvolva autonomia e comunhão.',
+  title: 'Acampa Deep Fake',
+  description:
+    'Acampamento para jovens a partir de 12 anos. Fortaleça a fé e desenvolva autonomia e comunhão.',
   icons: {
     icon: [
       {
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-}
+};
 
 export const viewport: Viewport = {
   themeColor: '#0a0a0a',
@@ -29,21 +31,21 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="pt-BR" className="dark" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground`}>
-        <Providers>
-          {children}
-        </Providers>
+      <body
+        className={`${inter.variable} font-sans antialiased bg-background text-foreground`}
+      >
+        <Providers>{children}</Providers>
         <Analytics />
       </body>
     </html>
-  )
+  );
 }

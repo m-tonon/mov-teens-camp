@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { RegistrationFormData } from "@/shared/registration.interface";
-import { createPaymentLink } from "@/services/payment";
+import { useState } from 'react';
+import { RegistrationFormData } from '@/shared/registration.interface';
+import { createPaymentLink } from '@/services/payment';
 
 interface Props {
   data: RegistrationFormData;
@@ -11,12 +11,12 @@ interface Props {
 
 const CAMP_INFO = {
   paymentOptions: {
-    methods: ["PIX", "Cartão de Crédito", "Cartão de Débito"],
+    methods: ['PIX', 'Cartão de Crédito', 'Cartão de Débito'],
     maxInstallments: 10,
   },
   contacts: [
-    { name: "Secretaria IPVO", phone: "(44) 3226-4473" },
-    { name: "Ana Carla", phone: "(44) 9 9115-8078" },
+    { name: 'Secretaria IPVO', phone: '(44) 3226-4473' },
+    { name: 'Ana Carla', phone: '(44) 9 9115-8078' },
   ],
 };
 
@@ -25,23 +25,23 @@ const installmentsAvailable = true;
 export function PaymentSection({ data, onBack }: Props) {
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const amount = data.payment?.amount ?? 28000;
-  const formatted = (amount / 100).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
+  const formatted = (amount / 100).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
   });
 
   const handleGenerateLink = async () => {
     setLoading(true);
-    setError("");
+    setError('');
     try {
       const response = await createPaymentLink(data.payment);
       setPaymentLink(response.paymentLink);
     } catch {
       setError(
-        "Erro ao processar o pagamento. Alguns dados do responsável podem estar incorretos.",
+        'Erro ao processar o pagamento. Alguns dados do responsável podem estar incorretos.',
       );
     } finally {
       setLoading(false);
@@ -67,7 +67,6 @@ export function PaymentSection({ data, onBack }: Props) {
           <p className="text-4xl font-black tracking-tight text-foreground">
             {formatted}
           </p>
-          <p className="text-xs text-muted-foreground">por participante</p>
         </div>
 
         <div className="border-t border-border px-6 py-4 space-y-2">
@@ -76,7 +75,7 @@ export function PaymentSection({ data, onBack }: Props) {
               💳
             </span>
             <span className="text-foreground/80">
-              {CAMP_INFO.paymentOptions.methods.join(" · ")}
+              {CAMP_INFO.paymentOptions.methods.join(' · ')}
             </span>
           </div>
           <div className="flex items-start gap-2 text-sm">
@@ -84,14 +83,14 @@ export function PaymentSection({ data, onBack }: Props) {
               🔒
             </span>
             <span className="text-foreground/80">
-              Pagamento processado com segurança via{" "}
+              Pagamento processado com segurança via{' '}
               <span className="font-medium text-foreground">PagSeguro</span>
             </span>
           </div>
           <div className="flex items-start gap-2 text-sm">
             <span className="flex-shrink-0 mt-0.5">🔄</span>
             <span
-              className={`${!installmentsAvailable ? "line-through" : "text-foreground/80"} `}
+              className={`${!installmentsAvailable ? 'line-through' : 'text-foreground/80'} `}
             >
               Parcelamento em até {CAMP_INFO.paymentOptions.maxInstallments}x no
               cartão
@@ -152,7 +151,7 @@ export function PaymentSection({ data, onBack }: Props) {
         ) : paymentLink ? (
           <button
             onClick={handleOpenPayment}
-            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold transition-all hover:opacity-90 active:scale-[0.98] shadow-sm"
+            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-green-600 text-white text-sm font-semibold transition-all hover:bg-green-700 active:scale-[0.98] shadow-sm"
           >
             <svg
               className="w-4 h-4"
@@ -203,7 +202,7 @@ export function PaymentSection({ data, onBack }: Props) {
       <div className="flex gap-2.5 items-start bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-3 text-xs text-amber-800 dark:text-amber-300">
         <span className="flex-shrink-0">⚠️</span>
         <span>
-          Sua vaga só é garantida após a{" "}
+          Sua vaga só é garantida após a{' '}
           <strong>confirmação do pagamento</strong>. Finalize o quanto antes.
         </span>
       </div>
@@ -234,7 +233,7 @@ function SummaryRow({
     <div className="flex justify-between gap-3 items-baseline">
       <span className="text-muted-foreground flex-shrink-0">{label}</span>
       <span
-        className={`text-right truncate ${mono ? "font-mono text-xs text-foreground/70" : "font-medium text-foreground"}`}
+        className={`text-right truncate ${mono ? 'font-mono text-xs text-foreground/70' : 'font-medium text-foreground'}`}
       >
         {value}
       </span>

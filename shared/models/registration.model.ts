@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const PaymentDataSchema = new mongoose.Schema(
   {
@@ -9,6 +9,7 @@ const PaymentDataSchema = new mongoose.Schema(
     email: String,
     phone: String,
     paymentLink: String,
+    amount: Number, // Add amount field
   },
   { _id: false },
 );
@@ -36,10 +37,17 @@ const RegistrationSchema = new mongoose.Schema(
     },
     parentalAuthorization: Boolean,
     payment: PaymentDataSchema,
+
+    isSuiteRegistration: { type: Boolean, default: false },
+    suitePartnerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Registration',
+    },
+    suitePartnerName: String,
   },
   { timestamps: true },
 );
 
 export const RegistrationModel =
   mongoose.models.Registration ||
-  mongoose.model("Registration", RegistrationSchema);
+  mongoose.model('Registration', RegistrationSchema);

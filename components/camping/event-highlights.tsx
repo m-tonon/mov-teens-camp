@@ -1,37 +1,37 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Calendar, MapPin, Users, Sparkles } from "lucide-react";
+import { motion } from 'framer-motion';
+import { Calendar, MapPin, Users, Sparkles } from 'lucide-react';
 
 const highlights = [
   {
     icon: Calendar,
-    label: "Data",
-    value: "05 a 07 de Junho",
-    description: "3 dias de imersão",
-    color: "bg-primary/20 text-primary",
+    label: 'Data',
+    value: '05 a 07 de Junho',
+    description: '3 dias de imersão',
+    color: 'bg-primary/20 text-primary',
   },
   {
     icon: MapPin,
-    label: "Local",
-    value: "Acampamento Maanaim",
-    description: "Acampamento Evangélico",
-    color: "bg-accent/20 text-accent",
+    label: 'Local',
+    value: 'Acampamento Maanaim',
+    description: 'Acampamento Evangélico',
+    color: 'bg-accent/20 text-accent',
   },
   {
     icon: Users,
-    label: "Idade",
-    value: "A partir de 12 anos",
-    description: "Faixa etária do acampamento",
-    color: "bg-chart-3/20 text-chart-3",
+    label: 'Idade',
+    value: 'A partir de 12 anos',
+    description: 'Faixa etária do acampamento',
+    color: 'bg-chart-3/20 text-chart-3',
   },
   {
     icon: Sparkles,
-    label: "Tema",
-    value: "Deepfake",
+    label: 'Tema',
+    value: 'Deep Fake',
     description:
-      "Num mundo de falsas versões, descubra quem você realmente é em Cristo.",
-    color: "bg-chart-4/20 text-chart-4",
+      'Num mundo de falsas versões, descubra quem você realmente é em Cristo.',
+    color: 'bg-chart-4/20 text-chart-4',
   },
 ];
 

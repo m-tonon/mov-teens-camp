@@ -1,17 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "@/lib/mongoose-connection";
-import { RegistrationModel } from "@/shared/models/registration.model";
-import { Parser } from "json2csv";
+import { NextRequest, NextResponse } from 'next/server';
+import { connectToDatabase } from '@/lib/mongoose-connection';
+import { RegistrationModel } from '@/shared/models/registration.model';
+import { Parser } from 'json2csv';
 
 export async function GET(req: NextRequest) {
   await connectToDatabase();
 
   try {
     const { searchParams } = req.nextUrl;
-    const paymentOnly = searchParams.get("paid") === "true";
-    const csvMode = searchParams.get("csv") === "1";
+    const paymentOnly = searchParams.get('paid') === 'true';
+    const csvMode = searchParams.get('csv') === '1';
 
-    const query = paymentOnly ? { "payment.paymentConfirmed": true } : {};
+    const query = paymentOnly ? { 'payment.paymentConfirmed': true } : {};
     const registrations = await RegistrationModel.find(query).lean();
 
     const flat = registrations.map((r: any) => ({
@@ -45,46 +45,46 @@ export async function GET(req: NextRequest) {
 
     if (csvMode) {
       const fields = [
-        { label: "Nome do Acampante", value: "name" },
-        { label: "Data de Nascimento", value: "birthDate" },
-        { label: "Idade", value: "age" },
-        { label: "Gênero", value: "gender" },
-        { label: "Documento do Acampante", value: "identityDocument" },
-        { label: "Endereço", value: "address" },
-        { label: "Membro de Igreja", value: "churchMembership" },
-        { label: "Nome da Igreja", value: "churchName" },
-        { label: "Plano de Saúde", value: "healthInsurance" },
-        { label: "Medicamentos", value: "medications" },
-        { label: "Alergias", value: "allergies" },
-        { label: "Necessidades Especiais", value: "specialNeeds" },
-        { label: "Nome do Responsável", value: "responsibleName" },
-        { label: "Telefone do Responsável", value: "responsiblePhone" },
-        { label: "Relação com o Acampante", value: "responsibleRelation" },
-        { label: "Documento do Responsável", value: "responsibleDocument" },
-        { label: "Email do Responsável", value: "responsibleEmail" },
-        { label: "Autorização dos Pais", value: "parentalAuthorization" },
-        { label: "ID do Pagamento", value: "paymentReferenceId" },
-        { label: "Pagamento Confirmado", value: "paymentConfirmed" },
-        { label: "Criado em", value: "createdAt" },
-        { label: "Atualizado em", value: "updatedAt" },
+        { label: 'Nome do Acampante', value: 'name' },
+        { label: 'Data de Nascimento', value: 'birthDate' },
+        { label: 'Idade', value: 'age' },
+        { label: 'Gênero', value: 'gender' },
+        { label: 'Documento do Acampante', value: 'identityDocument' },
+        { label: 'Endereço', value: 'address' },
+        { label: 'Membro de Igreja', value: 'churchMembership' },
+        { label: 'Nome da Igreja', value: 'churchName' },
+        { label: 'Plano de Saúde', value: 'healthInsurance' },
+        { label: 'Medicamentos', value: 'medications' },
+        { label: 'Alergias', value: 'allergies' },
+        { label: 'Necessidades Especiais', value: 'specialNeeds' },
+        { label: 'Nome do Responsável', value: 'responsibleName' },
+        { label: 'Telefone do Responsável', value: 'responsiblePhone' },
+        { label: 'Relação com o Acampante', value: 'responsibleRelation' },
+        { label: 'Documento do Responsável', value: 'responsibleDocument' },
+        { label: 'Email do Responsável', value: 'responsibleEmail' },
+        { label: 'Autorização dos Pais', value: 'parentalAuthorization' },
+        { label: 'ID do Pagamento', value: 'paymentReferenceId' },
+        { label: 'Pagamento Confirmado', value: 'paymentConfirmed' },
+        { label: 'Criado em', value: 'createdAt' },
+        { label: 'Atualizado em', value: 'updatedAt' },
       ];
 
       const csv = new Parser({ fields }).parse(flat);
       return new NextResponse(csv, {
         status: 200,
         headers: {
-          "Content-Type": "text/csv",
-          "Content-Disposition":
-            'attachment; filename="movteens-inscricoes2025.csv"',
+          'Content-Type': 'text/csv',
+          'Content-Disposition':
+            'attachment; filename="acampa-inscricoes2026.csv"',
         },
       });
     }
 
     return NextResponse.json(flat);
   } catch (error) {
-    console.error("Error in /api/registration/export:", error);
+    console.error('Error in /api/registration/export:', error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: 'Internal server error' },
       { status: 500 },
     );
   }

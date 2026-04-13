@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Button } from "@heroui/react";
-import { CalendarDays, MapPin, ChevronDown } from "lucide-react";
+import { motion } from 'framer-motion';
+import { Button } from '@heroui/react';
+import { CalendarDays, MapPin, ChevronDown } from 'lucide-react';
 
 export function HeroSection() {
   const scrollToContent = () => {
-    window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
 
   return (
@@ -20,12 +20,12 @@ export function HeroSection() {
         style={{ backgroundImage: "url('/hero-background.jpg')" }}
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: 0.6, scale: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 1, ease: 'easeOut' }}
       />
 
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -33,7 +33,7 @@ export function HeroSection() {
           <span className="inline-block px-4 py-2 mb-6 text-sm font-medium tracking-widest uppercase bg-primary/20 text-primary rounded-full border border-primary/30">
             3ª Edição
           </span>
-        </motion.div>
+        </motion.div> */}
 
         <motion.h1
           className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none mb-4"
@@ -41,9 +41,9 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span className="block text-foreground">ACAMPA</span>
+          {/* <span className="block text-foreground">ACAMPA</span> */}
           <span className="block bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
-            TEENS
+            ACAMPA
           </span>
         </motion.h1>
 
@@ -58,9 +58,9 @@ export function HeroSection() {
             className="bg-black text-white px-8 py-2 inline-block"
             style={{
               maskImage:
-                "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
+                'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',
               WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
+                'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',
             }}
           >
             DEEP FAKE

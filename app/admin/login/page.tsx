@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 export default function AdminLogin() {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -13,21 +13,21 @@ export default function AdminLogin() {
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const res = await fetch("/api/admin-login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const res = await fetch('/api/admin-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password }),
     });
 
     const data = await res.json();
-    console.log("Admin login response:", data);
+    console.log('Admin login response:', data);
 
     if (data.success) {
-      sessionStorage.setItem("admin-auth", "true");
-      router.push("/admin");
+      sessionStorage.setItem('admin-auth', 'true');
+      router.push('/admin');
     } else {
       setError(true);
-      setPassword("");
+      setPassword('');
     }
   };
 
@@ -38,7 +38,7 @@ export default function AdminLogin() {
           <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto text-2xl">
             ⛺
           </div>
-          <h1 className="text-xl font-black tracking-tight">MovTeens Admin</h1>
+          <h1 className="text-xl font-black tracking-tight">Acampa Admin</h1>
           <p className="text-xs text-muted-foreground">
             Digite a senha para continuar
           </p>
@@ -54,7 +54,7 @@ export default function AdminLogin() {
             </label>
             <div className="relative">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -64,8 +64,8 @@ export default function AdminLogin() {
                 autoFocus
                 className={`w-full bg-background border rounded-xl px-4 py-3 pr-11 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary placeholder:text-muted-foreground/40 transition-all ${
                   error
-                    ? "border-destructive/60 bg-destructive/5"
-                    : "border-border"
+                    ? 'border-destructive/60 bg-destructive/5'
+                    : 'border-border'
                 }`}
               />
               <button
