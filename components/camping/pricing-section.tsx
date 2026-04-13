@@ -159,7 +159,7 @@ export function PricingSection() {
                   R$
                 </span>
                 <span className="text-7xl sm:text-8xl px-2 font-black tracking-tighter bg-gradient-to-r from-primary via-purple-500 to-accent bg-clip-text text-transparent">
-                  800
+                  880
                 </span>
                 <span className="text-2xl font-medium text-muted-foreground">
                   ,00
@@ -257,7 +257,8 @@ export function PricingSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
-          * Para suíte, ambos os participantes devem ter 18 anos ou mais
+          * Para suíte, ambos os participantes devem ter 18 anos ou mais e ser
+          casados.
         </motion.p>
       </div>
     </section>

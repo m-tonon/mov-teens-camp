@@ -19,7 +19,7 @@ const STEP_LABELS: Record<FormStep, string> = {
   responsible: 'Informações do Responsável',
 };
 
-const SUITE_PRICE = 80000;
+const SUITE_PRICE = 88000;
 const INDIVIDUAL_PRICE = 28000;
 
 export function RegistrationForm({ onSubmit }: Props) {
@@ -875,8 +875,8 @@ export function RegistrationForm({ onSubmit }: Props) {
                   Inscrição para Suíte (Casal)
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Valor especial de R$ 800,00 para duas pessoas. Ambos devem ter
-                  18 anos ou mais.
+                  Valor especial de R$ 880,00 para duas pessoas. Ambos devem ter
+                  18 anos ou mais e ser casados.
                 </p>
               </div>
             </label>
@@ -962,7 +962,7 @@ export function RegistrationForm({ onSubmit }: Props) {
               <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm">
                 <p className="text-foreground/80">
                   ℹ️ Os dados do responsável serão utilizados para gerar o link
-                  de pagamento da suíte (R$ 800,00 total).
+                  de pagamento da suíte (R$ 880,00 total).
                 </p>
               </div>
             )}
