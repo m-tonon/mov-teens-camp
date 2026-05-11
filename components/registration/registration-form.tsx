@@ -80,7 +80,7 @@ export function RegistrationForm({ onSubmit }: Props) {
     isSuitePartner = false,
   ) => {
     const age = data.birthDate ? calculateAge(data.birthDate) : null;
-    const minAge = isSuitePartner ? 18 : isSuite ? 18 : 12;
+    const minAge = isSuitePartner ? 18 : isSuite ? 18 : 11;
     const ageError =
       age !== null && age < minAge
         ? `O acampante deve ter pelo menos ${minAge} anos.`

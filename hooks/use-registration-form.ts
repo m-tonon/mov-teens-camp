@@ -219,7 +219,7 @@ export function useRegistrationForm({ onSubmit }: UseRegistrationFormProps) {
         !!formData.gender &&
         !!formData.identityDocument &&
         age !== null &&
-        age >= (isSuite ? 18 : 12)
+        age >= (isSuite ? 18 : 11)
       );
     }
 
