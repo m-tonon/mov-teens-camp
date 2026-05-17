@@ -11,7 +11,11 @@ import {
   Search,
   ChevronUp,
   ChevronDown,
+  Copy,
+  ShieldCheck,
+  RotateCcw,
 } from 'lucide-react';
+import { Toaster, toast } from 'sonner';
 
 interface Registration {
   _id: string;
@@ -28,6 +32,7 @@ interface Registration {
     paymentConfirmed: boolean;
     referenceId: string;
     amount: number;
+    paymentLink?: string;
   };
   createdAt: string;
 }
@@ -82,6 +87,48 @@ export default function AdminPage() {
   const [genderFilter, setGenderFilter] = useState<
     'all' | 'Masculino' | 'Feminino'
   >('all');
+
+  const [confirmingRegId, setConfirmingRegId] = useState<string | null>(null);
+  const [confirmingTargetStatus, setConfirmingTargetStatus] = useState<boolean>(true);
+  const [adminPassword, setAdminPassword] = useState('');
+  const [confirmingLoading, setConfirmingLoading] = useState(false);
+
+  const confirmRegistration = async () => {
+    if (!confirmingRegId || !adminPassword) return;
+    setConfirmingLoading(true);
+    try {
+      const res = await fetch('/api/registration/confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: confirmingRegId,
+          password: adminPassword,
+          confirmed: confirmingTargetStatus,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Erro ao atualizar inscrição');
+      }
+      toast.success(confirmingTargetStatus ? 'Inscrição confirmada com sucesso!' : 'Inscrição alterada para pendente!');
+      setConfirmingRegId(null);
+      setAdminPassword('');
+      fetchRegistrations();
+    } catch (err: any) {
+      toast.error(err.message || 'Erro ao processar');
+    } finally {
+      setConfirmingLoading(false);
+    }
+  };
+
+  const copyPaymentUrl = (paymentLink?: string) => {
+    if (!paymentLink) {
+      toast.error('Link de pagamento não disponível.');
+      return;
+    }
+    navigator.clipboard.writeText(paymentLink);
+    toast.success('Link de pagamento copiado!');
+  };
 
   const fetchRegistrations = async () => {
     setLoading(true);
@@ -337,6 +384,9 @@ export default function AdminPage() {
                       Data <SortIcon field="createdAt" />
                     </span>
                   </th>
+                  <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider w-24">
+                    Ações
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -396,6 +446,47 @@ export default function AdminPage() {
                           })
                         : '—'}
                     </td>
+                    <td className="px-4 py-3 text-right whitespace-nowrap">
+                      <div className="flex items-center justify-end gap-2">
+                        {reg.payment?.paymentLink && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              copyPaymentUrl(reg.payment.paymentLink);
+                            }}
+                            title="Copiar link de pagamento"
+                            className="p-1.5 rounded-lg border border-border bg-background hover:bg-muted/50 transition-colors text-muted-foreground hover:text-foreground cursor-pointer"
+                          >
+                            <Copy className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                        {!reg.payment?.paymentConfirmed ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setConfirmingRegId(reg._id);
+                              setConfirmingTargetStatus(true);
+                            }}
+                            title="Confirmar pagamento manualmente"
+                            className="p-1.5 rounded-lg border border-green-500/30 bg-green-500/5 hover:bg-green-500/10 transition-colors text-green-400 cursor-pointer"
+                          >
+                            <ShieldCheck className="w-3.5 h-3.5" />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setConfirmingRegId(reg._id);
+                              setConfirmingTargetStatus(false);
+                            }}
+                            title="Marcar como pendente (estornar)"
+                            className="p-1.5 rounded-lg border border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/10 transition-colors text-amber-400 cursor-pointer"
+                          >
+                            <RotateCcw className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    </td>
                   </motion.tr>
                 ))}
               </tbody>
@@ -425,6 +516,86 @@ export default function AdminPage() {
           </div>
         )}
       </motion.div>
+
+      {/* Toaster and Confirmation Modal */}
+      <Toaster position="top-right" richColors />
+
+      {confirmingRegId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="w-full max-w-sm bg-card/85 backdrop-blur-xl border border-border rounded-2xl shadow-2xl p-6 relative overflow-hidden"
+          >
+            <div className="flex flex-col items-center text-center gap-3">
+              <div className={`p-3 rounded-full ${confirmingTargetStatus ? 'bg-green-500/10 text-green-400' : 'bg-amber-500/10 text-amber-400'}`}>
+                {confirmingTargetStatus ? (
+                  <ShieldCheck className="w-6 h-6" />
+                ) : (
+                  <RotateCcw className="w-6 h-6" />
+                )}
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-foreground">
+                  {confirmingTargetStatus ? 'Confirmar Pagamento' : 'Marcar como Pendente'}
+                </h3>
+                <p className="text-xs text-muted-foreground mt-1 max-w-xs">
+                  {confirmingTargetStatus
+                    ? 'Esta ação confirmará manualmente o pagamento do acampante. Digite a senha de autorização para prosseguir.'
+                    : 'Esta ação reverterá o pagamento do acampante para pendente. Digite a senha de autorização para prosseguir.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  Senha de Autorização
+                </label>
+                <input
+                  type="password"
+                  placeholder="Digite a senha..."
+                  value={adminPassword}
+                  onChange={(e) => setAdminPassword(e.target.value)}
+                  className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary placeholder:text-muted-foreground/45"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') confirmRegistration();
+                  }}
+                  autoFocus
+                />
+              </div>
+
+              <div className="flex items-center gap-3 pt-2">
+                <button
+                  onClick={() => {
+                    setConfirmingRegId(null);
+                    setAdminPassword('');
+                  }}
+                  className="flex-1 px-4 py-2 text-xs font-medium border border-border rounded-lg hover:bg-muted/50 transition-colors text-muted-foreground hover:text-foreground cursor-pointer"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={confirmRegistration}
+                  disabled={confirmingLoading || !adminPassword}
+                  className={`flex-1 px-4 py-2 text-xs font-semibold rounded-lg text-black transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer ${
+                    confirmingTargetStatus
+                      ? 'bg-green-500 hover:bg-green-400'
+                      : 'bg-amber-500 hover:bg-amber-400'
+                  }`}
+                >
+                  {confirmingLoading ? (
+                    <div className="w-3.5 h-3.5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+                  ) : (
+                    'Confirmar'
+                  )}
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

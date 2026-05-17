@@ -108,10 +108,10 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex h-screen overflow-hidden bg-background">
       {/* Desktop sidebar */}
       <aside
-        className={`hidden lg:flex flex-col border-r border-border bg-card transition-all duration-300 flex-shrink-0 ${
+        className={`hidden lg:flex flex-col border-r border-border bg-card transition-all duration-300 flex-shrink-0 h-full ${
           collapsed ? "w-16" : "w-56"
         }`}
       >
@@ -152,7 +152,7 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         {/* Mobile top bar */}
         <div className="lg:hidden flex items-center justify-between px-4 py-3 border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-30">
           <button
