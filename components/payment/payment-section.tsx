@@ -20,7 +20,7 @@ const CAMP_INFO = {
   ],
 };
 
-const installmentsAvailable = true;
+const installmentsAvailable = false;
 
 export function PaymentSection({ data, onBack }: Props) {
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
