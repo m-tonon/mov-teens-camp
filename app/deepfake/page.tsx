@@ -68,8 +68,7 @@ export default function DeepfakePage() {
         <header className="text-center">
           <h1 className="text-2xl font-bold">Deepfake</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Digite <strong>uma palavra</strong> que representa você neste
-            acampamento.
+            Digite <strong>uma palavra</strong> para participar.
           </p>
         </header>
 
