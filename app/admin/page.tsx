@@ -35,6 +35,7 @@ interface Registration {
     paymentLink?: string;
   };
   createdAt: string;
+  registrationType?: string;
 }
 
 type PaymentFilter = 'all' | 'paid' | 'pending';
@@ -365,6 +366,9 @@ export default function AdminPage() {
                     Gênero
                   </th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Acomodação
+                  </th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Igreja
                   </th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
@@ -413,6 +417,9 @@ export default function AdminPage() {
                       >
                         {reg.gender || '—'}
                       </span>
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground text-xs">
+                      {reg.registrationType ?? 'Individual'}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground text-xs">
                       {reg.churchName || '—'}
