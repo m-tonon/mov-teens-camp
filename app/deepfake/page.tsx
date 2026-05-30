@@ -1,84 +1,96 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { WordChipInput } from '@/components/deepfake/word-chip-input';
-import { WordCloudDisplay } from '@/components/deepfake/word-cloud-display';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { normalizeWord } from '@/lib/deepfake/parse-words';
 
 export default function DeepfakePage() {
-  const [words, setWords] = useState<string[]>([]);
-  const [generation, setGeneration] = useState<{
-    seed: string;
-    words: string[];
-  } | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [word, setWord] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { setTheme, theme } = useTheme();
 
   useEffect(() => {
     const originalTheme = theme;
     setTheme('light');
-
     return () => {
-      if (originalTheme) {
-        setTheme(originalTheme);
-      }
+      if (originalTheme) setTheme(originalTheme);
     };
   }, [setTheme, theme]);
 
-  const handleGenerate = () => {
-    if (words.length === 0 || isGenerating) return;
-    setIsGenerating(true);
-    setGeneration({ seed: crypto.randomUUID(), words: [...words] });
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    const normalized = normalizeWord(word);
+    if (!normalized) {
+      setError('Digite uma palavra válida (2–30 caracteres, sem símbolos especiais)');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/deepfake/words', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ word: normalized }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? 'Erro ao enviar');
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erro ao enviar palavra');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleLayoutReady = useCallback(() => {
-    setIsGenerating(false);
-  }, []);
-
-  const handleClear = () => {
-    setWords([]);
-    setGeneration(null);
-    setIsGenerating(false);
-  };
+  if (submitted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background px-4">
+        <div className="max-w-md space-y-4 text-center">
+          <div className="text-5xl">🙏</div>
+          <h1 className="text-2xl font-bold">Obrigado!</h1>
+          <p className="text-muted-foreground">
+            Sua palavra foi registrada. Obrigado por participar!
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-background py-6 sm:py-10">
-      <div className="container mx-auto max-w-3xl space-y-5 px-3 sm:space-y-6 sm:px-4">
-        <header>
-          <h1 className="text-xl font-bold sm:text-2xl">
-            Deepfake — Sua Nuvem de Palavras
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Adicione palavras e gere sua nuvem de palavras.
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="w-full max-w-md space-y-6">
+        <header className="text-center">
+          <h1 className="text-2xl font-bold">Deepfake</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Digite <strong>uma palavra</strong> que representa você neste
+            acampamento.
           </p>
         </header>
 
-        <WordChipInput words={words} onChange={setWords} disabled={isGenerating} />
-
-        <div className="flex flex-wrap gap-3">
-          <Button
-            onClick={handleGenerate}
-            disabled={words.length === 0 || isGenerating}
-            className="flex-1 sm:flex-none"
-          >
-            {isGenerating ? 'Gerando...' : 'Gerar nuvem'}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            value={word}
+            onChange={(e) => {
+              setWord(e.target.value);
+              if (error) setError(null);
+            }}
+            placeholder="Sua palavra..."
+            disabled={loading}
+            autoFocus
+            maxLength={30}
+            className="text-center text-lg"
+          />
+          {error && <p className="text-center text-sm text-destructive">{error}</p>}
+          <Button type="submit" className="w-full" disabled={loading || !word.trim()}>
+            {loading ? 'Enviando...' : 'Enviar'}
           </Button>
-          <Button
-            variant="outline"
-            onClick={handleClear}
-            disabled={(words.length === 0 && !generation) || isGenerating}
-            className="flex-1 sm:flex-none"
-          >
-            Limpar
-          </Button>
-        </div>
-
-        <WordCloudDisplay
-          generation={generation}
-          isGenerating={isGenerating}
-          onLayoutReady={handleLayoutReady}
-        />
+        </form>
       </div>
     </div>
   );

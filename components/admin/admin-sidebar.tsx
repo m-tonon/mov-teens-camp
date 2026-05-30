@@ -13,6 +13,7 @@ import {
   Moon,
   ChevronRight,
   LogOut,
+  FileJson,
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -21,7 +22,11 @@ const NAV_ITEMS = [
     href: "/admin",
     icon: Users,
   },
-  // Add future pages here:
+  {
+    label: "Palavras",
+    href: "/admin/generate",
+    icon: FileJson,
+  },
 ];
 
 export function AdminSidebar({ children }: { children: React.ReactNode }) {

@@ -9,6 +9,7 @@ const nextConfig = {
   async redirects() {
     return [
       { source: '/perfil', destination: '/deepfake', permanent: false },
+      { source: '/generate', destination: '/admin/generate', permanent: false },
     ];
   },
 }
