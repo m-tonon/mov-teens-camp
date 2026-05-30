@@ -35,6 +35,7 @@ export async function GET(req: NextRequest) {
       parentalAuthorization: r.parentalAuthorization,
       paymentReferenceId: r.payment?.referenceId,
       paymentConfirmed: r.payment?.paymentConfirmed,
+      registrationType: r.isSuiteRegistration ? 'Suíte' : 'Individual',
       // keep nested for JSON consumers
       responsibleInfo: r.responsibleInfo,
       payment: r.payment,
@@ -65,6 +66,7 @@ export async function GET(req: NextRequest) {
         { label: 'Autorização dos Pais', value: 'parentalAuthorization' },
         { label: 'ID do Pagamento', value: 'paymentReferenceId' },
         { label: 'Pagamento Confirmado', value: 'paymentConfirmed' },
+        { label: 'Tipo de Inscrição', value: 'registrationType' },
         { label: 'Criado em', value: 'createdAt' },
         { label: 'Atualizado em', value: 'updatedAt' },
       ];
