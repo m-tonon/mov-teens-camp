@@ -418,8 +418,16 @@ export default function AdminPage() {
                         {reg.gender || '—'}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-muted-foreground text-xs">
-                      {reg.registrationType ?? 'Individual'}
+                    <td className="px-4 py-3">
+                      <span
+                        className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                          reg.registrationType === 'Suíte'
+                            ? 'bg-purple-500/10 text-purple-400'
+                            : 'bg-zinc-500/10 text-zinc-400'
+                        }`}
+                      >
+                        {reg.registrationType ?? 'Individual'}
+                      </span>
                     </td>
                     <td className="px-4 py-3 text-muted-foreground text-xs">
                       {reg.churchName || '—'}
