@@ -157,8 +157,12 @@ export function useRegistrationForm({ onSubmit }: UseRegistrationFormProps) {
 
     if (name.startsWith('responsibleInfo.')) {
       const key = name.split('.')[1];
-      const capitalizeWords = (text: string) =>
-        text.replace(/\b\w/g, (char) => char.toUpperCase());
+      const capitalizeWords = (text: string) => {
+        if (!text) return '';
+        return text
+          .toLowerCase()
+          .replace(/(?:^|\s)\S/g, (char) => char.toUpperCase());
+      };
       const formattedValue =
         key === 'relation' ? capitalizeWords(value) : value;
 
@@ -318,6 +322,10 @@ export function useRegistrationForm({ onSubmit }: UseRegistrationFormProps) {
     setError('');
 
     try {
+      const formattedMainName = formatName(formData.name);
+      const formattedSuitePartnerName = isSuite ? formatName(suitePartner.name) : '';
+      const formattedResponsibleName = formatName(formData.responsibleInfo.name);
+
       const referenceId = generateReferenceId();
       const partnerReferenceId = isSuite ? generateReferenceId() : '';
 
@@ -330,7 +338,7 @@ export function useRegistrationForm({ onSubmit }: UseRegistrationFormProps) {
           referenceId,
           amount: paymentAmount,
           email: formData.responsibleInfo.email,
-          name: formData.responsibleInfo.name,
+          name: formattedResponsibleName,
           cpf: formData.responsibleInfo.document.replace(/\D/g, ''),
           phone: formData.responsibleInfo.phone,
           isSuiteRegistration: isSuite,
@@ -347,7 +355,7 @@ export function useRegistrationForm({ onSubmit }: UseRegistrationFormProps) {
         paymentConfirmed: false,
         paymentLink: paymentLink,
         amount: paymentAmount,
-        name: formData.responsibleInfo.name,
+        name: formattedResponsibleName,
         cpf: formData.responsibleInfo.document.replace(/\D/g, ''),
         email: formData.responsibleInfo.email,
         phone: formData.responsibleInfo.phone,
@@ -355,10 +363,12 @@ export function useRegistrationForm({ onSubmit }: UseRegistrationFormProps) {
 
       const updatedFormData: RegistrationFormData = {
         ...formData,
+        name: formattedMainName,
         payment: paymentData,
         suitePartner: isSuite
           ? {
               ...suitePartner,
+              name: formattedSuitePartnerName,
               payment: {
                 ...suitePartner.payment,
                 referenceId: partnerReferenceId,
@@ -406,3 +416,19 @@ export function useRegistrationForm({ onSubmit }: UseRegistrationFormProps) {
     calculateAge,
   };
 }
+
+const formatName = (name: string): string => {
+  if (!name) return '';
+  const lowercaseWords = ['de', 'da', 'do', 'dos', 'das', 'e'];
+  return name
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .map((word, index) => {
+      if (index > 0 && lowercaseWords.includes(word)) {
+        return word;
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
+};
