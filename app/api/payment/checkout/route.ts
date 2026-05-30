@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       payment_methods_configs: [
         {
           type: 'credit_card',
-          config_options: [{ option: 'installments_limit', value: '10' }],
+          config_options: [{ option: 'installments_limit', value: '1' }],
         },
       ],
       redirect_url: `https://${DOMAIN_URL}/?paymentCompleted=true`,

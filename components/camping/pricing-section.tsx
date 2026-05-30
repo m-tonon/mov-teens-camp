@@ -17,7 +17,7 @@ const paymentMethods = [
   { icon: CreditCard, label: 'Cartão de Débito', available: true },
 ];
 
-const installmentsAvailable = true;
+const installmentsAvailable = false;
 
 export function PricingSection() {
   return (
