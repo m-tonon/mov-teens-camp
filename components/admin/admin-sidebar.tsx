@@ -6,13 +6,12 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import {
   Users,
-  LayoutDashboard,
+  CreditCard,
   Menu,
   X,
   Sun,
   Moon,
   ChevronRight,
-  LogOut,
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -21,7 +20,11 @@ const NAV_ITEMS = [
     href: "/admin",
     icon: Users,
   },
-  // Add future pages here:
+  // {
+  //   label: "Pagamento staff",
+  //   href: "/admin/staff",
+  //   icon: CreditCard,
+  // },
 ];
 
 export function AdminSidebar({ children }: { children: React.ReactNode }) {
@@ -54,7 +57,10 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
       {/* Nav */}
       <nav className="flex-1 px-2 py-4 space-y-1">
         {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive =
+            item.href === "/admin"
+              ? pathname === "/admin"
+              : pathname.startsWith(item.href);
           return (
             <Link
               key={item.href}

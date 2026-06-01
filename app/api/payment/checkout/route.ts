@@ -29,6 +29,24 @@ export async function POST(req: NextRequest) {
       .replace('Z', '-03:00');
 
     const amount = payment.amount ?? 28000;
+    const isStaffType = payment.isStaffType === true;
+    const maxInstallments = String(payment.maxInstallments ?? 10);
+
+    const paymentMethodsConfigs = isStaffType
+      ? [
+          {
+            type: 'CREDIT_CARD',
+            config_options: [
+              { option: 'INSTALLMENTS_LIMIT', value: maxInstallments },
+            ],
+          },
+        ]
+      : [
+          {
+            type: 'credit_card',
+            config_options: [{ option: 'installments_limit', value: '1' }],
+          },
+        ];
 
     const payload = {
       reference_id: payment.referenceId,
@@ -46,7 +64,9 @@ export async function POST(req: NextRequest) {
       customer_modifiable: true,
       items: [
         {
-          name: 'Acampa Deep Fake',
+          name: isStaffType
+            ? 'Acampa Deep Fake - Staff'
+            : 'Acampa Deep Fake',
           quantity: 1,
           unit_amount: amount,
         },
@@ -56,12 +76,7 @@ export async function POST(req: NextRequest) {
         { type: 'DEBIT_CARD' },
         { type: 'PIX' },
       ],
-      payment_methods_configs: [
-        {
-          type: 'credit_card',
-          config_options: [{ option: 'installments_limit', value: '1' }],
-        },
-      ],
+      payment_methods_configs: paymentMethodsConfigs,
       redirect_url: `https://${DOMAIN_URL}/?paymentCompleted=true`,
       return_url: `https://${DOMAIN_URL}/`,
       notification_urls: [`https://${DOMAIN_URL}/api/payment/notification`],
