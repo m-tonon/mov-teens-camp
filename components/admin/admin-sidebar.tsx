@@ -20,11 +20,11 @@ const NAV_ITEMS = [
     href: "/admin",
     icon: Users,
   },
-  {
-    label: "Pagamento staff",
-    href: "/admin/staff",
-    icon: CreditCard,
-  },
+  // {
+  //   label: "Pagamento staff",
+  //   href: "/admin/staff",
+  //   icon: CreditCard,
+  // },
 ];
 
 export function AdminSidebar({ children }: { children: React.ReactNode }) {
