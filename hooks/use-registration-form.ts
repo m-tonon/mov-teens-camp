@@ -15,6 +15,8 @@ export const STEP_LABELS: Record<FormStep, string> = {
 
 export const SUITE_PRICE = 88000;
 export const INDIVIDUAL_PRICE = 28000;
+export const STAFF_PRICE = 20000;
+export const PAYMENT_MAX_INSTALLMENTS = 10;
 
 interface UseRegistrationFormProps {
   onSubmit: (data: RegistrationFormData) => void;
