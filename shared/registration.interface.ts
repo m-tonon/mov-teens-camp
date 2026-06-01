@@ -7,6 +7,8 @@ export interface PaymentInfo {
   cpf?: string;
   email?: string;
   phone?: string;
+  isStaffType?: boolean;
+  maxInstallments?: number;
 }
 
 export interface ResponsibleInfo {
