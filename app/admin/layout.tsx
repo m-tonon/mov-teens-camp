@@ -16,7 +16,8 @@ export default function AdminLayout({
   useEffect(() => {
     const auth = sessionStorage.getItem("admin-auth");
     if (!auth && pathname !== "/admin/login") {
-      router.replace("/admin/login");
+      const from = encodeURIComponent(pathname);
+      router.replace(`/admin/login?from=${from}`);
     } else {
       setAuthorized(true);
     }
