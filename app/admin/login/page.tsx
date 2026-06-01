@@ -1,14 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+
+function getSafeRedirectPath(from: string | null): string {
+  if (!from || !from.startsWith('/admin') || from === '/admin/login') {
+    return '/admin';
+  }
+  return from;
+}
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +32,8 @@ export default function AdminLogin() {
 
     if (data.success) {
       sessionStorage.setItem('admin-auth', 'true');
-      router.push('/admin');
+      const redirectTo = getSafeRedirectPath(searchParams.get('from'));
+      router.push(redirectTo);
     } else {
       setError(true);
       setPassword('');
