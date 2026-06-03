@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RegistrationForm } from "@/components/registration/registration-form";
+import { RegistrationClosed } from "@/components/registration/registration-closed";
 import { PaymentSection } from "@/components/payment/payment-section";
 import { RegistrationFormData } from "@/shared/registration.interface";
+import { isRegistrationOpen } from "@/lib/registration-config";
 
 type Step = "form" | "payment";
 
@@ -16,6 +18,8 @@ const STEP_LABELS: Record<Step, string> = {
 const STEPS: Step[] = ["form", "payment"];
 
 export default function RegistrationPage() {
+  const registrationOpen = isRegistrationOpen();
+
   const [step, setStep] = useState<Step>("form");
   const [submittedData, setSubmittedData] =
     useState<RegistrationFormData | null>(null);
@@ -48,6 +52,10 @@ export default function RegistrationPage() {
       />
 
       <div className="relative max-w-2xl mx-auto px-4 py-10 md:py-16">
+        {!registrationOpen ? (
+          <RegistrationClosed showHomeLink />
+        ) : (
+          <>
         {/* Step indicator */}
         <div className="flex items-center justify-center gap-2 mb-8">
           {STEPS.map((s, i) => {
@@ -130,6 +138,8 @@ export default function RegistrationPage() {
             </motion.div>
           )}
         </AnimatePresence>
+          </>
+        )}
       </div>
     </main>
   );
