@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { isRegistrationOpen } from '@/lib/registration-config';
+import { isRegistrationOpen, areInstallmentsAvailable } from '@/lib/registration-config';
 
 dotenv.config();
 
@@ -39,6 +39,9 @@ export async function POST(req: NextRequest) {
     const amount = payment.amount ?? 28000;
     const isStaffType = payment.isStaffType === true;
     const maxInstallments = String(payment.maxInstallments ?? 10);
+    const publicInstallmentsLimit = areInstallmentsAvailable()
+      ? maxInstallments
+      : '1';
 
     const paymentMethodsConfigs = isStaffType
       ? [
@@ -52,7 +55,9 @@ export async function POST(req: NextRequest) {
       : [
           {
             type: 'credit_card',
-            config_options: [{ option: 'installments_limit', value: '1' }],
+            config_options: [
+              { option: 'installments_limit', value: publicInstallmentsLimit },
+            ],
           },
         ];
 
