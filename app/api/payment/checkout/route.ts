@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import { isRegistrationOpen, areInstallmentsAvailable } from '@/lib/registration-config';
 
 dotenv.config();
 
@@ -12,6 +13,13 @@ export async function POST(req: NextRequest) {
   try {
     const payment = await req.json();
     console.log('Incoming payment:', payment);
+
+    if (!isRegistrationOpen() && payment.isStaffType !== true) {
+      return NextResponse.json(
+        { error: 'Inscrições encerradas.' },
+        { status: 403 },
+      );
+    }
 
     if (!payment?.name || !payment?.cpf || !payment?.referenceId) {
       return NextResponse.json(
@@ -31,6 +39,9 @@ export async function POST(req: NextRequest) {
     const amount = payment.amount ?? 28000;
     const isStaffType = payment.isStaffType === true;
     const maxInstallments = String(payment.maxInstallments ?? 10);
+    const publicInstallmentsLimit = areInstallmentsAvailable()
+      ? maxInstallments
+      : '1';
 
     const paymentMethodsConfigs = isStaffType
       ? [
@@ -44,7 +55,9 @@ export async function POST(req: NextRequest) {
       : [
           {
             type: 'credit_card',
-            config_options: [{ option: 'installments_limit', value: '1' }],
+            config_options: [
+              { option: 'installments_limit', value: publicInstallmentsLimit },
+            ],
           },
         ];
 

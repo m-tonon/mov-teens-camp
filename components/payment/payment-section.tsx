@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { RegistrationFormData } from '@/shared/registration.interface';
 import { createPaymentLink } from '@/services/payment';
+import { areInstallmentsAvailable } from '@/lib/registration-config';
 
 interface Props {
   data: RegistrationFormData;
@@ -20,9 +21,8 @@ const CAMP_INFO = {
   ],
 };
 
-const installmentsAvailable = false;
-
 export function PaymentSection({ data, onBack }: Props) {
+  const installmentsAvailable = areInstallmentsAvailable();
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

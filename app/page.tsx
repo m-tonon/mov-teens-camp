@@ -10,10 +10,13 @@ import { ContactSection } from "@/components/camping/contact-section";
 import { RegistrationCTA } from "@/components/camping/registration-cta";
 import { Footer } from "@/components/camping/footer";
 import { PaymentCompletedScreen } from "@/components/payment/payment-completed";
+import { RegistrationClosed } from "@/components/registration/registration-closed";
+import { isRegistrationOpen } from "@/lib/registration-config";
 
 function PageContent() {
   const searchParams = useSearchParams();
   const paymentCompleted = searchParams.get("paymentCompleted");
+  const registrationOpen = isRegistrationOpen();
 
   if (paymentCompleted) {
     return <PaymentCompletedScreen />;
@@ -21,6 +24,7 @@ function PageContent() {
 
   return (
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {!registrationOpen && <RegistrationClosed variant="banner" />}
       <HeroSection />
       <EventHighlights />
       <SpeakerSection />

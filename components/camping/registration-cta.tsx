@@ -5,8 +5,12 @@ import { motion } from 'framer-motion'
 import { Button, Checkbox } from '@heroui/react'
 import { ArrowRight, Check } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { RegistrationClosed } from '@/components/registration/registration-closed'
+import { isRegistrationOpen } from '@/lib/registration-config'
 
 export function RegistrationCTA() {
+  const registrationOpen = isRegistrationOpen()
+
   const [termsAccepted, setTermsAccepted] = useState({
     info: false,
     terms: false,
@@ -40,10 +44,12 @@ export function RegistrationCTA() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4">
-            Pronto Para Participar?
+            {registrationOpen ? 'Pronto Para Participar?' : 'Até a Próxima!'}
           </h2>
           <p className="text-muted-foreground text-lg">
-            Confirme as informações e avance para a inscrição
+            {registrationOpen
+              ? 'Confirme as informações e avance para a inscrição'
+              : 'As inscrições desta edição já encerraram — obrigado por fazer parte!'}
           </p>
         </motion.div>
 
@@ -54,6 +60,10 @@ export function RegistrationCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
+          {!registrationOpen ? (
+            <RegistrationClosed />
+          ) : (
+            <>
           {/* Checkboxes */}
           <div className="space-y-4 mb-8">
             <label
@@ -138,6 +148,8 @@ export function RegistrationCTA() {
             <p className="text-center text-sm text-muted-foreground mt-4">
               Marque as opcoes acima para continuar
             </p>
+          )}
+            </>
           )}
         </motion.div>
       </div>

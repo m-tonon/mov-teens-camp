@@ -10,6 +10,7 @@ import {
   User,
   UserPlus,
 } from 'lucide-react';
+import { areInstallmentsAvailable } from '@/lib/registration-config';
 
 const paymentMethods = [
   { icon: Smartphone, label: 'PIX', available: true },
@@ -17,9 +18,8 @@ const paymentMethods = [
   { icon: CreditCard, label: 'Cartão de Débito', available: true },
 ];
 
-const installmentsAvailable = false;
-
 export function PricingSection() {
+  const installmentsAvailable = areInstallmentsAvailable();
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
       {/* Decorative elements */}

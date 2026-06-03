@@ -3,8 +3,12 @@
 import { motion } from 'framer-motion';
 import { Button } from '@heroui/react';
 import { CalendarDays, MapPin, ChevronDown } from 'lucide-react';
+import { RegistrationClosed } from '@/components/registration/registration-closed';
+import { isRegistrationOpen } from '@/lib/registration-config';
 
 export function HeroSection() {
+  const registrationOpen = isRegistrationOpen();
+
   const scrollToContent = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
@@ -95,16 +99,24 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div
+          className="flex flex-col items-center gap-4"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
+          {!registrationOpen && <RegistrationClosed variant="compact" />}
+
           <Button
             size="lg"
-            className="bg-primary text-primary-foreground font-bold text-lg px-10 py-7 rounded-full hover:scale-105 transition-transform shadow-lg shadow-primary/30"
-            onPress={scrollToContent}
+            isDisabled={!registrationOpen}
+            className={
+              registrationOpen
+                ? 'bg-primary text-primary-foreground font-bold text-lg px-10 py-7 rounded-full hover:scale-105 transition-transform shadow-lg shadow-primary/30'
+                : 'bg-muted text-muted-foreground font-bold text-lg px-10 py-7 rounded-full cursor-not-allowed opacity-80'
+            }
+            onPress={registrationOpen ? scrollToContent : undefined}
           >
-            Quero Participar
+            {registrationOpen ? 'Quero Participar' : 'Inscrições Encerradas'}
           </Button>
         </motion.div>
       </div>

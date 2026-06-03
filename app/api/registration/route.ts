@@ -3,10 +3,18 @@ import dotenv from 'dotenv';
 import { RegistrationFormData } from '@/shared/registration.interface';
 import { connectToDatabase } from '@/lib/mongoose-connection';
 import { RegistrationModel } from '@/shared/models/registration.model';
+import { isRegistrationOpen } from '@/lib/registration-config';
 
 dotenv.config();
 
 export async function POST(req: NextRequest) {
+  if (!isRegistrationOpen()) {
+    return NextResponse.json(
+      { error: 'Inscrições encerradas.' },
+      { status: 403 },
+    );
+  }
+
   console.log('Registration API called');
 
   await connectToDatabase();
