@@ -3,7 +3,7 @@ import { AdminAuthShell } from '@/components/admin/admin-auth-shell';
 
 export const metadata = adminAreaMetadata;
 
-export default function AdminLayout({
+export default function EbdLayout({
   children,
 }: {
   children: React.ReactNode;

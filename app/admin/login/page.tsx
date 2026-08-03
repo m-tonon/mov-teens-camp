@@ -3,12 +3,16 @@
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { AdminLogoMark } from '@/components/admin/admin-logo-mark';
 
 function getSafeRedirectPath(from: string | null): string {
-  if (!from || !from.startsWith('/admin') || from === '/admin/login') {
+  if (!from || from === '/admin/login') {
     return '/admin';
   }
-  return from;
+  if (from.startsWith('/admin') || from === '/ebd' || from.startsWith('/ebd/')) {
+    return from;
+  }
+  return '/admin';
 }
 
 export default function AdminLogin() {
@@ -44,9 +48,7 @@ export default function AdminLogin() {
     <main className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="w-full max-w-sm space-y-6">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto text-2xl">
-            ⛺
-          </div>
+          <AdminLogoMark size="lg" className="mx-auto" />
           <h1 className="text-xl font-black tracking-tight">Acampa Admin</h1>
           <p className="text-xs text-muted-foreground">
             Digite a senha para continuar

@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: 'Acampa Deep Fake',
   description:
     'Acampamento para jovens a partir de 12 anos. Fortaleça a fé e desenvolva autonomia e comunhão.',
+  appleWebApp: {
+    capable: true,
+    title: 'MovTeens Admin',
+    statusBarStyle: 'default',
+  },
   icons: {
     icon: [
       {
@@ -39,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={`${inter.variable} font-sans antialiased bg-background text-foreground`}
       >
