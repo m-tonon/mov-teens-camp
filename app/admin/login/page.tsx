@@ -5,10 +5,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 function getSafeRedirectPath(from: string | null): string {
-  if (!from || !from.startsWith('/admin') || from === '/admin/login') {
+  if (!from || from === '/admin/login') {
     return '/admin';
   }
-  return from;
+  if (from.startsWith('/admin') || from === '/ebd' || from.startsWith('/ebd/')) {
+    return from;
+  }
+  return '/admin';
 }
 
 export default function AdminLogin() {

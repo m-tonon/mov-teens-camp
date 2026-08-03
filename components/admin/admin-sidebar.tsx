@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
+import { useAdminTheme } from "@/components/admin/admin-theme-provider";
 import {
   Users,
-  CreditCard,
+  ClipboardList,
   Menu,
   X,
   Sun,
@@ -20,6 +20,11 @@ const NAV_ITEMS = [
     href: "/admin",
     icon: Users,
   },
+  {
+    label: "Chamada EBD",
+    href: "/ebd",
+    icon: ClipboardList,
+  },
   // {
   //   label: "Pagamento staff",
   //   href: "/admin/staff",
@@ -31,9 +36,7 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
-
-  const isDark = theme === "dark";
+  const { isDark, toggleTheme } = useAdminTheme();
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
@@ -60,7 +63,9 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
           const isActive =
             item.href === "/admin"
               ? pathname === "/admin"
-              : pathname.startsWith(item.href);
+              : item.href === "/ebd"
+                ? pathname === "/ebd" || pathname.startsWith("/ebd/")
+                : pathname.startsWith(item.href);
           return (
             <Link
               key={item.href}
@@ -90,7 +95,7 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
       <div className={`px-2 pb-4 space-y-1 border-t border-border pt-4`}>
         {/* Theme toggle */}
         <button
-          onClick={() => setTheme(isDark ? "light" : "dark")}
+          onClick={toggleTheme}
           className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all ${collapsed ? "justify-center" : ""}`}
         >
           {isDark ? (
@@ -169,7 +174,7 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
           </button>
           <span className="text-sm font-bold">MovTeens Admin</span>
           <button
-            onClick={() => setTheme(isDark ? "light" : "dark")}
+            onClick={toggleTheme}
             className="p-2 rounded-lg hover:bg-muted/50 text-muted-foreground"
           >
             {isDark ? (

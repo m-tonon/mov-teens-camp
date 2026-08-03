@@ -2,7 +2,7 @@
 
 import { AdminAuthShell } from "@/components/admin/admin-auth-shell";
 
-export default function AdminLayout({
+export default function EbdLayout({
   children,
 }: {
   children: React.ReactNode;

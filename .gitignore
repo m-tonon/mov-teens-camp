@@ -18,3 +18,8 @@ node_modules/
 .DS_Store
 .vercel
 .agent/
+
+# --- Cursor AI (local-only) ---
+.cursor/rules/
+.cursor/skills/
+.cursor/commands/
