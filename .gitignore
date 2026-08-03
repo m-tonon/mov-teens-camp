@@ -15,6 +15,12 @@ next-env.d.ts
 # Common ignores
 node_modules/
 .next/
+public/sw.js
 .DS_Store
 .vercel
 .agent/
+
+# --- Cursor AI (local-only) ---
+.cursor/rules/
+.cursor/skills/
+.cursor/commands/

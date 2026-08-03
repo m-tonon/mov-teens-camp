@@ -11,7 +11,6 @@ dotenv.config();
 const GMAIL_USER = process.env.GMAIL_USER!;
 const GMAIL_APP_PASS = process.env.GMAIL_APP_PASS!;
 const ADMIN_PASS = process.env.ADMIN_PASS!;
-const ADMIN_PAY_PASS = process.env.ADMIN_PAY_PASS || ADMIN_PASS;
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,7 +25,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (password !== ADMIN_PAY_PASS) {
+    if (password !== ADMIN_PASS) {
       return NextResponse.json(
         { error: 'Senha de autorização inválida' },
         { status: 401 },
