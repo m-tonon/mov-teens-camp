@@ -2,6 +2,7 @@ import type {
   AttendanceMatrixReportRow,
   AttendanceStatus,
 } from '@/shared/ebd.interface';
+import { formatIsoDayMonthPtBr } from '@/lib/ebd/date-format';
 
 type StudentLean = { _id: { toString(): string }; fullName: string };
 
@@ -61,11 +62,7 @@ export function buildAttendanceMatrixReport(
 }
 
 export function formatReportDayHeader(isoDate: string): string {
-  const [y, m, d] = isoDate.split('-').map(Number);
-  const local = new Date(y, m - 1, d);
-  const dd = String(local.getDate()).padStart(2, '0');
-  const mm = String(local.getMonth() + 1).padStart(2, '0');
-  return `${dd}/${mm}`;
+  return formatIsoDayMonthPtBr(isoDate);
 }
 
 export function attendanceCellLabel(

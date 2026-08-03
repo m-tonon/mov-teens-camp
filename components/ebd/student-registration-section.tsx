@@ -32,6 +32,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { EbdAgeInput } from '@/components/ebd/ebd-age-input';
+import { SwipeActionRow } from '@/components/ebd/swipe-action-row';
 import { parseOptionalAge } from '@/lib/ebd/age-input';
 
 type Props = {
@@ -190,7 +191,7 @@ export function StudentRegistrationSection({
             <Button
               type="submit"
               disabled={submitting}
-              className="cursor-pointer transition-colors duration-200 w-full sm:w-auto min-h-11"
+              className="cursor-pointer transition-colors duration-200 w-full sm:w-auto min-h-11 bg-green-600 text-white hover:bg-green-700 disabled:opacity-50"
             >
               <UserPlus className="size-4" />
               Adicionar aluno
@@ -201,48 +202,77 @@ export function StudentRegistrationSection({
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
               Alunos
             </p>
+            <p className="text-[10px] text-muted-foreground md:hidden leading-snug">
+              Deslize à direita para editar · à esquerda para excluir
+            </p>
             {!studentsFetched ? null : students.length === 0 ? (
               <p className="text-sm text-muted-foreground py-6 text-center border border-dashed border-border rounded-xl">
                 Nenhum aluno cadastrado.
               </p>
             ) : (
-              <ul className="divide-y divide-border border border-border rounded-xl overflow-hidden">
+              <ul className="divide-y divide-border border border-border rounded-xl overflow-hidden md:overflow-visible">
                 {students.map((student) => (
-                  <li
-                    key={student._id}
-                    className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-card hover:bg-muted/30 transition-colors duration-200"
-                  >
-                    <div>
-                      <p className="text-sm font-medium text-foreground">
-                        {student.fullName}
-                      </p>
-                      {student.age !== undefined && (
-                        <p className="text-xs text-muted-foreground">
-                          {student.age} anos
-                        </p>
-                      )}
+                  <li key={student._id}>
+                    <div className="md:hidden">
+                      <SwipeActionRow
+                        onSwipeRight={{
+                          label: 'Editar',
+                          icon: <Pencil className="size-4 shrink-0" />,
+                          className: 'bg-primary',
+                          onCommit: () => openEdit(student),
+                        }}
+                        onSwipeLeft={{
+                          label: 'Excluir',
+                          icon: <Trash2 className="size-4 shrink-0" />,
+                          className: 'bg-destructive',
+                          onCommit: () => setDeleteId(student._id),
+                        }}
+                      >
+                        <div className="px-3.5 py-2.5 min-h-[3rem] flex flex-col justify-center">
+                          <p className="text-xs font-medium text-foreground pr-2">
+                            {student.fullName}
+                          </p>
+                          {student.age !== undefined && (
+                            <p className="text-[11px] text-muted-foreground mt-0.5">
+                              {student.age} anos
+                            </p>
+                          )}
+                        </div>
+                      </SwipeActionRow>
                     </div>
-                    <div className="flex gap-2 w-full sm:w-auto">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="cursor-pointer flex-1 sm:flex-none min-h-10"
-                        onClick={() => openEdit(student)}
-                      >
-                        <Pencil className="size-3.5" />
-                        Editar
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="cursor-pointer flex-1 sm:flex-none min-h-10 text-destructive hover:text-destructive"
-                        onClick={() => setDeleteId(student._id)}
-                      >
-                        <Trash2 className="size-3.5" />
-                        Excluir
-                      </Button>
+                    <div className="hidden md:flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-card hover:bg-muted/30 transition-colors duration-200">
+                      <div>
+                        <p className="text-sm font-medium text-foreground">
+                          {student.fullName}
+                        </p>
+                        {student.age !== undefined && (
+                          <p className="text-xs text-muted-foreground">
+                            {student.age} anos
+                          </p>
+                        )}
+                      </div>
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="cursor-pointer min-h-10"
+                          onClick={() => openEdit(student)}
+                        >
+                          <Pencil className="size-3.5" />
+                          Editar
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="cursor-pointer min-h-10 text-destructive hover:text-destructive"
+                          onClick={() => setDeleteId(student._id)}
+                        >
+                          <Trash2 className="size-3.5" />
+                          Excluir
+                        </Button>
+                      </div>
                     </div>
                   </li>
                 ))}

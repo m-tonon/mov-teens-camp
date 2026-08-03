@@ -45,7 +45,11 @@ export async function GET(req: NextRequest) {
       status: statusByStudent.get(s._id.toString()) ?? 'absent',
     }));
 
-    return NextResponse.json({ date: parsed.data.date, rows });
+    return NextResponse.json({
+      date: parsed.data.date,
+      rows,
+      hasSavedAttendance: records.length > 0,
+    });
   } catch (error) {
     console.error('GET /api/ebd/attendance:', error);
     return NextResponse.json(

@@ -9,8 +9,10 @@ import {
   attendanceCellLabel,
   formatReportDayHeader,
 } from '@/lib/ebd/report-utils';
+import { cn } from '@/lib/utils';
+import { formatIsoDatePtBr } from '@/lib/ebd/date-format';
+import { EbdDatePicker } from '@/components/ebd/ebd-date-picker';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
   Card,
@@ -76,6 +78,11 @@ export function ReportsSection() {
       setLoading(false);
     }
   };
+
+  const currentMonth = monthRangeIso();
+  const isCurrentMonthRange =
+    start === currentMonth.start && end === currentMonth.end;
+  const canUseCurrentMonth = !isCurrentMonthRange && !loading;
 
   const handleCurrentMonth = () => {
     const range = monthRangeIso();
@@ -181,30 +188,36 @@ export function ReportsSection() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto_auto] sm:items-end">
           <div className="space-y-2">
             <Label htmlFor="report-start">Início</Label>
-            <Input
+            <EbdDatePicker
               id="report-start"
-              type="date"
               value={start}
-              onChange={(e) => setStart(e.target.value)}
-              className="cursor-pointer h-11 w-full"
+              onChange={setStart}
             />
           </div>
           <div className="space-y-2">
             <Label htmlFor="report-end">Fim</Label>
-            <Input
+            <EbdDatePicker
               id="report-end"
-              type="date"
               value={end}
-              onChange={(e) => setEnd(e.target.value)}
-              className="cursor-pointer h-11 w-full"
+              onChange={setEnd}
             />
           </div>
           <Button
             type="button"
-            variant="secondary"
-            className="cursor-pointer transition-colors duration-200 w-full min-h-11"
-            disabled={loading}
+            variant="outline"
+            className={cn(
+              'transition-colors duration-200 w-full min-h-11',
+              canUseCurrentMonth
+                ? 'cursor-pointer border-amber-500 bg-amber-400 text-amber-950 hover:bg-amber-300 shadow-md font-semibold dark:bg-amber-500 dark:text-amber-950 dark:hover:bg-amber-400'
+                : 'cursor-default opacity-50 text-muted-foreground',
+            )}
+            disabled={!canUseCurrentMonth}
             onClick={handleCurrentMonth}
+            title={
+              isCurrentMonthRange
+                ? 'O período já é o mês atual'
+                : 'Restaurar início e fim para o mês atual'
+            }
           >
             <FileSpreadsheet className="size-4" />
             Mês atual
@@ -224,7 +237,7 @@ export function ReportsSection() {
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-xs text-muted-foreground">
                 {reportStart && reportEnd
-                  ? `Período: ${reportStart} a ${reportEnd}`
+                  ? `Período: ${formatIsoDatePtBr(reportStart)} a ${formatIsoDatePtBr(reportEnd)}`
                   : null}
                 {dates.length > 0
                   ? ` · ${dates.length} dia(s) com chamada`
