@@ -41,6 +41,15 @@ export function AdminThemeProvider({ children }: { children: React.ReactNode }) 
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (!mounted) return;
+    const root = document.documentElement;
+    root.classList.toggle('dark', theme === 'dark');
+    return () => {
+      root.classList.remove('dark');
+    };
+  }, [theme, mounted]);
+
   const toggleTheme = useCallback(() => {
     setThemeState((current) => {
       const next = current === 'dark' ? 'light' : 'dark';

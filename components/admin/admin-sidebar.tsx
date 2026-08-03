@@ -13,6 +13,7 @@ import {
   Moon,
   ChevronRight,
 } from "lucide-react";
+import { AdminLogoMark } from "@/components/admin/admin-logo-mark";
 
 const NAV_ITEMS = [
   {
@@ -44,9 +45,7 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
       <div
         className={`flex items-center gap-3 px-4 py-5 border-b border-border ${collapsed ? "justify-center" : ""}`}
       >
-        <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
-          <span className="text-sm">⛺</span>
-        </div>
+        <AdminLogoMark size="md" />
         {!collapsed && (
           <div className="overflow-hidden">
             <p className="text-sm font-bold text-foreground tracking-tight leading-none">
@@ -145,9 +144,7 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
       >
         <div className="flex items-center justify-between px-4 py-4 border-b border-border">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center">
-              <span className="text-xs">⛺</span>
-            </div>
+            <AdminLogoMark size="sm" />
             <span className="text-sm font-bold">MovTeens Admin</span>
           </div>
           <button

@@ -8,6 +8,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Serwist injects webpack config; allow `next dev` (Turbopack) while SW is off in dev.
+  turbopack: {},
 };
 
 const withSerwist = withSerwistInit({
