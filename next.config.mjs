@@ -1,3 +1,5 @@
+import withSerwistInit from '@serwist/next';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -6,6 +8,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
+};
 
-export default nextConfig
+const withSerwist = withSerwistInit({
+  swSrc: 'app/sw.ts',
+  swDest: 'public/sw.js',
+  disable: process.env.NODE_ENV === 'development',
+  register: false,
+});
+
+export default withSerwist(nextConfig);
