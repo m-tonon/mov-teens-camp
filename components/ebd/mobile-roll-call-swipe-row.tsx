@@ -42,10 +42,10 @@ export function MobileRollCallSwipeRow({
         onCommit: onSwipeAbsent,
       }}
     >
-      <div className="flex items-center gap-2.5 px-3.5 py-2.5 min-h-[3.25rem]">
+      <div className="flex items-center gap-2.5 px-3.5 py-3 min-h-[3.5rem]">
         <div
           className={cn(
-            'flex size-8 shrink-0 items-center justify-center rounded-full transition-colors',
+            'flex size-9 shrink-0 items-center justify-center rounded-full transition-colors',
             status === 'present'
               ? 'bg-green-600/15 text-green-700 dark:text-green-500'
               : 'bg-destructive/15 text-destructive',
@@ -59,11 +59,11 @@ export function MobileRollCallSwipeRow({
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-xs font-medium leading-snug truncate">
+          <p className="text-sm font-medium leading-snug truncate">
             {fullName}
           </p>
           {age !== undefined && (
-            <p className="text-[11px] text-muted-foreground">{age} anos</p>
+            <p className="text-xs text-muted-foreground">{age} anos</p>
           )}
         </div>
         <span

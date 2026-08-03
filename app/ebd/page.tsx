@@ -42,12 +42,12 @@ export default function EbdPage() {
       <Toaster richColors position="top-center" />
       <header className="space-y-1">
         <div className="flex items-center gap-2 text-primary">
-          <ClipboardList className="size-6 shrink-0" />
-          <h1 className="text-lg sm:text-xl font-black tracking-tight text-foreground">
+          <ClipboardList className="size-7 shrink-0 sm:size-6" />
+          <h1 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
             EBD — Chamada
           </h1>
         </div>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-sm sm:text-xs text-muted-foreground">
           Escola Bíblica Dominical: cadastro, presença e relatórios.
         </p>
       </header>
@@ -56,21 +56,21 @@ export default function EbdPage() {
         <TabsList className="grid w-full grid-cols-3 h-auto p-1 sticky top-0 z-20 bg-muted/95 backdrop-blur-sm supports-[backdrop-filter]:bg-muted/80">
           <TabsTrigger
             value="cadastro"
-            className="cursor-pointer flex flex-col gap-0.5 py-2.5 min-h-11 text-xs sm:text-sm sm:flex-row sm:gap-1.5"
+            className="cursor-pointer flex flex-col gap-0.5 py-2.5 min-h-11 text-sm sm:flex-row sm:gap-1.5"
           >
             <UserPlus className="size-4 shrink-0" />
             <span>Cadastro</span>
           </TabsTrigger>
           <TabsTrigger
             value="chamada"
-            className="cursor-pointer flex flex-col gap-0.5 py-2.5 min-h-11 text-xs sm:text-sm sm:flex-row sm:gap-1.5"
+            className="cursor-pointer flex flex-col gap-0.5 py-2.5 min-h-11 text-sm sm:flex-row sm:gap-1.5"
           >
             <Users className="size-4 shrink-0" />
             <span>Chamada</span>
           </TabsTrigger>
           <TabsTrigger
             value="relatorios"
-            className="cursor-pointer flex flex-col gap-0.5 py-2.5 min-h-11 text-xs sm:text-sm sm:flex-row sm:gap-1.5"
+            className="cursor-pointer flex flex-col gap-0.5 py-2.5 min-h-11 text-sm sm:flex-row sm:gap-1.5"
           >
             <FileSpreadsheet className="size-4 shrink-0" />
             <span>Relatórios</span>

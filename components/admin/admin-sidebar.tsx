@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAdminTheme } from "@/components/admin/admin-theme-provider";
 import {
   Users,
@@ -12,53 +12,76 @@ import {
   Sun,
   Moon,
   ChevronRight,
+  LogOut,
+  PanelLeftClose,
+  PanelLeft,
 } from "lucide-react";
 import { AdminLogoMark } from "@/components/admin/admin-logo-mark";
+import { clearAdminSession, getAdminRole, type AdminRole } from "@/lib/admin-session";
 
-const NAV_ITEMS = [
+const NAV_ITEMS: {
+  label: string;
+  href: string;
+  icon: typeof Users;
+  roles: AdminRole[];
+}[] = [
   {
     label: "Inscrições",
     href: "/admin",
     icon: Users,
+    roles: ["admin"],
   },
   {
     label: "Chamada EBD",
     href: "/ebd",
     icon: ClipboardList,
+    roles: ["admin", "guest"],
   },
-  // {
-  //   label: "Pagamento staff",
-  //   href: "/admin/staff",
-  //   icon: CreditCard,
-  // },
 ];
 
 export function AdminSidebar({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const { isDark, toggleTheme } = useAdminTheme();
+  const [role, setRole] = useState<AdminRole | null>(null);
 
-  const SidebarContent = () => (
+  useEffect(() => {
+    setRole(getAdminRole());
+  }, []);
+
+  const navItems = role
+    ? NAV_ITEMS.filter((item) => item.roles.includes(role))
+    : [];
+
+  const handleLogout = () => {
+    clearAdminSession();
+    setMobileOpen(false);
+    router.replace("/admin/login");
+  };
+
+  const SidebarContent = ({ showLogo = true }: { showLogo?: boolean }) => (
     <div className="flex flex-col h-full">
-      {/* Logo */}
-      <div
-        className={`flex items-center gap-3 px-4 py-5 border-b border-border ${collapsed ? "justify-center" : ""}`}
-      >
-        <AdminLogoMark size="md" />
-        {!collapsed && (
-          <div className="overflow-hidden">
-            <p className="text-sm font-bold text-foreground tracking-tight leading-none">
-              MovTeens
-            </p>
-            <p className="text-xs text-muted-foreground mt-0.5">Admin Panel</p>
-          </div>
-        )}
-      </div>
+      {showLogo ? (
+        <div
+          className={`flex items-center gap-3 px-4 py-5 border-b border-border ${collapsed ? "justify-center" : ""}`}
+        >
+          <AdminLogoMark size="md" />
+          {!collapsed && (
+            <div className="overflow-hidden">
+              <p className="text-sm font-bold text-foreground tracking-tight leading-none">
+                MovTeens
+              </p>
+              <p className="text-xs text-muted-foreground mt-0.5">Admin Panel</p>
+            </div>
+          )}
+        </div>
+      ) : null}
 
       {/* Nav */}
       <nav className="flex-1 px-2 py-4 space-y-1">
-        {NAV_ITEMS.map((item) => {
+        {navItems.map((item) => {
           const isActive =
             item.href === "/admin"
               ? pathname === "/admin"
@@ -107,11 +130,26 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
 
         {/* Collapse toggle — desktop only */}
         <button
+          type="button"
           onClick={() => setCollapsed(!collapsed)}
-          className={`hidden lg:flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all ${collapsed ? "justify-center" : ""}`}
+          aria-label={collapsed ? "Expandir menu" : "Recolher menu"}
+          className={`hidden lg:flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all cursor-pointer ${collapsed ? "justify-center" : ""}`}
         >
-          <Menu className="w-4 h-4 flex-shrink-0" />
+          {collapsed ? (
+            <PanelLeft className="w-4 h-4 flex-shrink-0" />
+          ) : (
+            <PanelLeftClose className="w-4 h-4 flex-shrink-0" />
+          )}
           {!collapsed && <span>Recolher menu</span>}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleLogout}
+          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all cursor-pointer ${collapsed ? "justify-center" : ""}`}
+        >
+          <LogOut className="w-4 h-4 flex-shrink-0" />
+          {!collapsed && <span>Sair</span>}
         </button>
       </div>
     </div>
@@ -145,7 +183,9 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
         <div className="flex items-center justify-between px-4 py-4 border-b border-border">
           <div className="flex items-center gap-2">
             <AdminLogoMark size="sm" />
-            <span className="text-sm font-bold">MovTeens Admin</span>
+          <span className="text-sm font-bold">
+            {role === "guest" ? "Chamada EBD" : "MovTeens Admin"}
+          </span>
           </div>
           <button
             onClick={() => setMobileOpen(false)}
@@ -155,7 +195,7 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
           </button>
         </div>
         <div className="flex-1 overflow-y-auto">
-          <SidebarContent />
+          <SidebarContent showLogo={false} />
         </div>
       </aside>
 
@@ -169,7 +209,9 @@ export function AdminSidebar({ children }: { children: React.ReactNode }) {
           >
             <Menu className="w-4 h-4" />
           </button>
-          <span className="text-sm font-bold">MovTeens Admin</span>
+          <span className="text-sm font-bold">
+            {role === "guest" ? "Chamada EBD" : "MovTeens Admin"}
+          </span>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg hover:bg-muted/50 text-muted-foreground"

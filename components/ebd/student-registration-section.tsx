@@ -228,12 +228,12 @@ export function StudentRegistrationSection({
                           onCommit: () => setDeleteId(student._id),
                         }}
                       >
-                        <div className="px-3.5 py-2.5 min-h-[3rem] flex flex-col justify-center">
-                          <p className="text-xs font-medium text-foreground pr-2">
+                        <div className="px-3.5 py-3 min-h-[3.5rem] flex flex-col justify-center">
+                          <p className="text-sm font-medium text-foreground pr-2 leading-snug">
                             {student.fullName}
                           </p>
                           {student.age !== undefined && (
-                            <p className="text-[11px] text-muted-foreground mt-0.5">
+                            <p className="text-xs text-muted-foreground mt-0.5">
                               {student.age} anos
                             </p>
                           )}
@@ -242,11 +242,11 @@ export function StudentRegistrationSection({
                     </div>
                     <div className="hidden md:flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-card hover:bg-muted/30 transition-colors duration-200">
                       <div>
-                        <p className="text-sm font-medium text-foreground">
+                        <p className="text-base font-medium text-foreground">
                           {student.fullName}
                         </p>
                         {student.age !== undefined && (
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-sm text-muted-foreground">
                             {student.age} anos
                           </p>
                         )}

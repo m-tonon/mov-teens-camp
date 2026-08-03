@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Download, Share, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const DISMISS_KEY = 'movteens-install-dismissed';
 const DISMISS_MS = 7 * 24 * 60 * 60 * 1000;
@@ -48,14 +49,14 @@ function shouldShowBanner(deferredPrompt: BeforeInstallPromptEvent | null): bool
 }
 
 export function AdminInstallBanner() {
+  const isMobile = useIsMobile();
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
-  const [hidden, setHidden] = useState(true);
+  const [userHidden, setUserHidden] = useState(false);
   const [installing, setInstalling] = useState(false);
 
-  useEffect(() => {
-    setHidden(!shouldShowBanner(deferredPrompt));
-  }, [deferredPrompt]);
+  const showBanner =
+    isMobile && shouldShowBanner(deferredPrompt) && !userHidden;
 
   useEffect(() => {
     const onBeforeInstall = (e: Event) => {
@@ -64,7 +65,7 @@ export function AdminInstallBanner() {
     };
     const onInstalled = () => {
       setDeferredPrompt(null);
-      setHidden(true);
+      setUserHidden(true);
     };
 
     window.addEventListener('beforeinstallprompt', onBeforeInstall);
@@ -81,7 +82,7 @@ export function AdminInstallBanner() {
     } catch {
       // ignore
     }
-    setHidden(true);
+    setUserHidden(true);
   };
 
   const handleInstall = async () => {
@@ -91,7 +92,7 @@ export function AdminInstallBanner() {
       await deferredPrompt.prompt();
       await deferredPrompt.userChoice;
       setDeferredPrompt(null);
-      setHidden(true);
+      setUserHidden(true);
     } catch {
       // user cancelled or browser blocked
     } finally {
@@ -99,7 +100,7 @@ export function AdminInstallBanner() {
     }
   };
 
-  if (hidden) return null;
+  if (!showBanner) return null;
 
   const android = Boolean(deferredPrompt);
 
@@ -108,16 +109,28 @@ export function AdminInstallBanner() {
       role="region"
       aria-label="Instalar aplicativo"
       className={cn(
-        'fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm',
-        'pb-[max(0.75rem,env(safe-area-inset-bottom))] px-4 pt-3 shadow-lg',
+        'fixed bottom-0 left-0 right-0 z-40 overflow-hidden',
+        'border-t border-primary/20',
+        'bg-gradient-to-r from-primary/15 via-accent/10 to-primary/15',
+        'backdrop-blur-md supports-[backdrop-filter]:bg-background/30',
+        'shadow-[0_-8px_32px_rgba(0,0,0,0.15)]',
+        'pb-[max(0.75rem,env(safe-area-inset-bottom))] px-4 pt-3',
       )}
     >
+      <div
+        className="pointer-events-none absolute -top-12 right-8 h-24 w-24 rounded-full bg-primary/15 blur-2xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -bottom-8 left-4 h-20 w-20 rounded-full bg-accent/10 blur-2xl"
+        aria-hidden
+      />
       <div className="relative mx-auto flex max-w-lg flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0 flex-1 pr-8 sm:pr-0">
-          <p className="text-sm font-semibold text-foreground">
+          <p className="text-sm sm:text-base font-semibold text-foreground">
             {android ? 'Instalar MovTeens Admin' : 'Atalho na tela inicial'}
           </p>
-          <p className="text-xs text-muted-foreground mt-0.5 leading-snug">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-snug">
             {android ? (
               'Abra o painel com um toque, como um aplicativo.'
             ) : (
@@ -138,7 +151,7 @@ export function AdminInstallBanner() {
             <Button
               type="button"
               size="sm"
-              className="cursor-pointer min-h-10 flex-1 sm:flex-none"
+              className="cursor-pointer min-h-10 flex-1 sm:flex-none text-white"
               disabled={installing}
               onClick={() => void handleInstall()}
             >
@@ -150,7 +163,7 @@ export function AdminInstallBanner() {
             type="button"
             variant="outline"
             size="sm"
-            className="cursor-pointer min-h-10"
+            className="cursor-pointer min-h-10 border-primary/25 bg-background/40 backdrop-blur-sm"
             onClick={handleDismiss}
           >
             Agora não

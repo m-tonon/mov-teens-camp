@@ -6,6 +6,11 @@ import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminThemeProvider } from "@/components/admin/admin-theme-provider";
 import { RegisterSw } from "@/components/admin/register-sw";
 import { AdminInstallBanner } from "@/components/admin/admin-install-banner";
+import {
+  defaultPathForRole,
+  getAdminRole,
+  isPathAllowedForRole,
+} from "@/lib/admin-session";
 
 function isAdminLoginPath(pathname: string) {
   return pathname === "/admin/login";
@@ -26,13 +31,20 @@ export function AdminAuthShell({ children }: { children: React.ReactNode }) {
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    const auth = sessionStorage.getItem("admin-auth");
-    if (!auth && isProtectedAdminPath(pathname)) {
+    const role = getAdminRole();
+
+    if (!role && isProtectedAdminPath(pathname)) {
       const from = encodeURIComponent(pathname);
       router.replace(`/admin/login?from=${from}`);
-    } else {
-      setAuthorized(true);
+      return;
     }
+
+    if (role && isProtectedAdminPath(pathname) && !isPathAllowedForRole(pathname, role)) {
+      router.replace(defaultPathForRole(role));
+      return;
+    }
+
+    setAuthorized(true);
   }, [pathname, router]);
 
   if (!authorized) return null;

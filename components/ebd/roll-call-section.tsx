@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import {
   Calendar,
@@ -78,8 +78,12 @@ export function RollCallSection({ students, studentsFetched }: Props) {
   const [saving, setSaving] = useState(false);
   const [daySummary, setDaySummary] = useState<DaySummary | null>(null);
   const [forceEditDate, setForceEditDate] = useState<string | null>(null);
+  const studentsRef = useRef(students);
+  studentsRef.current = students;
 
   const loadAttendance = useCallback(async () => {
+    if (!studentsFetched) return;
+
     setAttendanceLoading(true);
     try {
       const res = await fetch(
@@ -90,29 +94,35 @@ export function RollCallSection({ students, studentsFetched }: Props) {
         throw new Error(data.error || 'Erro ao carregar chamada.');
       }
       const loadedRows = (data.rows ?? []) as AttendanceRollCallRow[];
-      setRows(loadedRows);
+      const merged = mergeStudentsIntoRows(studentsRef.current, loadedRows);
+      setRows(merged);
 
       const hasSaved = Boolean(data.hasSavedAttendance);
       if (hasSaved) {
-        setDaySummary(summaryFromRows(date, loadedRows));
+        setDaySummary(summaryFromRows(date, merged));
       } else {
         setDaySummary(null);
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Erro ao carregar.');
       setRows([]);
+      setDaySummary(null);
     } finally {
       setAttendanceLoading(false);
     }
-  }, [date]);
+  }, [date, studentsFetched]);
 
   useEffect(() => {
     void loadAttendance();
   }, [loadAttendance]);
 
   useEffect(() => {
-    setRows((prev) => mergeStudentsIntoRows(students, prev));
-  }, [students]);
+    if (!studentsFetched || attendanceLoading) return;
+    setRows((prev) => {
+      if (prev.length === 0) return prev;
+      return mergeStudentsIntoRows(students, prev);
+    });
+  }, [students, studentsFetched, attendanceLoading]);
 
   const setStatus = (studentId: string, status: AttendanceStatus) => {
     setRows((prev) =>
@@ -161,6 +171,9 @@ export function RollCallSection({ students, studentsFetched }: Props) {
     students.length > 0 &&
     forceEditDate !== date;
 
+  const rollCallReady =
+    studentsFetched && !(attendanceLoading && rows.length === 0);
+
   const openEditorForCurrentDay = () => {
     setForceEditDate(date);
   };
@@ -191,12 +204,14 @@ export function RollCallSection({ students, studentsFetched }: Props) {
             value={date}
             onChange={(iso) => {
               setForceEditDate(null);
+              setRows([]);
+              setDaySummary(null);
               setDate(iso);
             }}
           />
         </div>
 
-        {!studentsFetched ? null : students.length === 0 ? (
+        {!rollCallReady ? null : students.length === 0 ? (
           <p className="text-sm text-muted-foreground py-6 text-center border border-dashed border-border rounded-xl">
             Cadastre alunos na aba Cadastro para fazer a chamada.
           </p>
@@ -256,11 +271,11 @@ export function RollCallSection({ students, studentsFetched }: Props) {
                 </div>
 
                 <div className="hidden md:block min-w-0 md:flex-1">
-                  <p className="text-base font-medium leading-snug md:text-[0.9375rem]">
+                  <p className="text-base font-medium leading-snug md:text-lg">
                     {row.fullName}
                   </p>
                   {row.age !== undefined && (
-                    <p className="text-xs text-muted-foreground mt-0.5">
+                    <p className="text-sm text-muted-foreground mt-0.5">
                       {row.age} anos
                     </p>
                   )}
